@@ -13,6 +13,12 @@ struct SidebarView: View {
 	/// The person's selection in the sidebar
 	@Binding var selection: Panel?
 
+	// MARK: - Local state
+
+	@State var isPresented: Bool = false
+
+	@State var edited: ListItem?
+
 	// MARK: - Data
 
 	@Environment(\.modelContext) private var modelContext
@@ -42,7 +48,27 @@ struct SidebarView: View {
 						Label(list.title, systemImage: "doc.text")
 					}
 					.listItemTint(.secondary)
+					.contextMenu {
+						Button("Edit...") {
+							self.edited = list
+						}
+						Divider()
+						Button("Delete") {
+							modelContext.delete(list)
+						}
+					}
 				}
+			}
+		}
+		.sheet(isPresented: $isPresented) {
+			ListDetails(list: nil)
+		}
+		.sheet(item: $edited) { item in
+			ListDetails(list: item)
+		}
+		.toolbar {
+			Button("Add") {
+				self.isPresented = true
 			}
 		}
 	}

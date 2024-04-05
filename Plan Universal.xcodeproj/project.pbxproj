@@ -19,6 +19,7 @@
 		4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88322BC06F7D0019AC71 /* Panel.swift */; };
 		4CDB88352BC077C90019AC71 /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88342BC077C90019AC71 /* ListItem.swift */; };
 		4CDB88372BC077D30019AC71 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88362BC077D30019AC71 /* TodoItem.swift */; };
+		4CDB883B2BC07E4E0019AC71 /* ListDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883A2BC07E4E0019AC71 /* ListDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		4CDB88322BC06F7D0019AC71 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		4CDB88342BC077C90019AC71 /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		4CDB88362BC077D30019AC71 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		4CDB883A2BC07E4E0019AC71 /* ListDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				4CDB88292BC06C9A0019AC71 /* Root */,
 				4CDB88272BC06C310019AC71 /* Navigation */,
 				4CDB88282BC06C3A0019AC71 /* Details */,
+				4CDB88392BC07E3A0019AC71 /* ListDetails */,
 			);
 			path = Units;
 			sourceTree = "<group>";
@@ -206,6 +209,14 @@
 				4CDB88322BC06F7D0019AC71 /* Panel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4CDB88392BC07E3A0019AC71 /* ListDetails */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB883A2BC07E4E0019AC71 /* ListDetails.swift */,
+			);
+			path = ListDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +355,7 @@
 				4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */,
 				4CDB882B2BC06D2E0019AC71 /* SidebarView.swift in Sources */,
 				4CDB88372BC077D30019AC71 /* TodoItem.swift in Sources */,
+				4CDB883B2BC07E4E0019AC71 /* ListDetails.swift in Sources */,
 				4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
