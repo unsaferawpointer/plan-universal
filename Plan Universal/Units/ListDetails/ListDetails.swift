@@ -22,41 +22,70 @@ struct ListDetails: View {
 	}
 
 	var body: some View {
+		#if os(macOS)
 		VStack(alignment: .trailing) {
-			Form {
-				TextField("List name", text: $list.title)
-				Toggle(isOn: $list.isArchieved) {
-					Text("Is Archived")
-				}
-				Toggle(isOn: $list.isFavorite) {
-					Text("Is Favorite")
-				}
-			}
-			.formStyle(.grouped)
-
+			makeForm()
 			HStack(alignment: .firstTextBaseline) {
 				Button(role: .cancel) {
-					dismiss()
+					cancel()
 				} label: {
 					Text("Cancel")
 				}
 				Button("Save") {
-					modelContext.insert(list)
-					dismiss.callAsFunction()
+					save()
 				}
 				.keyboardShortcut("\r", modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
 			}
 			.padding()
 		}
-		.frame(
-			minWidth: 240,
-			idealWidth: 280,
-			maxWidth: 360,
-			minHeight: 240,
-			idealHeight: 240,
-			maxHeight: 360,
-			alignment: .center
-		)
+		#else
+		NavigationView {
+			makeForm()
+			.toolbar {
+				ToolbarItem(placement: .cancellationAction) {
+					Button(role: .cancel) {
+						cancel()
+					} label: {
+						Text("Cancel")
+					}
+				}
+				ToolbarItem(placement: .confirmationAction) {
+					Button("Save") {
+						save()
+					}
+				}
+			}
+		}
+		#endif
+	}
+
+	@ViewBuilder
+	func makeForm() -> some View {
+		Form {
+			TextField("List name", text: $list.title)
+			Toggle(isOn: $list.isArchieved) {
+				Text("Is Archived")
+			}
+			Toggle(isOn: $list.isFavorite) {
+				Text("Is Favorite")
+			}
+		}
+		.formStyle(.grouped)
+	}
+}
+
+// MARK: - Helpers
+private extension ListDetails {
+
+	func save() {
+		withAnimation {
+			modelContext.insert(list)
+			dismiss.callAsFunction()
+		}
+	}
+
+	func cancel() {
+		dismiss.callAsFunction()
 	}
 }
 

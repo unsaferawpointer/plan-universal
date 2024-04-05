@@ -67,8 +67,11 @@ struct SidebarView: View {
 			ListDetails(list: item)
 		}
 		.toolbar {
-			Button("Add") {
+			Spacer()
+			Button {
 				self.isPresented = true
+			} label: {
+				Image(systemName: "plus")
 			}
 		}
 	}
