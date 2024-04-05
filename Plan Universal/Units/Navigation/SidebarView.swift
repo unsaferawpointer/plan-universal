@@ -6,11 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SidebarView: View {
 
 	/// The person's selection in the sidebar
 	@Binding var selection: Panel?
+
+	// MARK: - Data
+
+	@Environment(\.modelContext) private var modelContext
+
+	@Query(sort: \ListItem.creationDate, order: .forward, animation: .default) private var lists: [ListItem]
 
 	var body: some View {
 		List(selection: $selection) {
@@ -30,9 +37,9 @@ struct SidebarView: View {
 			.listItemTint(.monochrome)
 
 			Section("Lists") {
-				ForEach(0..<12) { list in
+				ForEach(lists) { list in
 					NavigationLink(value: list) {
-						Label("List \(list)", systemImage: "doc.text")
+						Label(list.title, systemImage: "doc.text")
 					}
 					.listItemTint(.secondary)
 				}

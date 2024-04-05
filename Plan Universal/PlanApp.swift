@@ -12,7 +12,8 @@ import SwiftData
 struct PlanApp: App {
 	var sharedModelContainer: ModelContainer = {
 		let schema = Schema([
-			Item.self,
+			ListItem.self,
+			TodoItem.self
 		])
 		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

@@ -15,7 +15,7 @@ struct RootView: View {
 		NavigationSplitView {
 			SidebarView(selection: $selection)
 		} detail: {
-			if let selection {
+			if selection != nil {
 				DetailsView()
 			} else {
 				Text("Select sidebar item")
@@ -26,5 +26,6 @@ struct RootView: View {
 
 #Preview {
 	RootView()
-		.modelContainer(for: Item.self, inMemory: true)
+		.modelContainer(for: ListItem.self, inMemory: true)
+		.modelContainer(for: TodoItem.self, inMemory: true)
 }
