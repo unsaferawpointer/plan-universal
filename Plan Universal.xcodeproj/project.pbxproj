@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CDB87FA2BC06BFA0019AC71 /* Plan_UniversalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87F92BC06BFA0019AC71 /* Plan_UniversalApp.swift */; };
-		4CDB87FC2BC06BFA0019AC71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87FB2BC06BFA0019AC71 /* ContentView.swift */; };
+		4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87F92BC06BFA0019AC71 /* PlanApp.swift */; };
+		4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87FB2BC06BFA0019AC71 /* RootView.swift */; };
 		4CDB87FE2BC06BFA0019AC71 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87FD2BC06BFA0019AC71 /* Item.swift */; };
 		4CDB88002BC06BFB0019AC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */; };
 		4CDB88042BC06BFB0019AC71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CDB88032BC06BFB0019AC71 /* Preview Assets.xcassets */; };
 		4CDB880E2BC06BFB0019AC71 /* Plan_UniversalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB880D2BC06BFB0019AC71 /* Plan_UniversalTests.swift */; };
 		4CDB88182BC06BFB0019AC71 /* Plan_UniversalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88172BC06BFB0019AC71 /* Plan_UniversalUITests.swift */; };
 		4CDB881A2BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */; };
+		4CDB882B2BC06D2E0019AC71 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882A2BC06D2E0019AC71 /* SidebarView.swift */; };
+		4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882C2BC06D530019AC71 /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +38,8 @@
 
 /* Begin PBXFileReference section */
 		4CDB87F62BC06BFA0019AC71 /* Plan Universal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plan Universal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CDB87F92BC06BFA0019AC71 /* Plan_UniversalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_UniversalApp.swift; sourceTree = "<group>"; };
-		4CDB87FB2BC06BFA0019AC71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4CDB87F92BC06BFA0019AC71 /* PlanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanApp.swift; sourceTree = "<group>"; };
+		4CDB87FB2BC06BFA0019AC71 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		4CDB87FD2BC06BFA0019AC71 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CDB88012BC06BFB0019AC71 /* Plan_Universal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Plan_Universal.entitlements; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		4CDB88132BC06BFB0019AC71 /* Plan UniversalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Plan UniversalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CDB88172BC06BFB0019AC71 /* Plan_UniversalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_UniversalUITests.swift; sourceTree = "<group>"; };
 		4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_UniversalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4CDB882A2BC06D2E0019AC71 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		4CDB882C2BC06D530019AC71 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +101,12 @@
 		4CDB87F82BC06BFA0019AC71 /* Plan Universal */ = {
 			isa = PBXGroup;
 			children = (
-				4CDB87F92BC06BFA0019AC71 /* Plan_UniversalApp.swift */,
-				4CDB87FB2BC06BFA0019AC71 /* ContentView.swift */,
-				4CDB87FD2BC06BFA0019AC71 /* Item.swift */,
-				4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */,
+				4CDB87F92BC06BFA0019AC71 /* PlanApp.swift */,
 				4CDB88012BC06BFB0019AC71 /* Plan_Universal.entitlements */,
+				4CDB882E2BC06E120019AC71 /* Services */,
+				4CDB882F2BC06E1E0019AC71 /* Models */,
+				4CDB88302BC06E2A0019AC71 /* Resource */,
+				4CDB88262BC06C2A0019AC71 /* Units */,
 				4CDB88022BC06BFB0019AC71 /* Preview Content */,
 			);
 			path = "Plan Universal";
@@ -130,6 +135,63 @@
 				4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */,
 			);
 			path = "Plan UniversalUITests";
+			sourceTree = "<group>";
+		};
+		4CDB88262BC06C2A0019AC71 /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB88292BC06C9A0019AC71 /* Root */,
+				4CDB88272BC06C310019AC71 /* Navigation */,
+				4CDB88282BC06C3A0019AC71 /* Details */,
+			);
+			path = Units;
+			sourceTree = "<group>";
+		};
+		4CDB88272BC06C310019AC71 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB882A2BC06D2E0019AC71 /* SidebarView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		4CDB88282BC06C3A0019AC71 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB882C2BC06D530019AC71 /* DetailsView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		4CDB88292BC06C9A0019AC71 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB87FB2BC06BFA0019AC71 /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		4CDB882E2BC06E120019AC71 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4CDB882F2BC06E1E0019AC71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB87FD2BC06BFA0019AC71 /* Item.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4CDB88302BC06E2A0019AC71 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +324,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CDB87FC2BC06BFA0019AC71 /* ContentView.swift in Sources */,
+				4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */,
+				4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */,
+				4CDB882B2BC06D2E0019AC71 /* SidebarView.swift in Sources */,
 				4CDB87FE2BC06BFA0019AC71 /* Item.swift in Sources */,
-				4CDB87FA2BC06BFA0019AC71 /* Plan_UniversalApp.swift in Sources */,
+				4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
