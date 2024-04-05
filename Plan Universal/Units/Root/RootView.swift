@@ -9,11 +9,17 @@ import SwiftUI
 
 struct RootView: View {
 
+	@State private var selection: Panel? = Panel.inFocus
+
 	var body: some View {
 		NavigationSplitView {
-			SidebarView()
+			SidebarView(selection: $selection)
 		} detail: {
-			DetailsView()
+			if let selection {
+				DetailsView()
+			} else {
+				Text("Select sidebar item")
+			}
 		}
 	}
 }

@@ -17,6 +17,7 @@
 		4CDB881A2BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */; };
 		4CDB882B2BC06D2E0019AC71 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882A2BC06D2E0019AC71 /* SidebarView.swift */; };
 		4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882C2BC06D530019AC71 /* DetailsView.swift */; };
+		4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88322BC06F7D0019AC71 /* Panel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_UniversalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4CDB882A2BC06D2E0019AC71 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		4CDB882C2BC06D530019AC71 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		4CDB88322BC06F7D0019AC71 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				4CDB87FB2BC06BFA0019AC71 /* RootView.swift */,
+				4CDB88312BC06F660019AC71 /* Models */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -192,6 +195,14 @@
 				4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		4CDB88312BC06F660019AC71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4CDB88322BC06F7D0019AC71 /* Panel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +337,7 @@
 			files = (
 				4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */,
 				4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */,
+				4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */,
 				4CDB882B2BC06D2E0019AC71 /* SidebarView.swift in Sources */,
 				4CDB87FE2BC06BFA0019AC71 /* Item.swift in Sources */,
 				4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */,
