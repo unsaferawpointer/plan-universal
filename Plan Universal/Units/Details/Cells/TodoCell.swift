@@ -71,14 +71,14 @@ struct TodoCell: View {
 						Image(systemName: "bolt.fill")
 							.foregroundStyle(.yellow)
 					}
-					TextField("Todo...", text: $todo.text)
-						#if os(iOS)
+					Text(todo.text)
 						.textFieldStyle(.plain)
-						#endif
 				}
-				Text(todo.list?.title ?? "Programming")
-					.foregroundStyle(.secondary)
-					.font(.caption)
+				if let title = todo.list?.title {
+					Text(title)
+						.foregroundStyle(.secondary)
+						.font(.caption)
+				}
 			}
 		}
 

@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 
-#if os(macOS) || os(iOS)
 struct DetailsView: View {
 
 	var behaviour: Behaviour
@@ -18,6 +17,14 @@ struct DetailsView: View {
 	// MARK: - Local state
 
 	@State var selection: Set<TodoItem.ID> = .init()
+
+	@State var isPresented: Bool = false
+
+	@State var edited: TodoItem?
+
+	#if os(iOS)
+	@State private var editMode = EditMode.inactive
+	#endif
 
 	// MARK: - Data
 
@@ -52,7 +59,30 @@ struct DetailsView: View {
 			}
 			.listRowSeparator(.hidden)
 		}
+		.sheet(isPresented: $isPresented) {
+			TodoDetailsView(behaviour: behaviour, todo: nil)
+		}
+		.sheet(item: $edited) { item in
+			TodoDetailsView(behaviour: behaviour, todo: item)
+		}
 		.navigationTitle(panel?.title ?? "")
+		#if os(iOS)
+		.toolbar {
+			if editMode == .inactive {
+				ToolbarItem(placement: .primaryAction) {
+					Button {
+						newTodo()
+					} label: {
+						Image(systemName: "plus")
+					}
+				}
+			}
+			ToolbarItem {
+				EditButton()
+			}
+		}
+		.environment(\.editMode, $editMode)
+		#else
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button {
@@ -62,14 +92,30 @@ struct DetailsView: View {
 				}
 			}
 		}
+		#endif
 	}
 }
 
 private extension DetailsView {
 
+	#if os(iOS)
+	private var addButton: some View {
+		switch editMode {
+		case .inactive:
+			return AnyView(Button(action: newTodo) { Image(systemName: "plus") })
+		default:
+			return AnyView(EmptyView())
+		}
+	}
+	#endif
+
 	@ViewBuilder
 	func makeMenu(_ todo: TodoItem) -> some View {
-		Menu("Status") {
+		Button("Edit...") {
+			self.edited = todo
+		}
+		Divider()
+		Section("Status") {
 			ForEach(TodoStatus.allCases) { status in
 				Button(status.title) {
 					setStatus(status, todo: todo)
@@ -77,7 +123,7 @@ private extension DetailsView {
 			}
 		}
 		Divider()
-		Menu("Priority") {
+		Section("Priority") {
 			ForEach(TodoPriority.allCases) { priority in
 				Button(priority.title) {
 					setPriority(priority: priority, todo: todo)
@@ -85,8 +131,10 @@ private extension DetailsView {
 			}
 		}
 		Divider()
-		Button("Delete") {
+		Button(role: .destructive) {
 			delete(todo)
+		} label: {
+			Text("Delete")
 		}
 	}
 }
@@ -95,16 +143,7 @@ private extension DetailsView {
 private extension DetailsView {
 
 	func newTodo() {
-		withAnimation {
-			let new: TodoItem = .new
-			switch behaviour {
-			case .status(let value):
-				new.status = value
-			case .list(let value):
-				new.list = value
-			}
-			modelContext.insert(new)
-		}
+		self.isPresented = true
 	}
 
 	func setPriority(priority: TodoPriority, todo: TodoItem) {
@@ -177,7 +216,6 @@ private extension DetailsView {
 	DetailsView(behaviour: .status(.inFocus), panel: .constant(.inFocus))
 		.modelContainer(for: TodoItem.self, inMemory: true)
 }
-#endif
 
 extension TodoPriority {
 
