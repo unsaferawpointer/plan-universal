@@ -53,3 +53,18 @@ extension ListItem: Identifiable {
 		return uuid
 	}
 }
+
+// MARK: - Templates
+extension ListItem {
+
+	static var new: ListItem {
+		return .init(
+			uuid: .init(),
+			title: "New List",
+			isArchieved: false,
+			isFavorite: false,
+			creationDate: .now,
+			rawIcon: nil
+		)
+	}
+}

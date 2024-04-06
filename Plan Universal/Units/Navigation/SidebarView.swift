@@ -61,10 +61,10 @@ struct SidebarView: View {
 			}
 		}
 		.sheet(isPresented: $isPresented) {
-			ListDetails(list: nil)
+			ListDetailsView(list: nil)
 		}
 		.sheet(item: $edited) { item in
-			ListDetails(list: item)
+			ListDetailsView(list: item)
 		}
 		.navigationTitle("Plan")
 		.toolbar {
