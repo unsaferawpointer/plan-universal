@@ -16,6 +16,7 @@ struct PlanApp: App {
 			TodoItem.self
 		])
 		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+		print(modelConfiguration.id)
 
 		do {
 			return try ModelContainer(for: schema, configurations: [modelConfiguration])

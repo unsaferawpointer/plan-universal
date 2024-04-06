@@ -14,5 +14,21 @@ enum Panel: Hashable {
 	case inFocus
 	case backlog
 	case archieve
-	case list(_ id: UUID)
+	case list(_ value: ListItem)
+}
+
+extension Panel {
+
+	var title: String {
+		switch self {
+		case .inFocus:
+			return "In Focus"
+		case .backlog:
+			return "Backlog"
+		case .archieve:
+			return "Archieve"
+		case .list(let value):
+			return value.title
+		}
+	}
 }

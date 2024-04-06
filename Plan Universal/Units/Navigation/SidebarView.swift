@@ -44,7 +44,7 @@ struct SidebarView: View {
 
 			Section("Lists") {
 				ForEach(lists) { list in
-					NavigationLink(value: list) {
+					NavigationLink(value: Panel.list(list)) {
 						Label(list.title, systemImage: "doc.text")
 					}
 					.listItemTint(.secondary)
@@ -66,6 +66,7 @@ struct SidebarView: View {
 		.sheet(item: $edited) { item in
 			ListDetails(list: item)
 		}
+		.navigationTitle("Plan")
 		.toolbar {
 			Spacer()
 			Button {
