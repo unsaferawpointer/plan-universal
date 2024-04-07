@@ -15,13 +15,15 @@ final class TodoItem {
 
 	var text: String
 
-	private (set) var rawStatus: Int
-
-	private (set) var rawPriority: Int
-
 	var creationDate: Date
 
 	var completionDate: Date?
+
+	// MARK: - Private properties
+
+	private (set) var rawStatus: Int
+
+	private (set) var rawPriority: Int
 
 	// MARK: - Relationships
 
@@ -71,6 +73,7 @@ extension TodoItem {
 		}
 		set {
 			self.rawStatus = newValue ? TodoStatus.done.rawValue : TodoStatus.backlog.rawValue
+			self.completionDate = newValue ? .now : nil
 		}
 	}
 
@@ -81,6 +84,7 @@ extension TodoItem {
 
 		set {
 			self.rawStatus = newValue.rawValue
+			self.completionDate = newValue == .done ? .now : nil
 		}
 	}
 }

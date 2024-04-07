@@ -43,8 +43,7 @@ struct DetailsView: View {
 		self._panel = panel
 		self._todos = Query(
 			filter: predicate(for: behaviour),
-			sort: \.creationDate,
-			order: .forward,
+			sort: sortDescriptors(for: behaviour),
 			animation: .default
 		)
 	}
@@ -214,6 +213,27 @@ private extension DetailsView {
 			return #Predicate { todo in
 				todo.list?.uuid == id
 			}
+		}
+	}
+
+	func sortDescriptors(for behaviour: Behaviour) -> [SortDescriptor<TodoItem>] {
+		switch behaviour {
+		case .status(let value):
+			switch value {
+			case .inFocus, .backlog:
+				return [
+							SortDescriptor(\TodoItem.rawPriority, order: .reverse),
+							SortDescriptor(\TodoItem.creationDate, order: .forward)
+					   ]
+			case .done:
+				return [SortDescriptor(\TodoItem.completionDate, order: .reverse)]
+			}
+
+		case .list(let value):
+			return [
+						SortDescriptor(\TodoItem.rawPriority, order: .reverse),
+						SortDescriptor(\TodoItem.creationDate, order: .forward)
+				   ]
 		}
 	}
 }
