@@ -80,9 +80,15 @@ struct DetailsView: View {
 			ToolbarItem {
 				EditButton()
 			}
+			ToolbarItem(placement: .status) {
+				Text("\(todos.count) Todos")
+					.foregroundStyle(.secondary)
+					.font(.callout)
+			}
 		}
 		.environment(\.editMode, $editMode)
 		#else
+		.navigationSubtitle("\(todos.count) Todos")
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button {

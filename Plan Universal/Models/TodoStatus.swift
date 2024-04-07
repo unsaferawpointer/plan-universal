@@ -22,11 +22,11 @@ extension TodoStatus {
 	var title: String {
 		switch self {
 		case .inFocus:
-			"In Focus"
+			String(localized: "In Focus")
 		case .backlog:
-			"Backlog"
+			String(localized: "Backlog")
 		case .done:
-			"Archieve"
+			String(localized: "Archieve")
 		}
 	}
 }

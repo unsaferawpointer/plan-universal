@@ -31,7 +31,6 @@ struct ListDetailsView: View {
 			Form {
 				TextField("List name", text: $title)
 			}
-			.formStyle(.grouped)
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
 					Button(role: .cancel) {
@@ -57,6 +56,10 @@ struct ListDetailsView: View {
 				}
 			}
 		}
+		#if os(macOS)
+		.padding(10)
+		.frame(minWidth: 320)
+		#endif
 	}
 
 }

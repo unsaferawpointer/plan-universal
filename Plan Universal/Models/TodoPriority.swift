@@ -22,11 +22,11 @@ extension TodoPriority {
 	var title: String {
 		switch self {
 		case .low:
-			"Low"
+			String(localized: "Low")
 		case .medium:
-			"Medium"
+			String(localized: "Medium")
 		case .high:
-			"High"
+			String(localized: "High")
 		}
 	}
 }

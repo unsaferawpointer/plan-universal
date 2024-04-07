@@ -22,11 +22,11 @@ extension Panel {
 	var title: String {
 		switch self {
 		case .inFocus:
-			return "In Focus"
+			return String(localized: "In Focus")
 		case .backlog:
-			return "Backlog"
+			return String(localized: "Backlog")
 		case .archieve:
-			return "Archieve"
+			return String(localized: "Archieve")
 		case .list(let value):
 			return value.title
 		}

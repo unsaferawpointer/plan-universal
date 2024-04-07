@@ -60,7 +60,7 @@ extension ListItem {
 	static var new: ListItem {
 		return .init(
 			uuid: .init(),
-			title: "New List",
+			title: String(localized: "New List"),
 			isArchieved: false,
 			isFavorite: false,
 			creationDate: .now,
