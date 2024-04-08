@@ -43,18 +43,34 @@ struct SidebarView: View {
 			.listItemTint(.monochrome)
 
 			Section("Lists") {
-				ForEach(lists) { list in
-					NavigationLink(value: Panel.list(list)) {
-						Label(list.title, systemImage: "doc.text")
-					}
-					.listItemTint(.secondary)
-					.contextMenu {
-						Button("Edit...") {
-							self.edited = list
+				if lists.isEmpty {
+					ContentUnavailableView.init(label: {
+						Label("No Lists", systemImage: "doc.text")
+					}, description: {
+						Text("New lists you create will appear here.")
+							.lineLimit(2)
+					}, actions: {
+						Button(action: {
+							self.isPresented = true
+						}) {
+							Text("New List")
 						}
-						Divider()
-						Button("Delete") {
-							modelContext.delete(list)
+						.buttonStyle(.bordered)
+					})
+				} else {
+					ForEach(lists) { list in
+						NavigationLink(value: Panel.list(list)) {
+							Label(list.title, systemImage: "doc.text")
+						}
+						.listItemTint(.secondary)
+						.contextMenu {
+							Button("Edit...") {
+								self.edited = list
+							}
+							Divider()
+							Button("Delete") {
+								modelContext.delete(list)
+							}
 						}
 					}
 				}
@@ -110,7 +126,7 @@ struct Sidebar_Previews: PreviewProvider {
 		NavigationSplitView {
 			Preview()
 		} detail: {
-			Text("Detail!")
+			Text("Details")
 		}
 	}
 }

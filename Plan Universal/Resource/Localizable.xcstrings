@@ -99,7 +99,7 @@
         }
       }
     },
-    "Detail!" : {
+    "Details" : {
 
     },
     "Edit..." : {
@@ -182,6 +182,16 @@
         }
       }
     },
+    "New lists you create will appear here." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новые списки появятся здесь"
+          }
+        }
+      }
+    },
     "New todo" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -209,6 +219,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Новые задание появятся здесь."
+          }
+        }
+      }
+    },
+    "No Lists" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Списков нет"
           }
         }
       }

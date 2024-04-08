@@ -73,6 +73,7 @@ struct DetailsView: View {
 					}) {
 						Text("New Todo")
 					}
+					.buttonStyle(.bordered)
 				})
 			}
 		}
