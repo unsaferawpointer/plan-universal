@@ -29,7 +29,7 @@ struct TodoDetailsView: View {
 		self.behaviour = behaviour
 		self.todo = todo
 		self._priority = State(initialValue: todo?.priority ?? .low)
-		self._text = State(initialValue: todo?.text ?? "New todo")
+		self._text = State(initialValue: todo?.text ?? String(localized: "New Todo"))
 	}
 
 	var body: some View {

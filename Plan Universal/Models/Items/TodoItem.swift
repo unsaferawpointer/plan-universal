@@ -103,7 +103,7 @@ extension TodoItem {
 	static var new: TodoItem {
 		return TodoItem(
 			uuid: .init(),
-			text: "New Todo",
+			text: String(localized: "New Todo"),
 			rawStatus: TodoStatus.backlog.rawValue,
 			rawPriority: TodoPriority.low.rawValue,
 			creationDate: .now,

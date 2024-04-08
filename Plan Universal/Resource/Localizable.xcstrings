@@ -183,7 +183,15 @@
       }
     },
     "New todo" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новое задание"
+          }
+        }
+      }
     },
     "New Todo" : {
       "localizations" : {
@@ -191,6 +199,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Новое задание"
+          }
+        }
+      }
+    },
+    "New todos you create will appear here." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новые задание появятся здесь."
+          }
+        }
+      }
+    },
+    "No Todos" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заданий нет"
           }
         }
       }

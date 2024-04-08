@@ -61,6 +61,21 @@ struct DetailsView: View {
 			TodoDetailsView(behaviour: behaviour, todo: item)
 		}
 		.navigationTitle(panel?.title ?? "")
+		.overlay {
+			if todos.isEmpty {
+				ContentUnavailableView.init(label: {
+					Label("No Todos", systemImage: "tray.fill")
+				}, description: {
+					Text("New todos you create will appear here.")
+				}, actions: {
+					Button(action: {
+						newTodo()
+					}) {
+						Text("New Todo")
+					}
+				})
+			}
+		}
 		#if os(iOS)
 		.toolbar {
 			ToolbarItem(placement: .bottomBar) {
