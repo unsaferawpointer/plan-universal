@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%@ " : {
+
+    },
     "%lld Todos" : {
       "localizations" : {
         "en" : {
@@ -170,7 +173,27 @@
       }
     },
     "New List" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый список"
+          }
+        }
+      }
+    },
+    "New todo" : {
 
+    },
+    "New Todo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новое задание"
+          }
+        }
+      }
     },
     "Plan" : {
       "localizations" : {
