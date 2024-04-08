@@ -67,14 +67,33 @@ struct SidebarView: View {
 			ListDetailsView(list: item)
 		}
 		.navigationTitle("Plan")
+		#if os(iOS)
 		.toolbar {
-			Spacer()
-			Button {
-				self.isPresented = true
-			} label: {
-				Image(systemName: "plus")
+			ToolbarItem(placement: .bottomBar) {
+				Spacer()
+			}
+			ToolbarItem(placement: .bottomBar) {
+				Button {
+					self.isPresented = true
+				} label: {
+					Image(systemName: "doc.badge.plus")
+				}
 			}
 		}
+		#else
+		.toolbar {
+			ToolbarItem {
+				Spacer()
+			}
+			ToolbarItem(placement: .primaryAction) {
+				Button {
+					self.isPresented = true
+				} label: {
+					Image(systemName: "doc.badge.plus")
+				}
+			}
+		}
+		#endif
 	}
 }
 

@@ -197,7 +197,6 @@
 			children = (
 				4CDB88422BC094070019AC71 /* Cells */,
 				4CDB882C2BC06D530019AC71 /* DetailsView.swift */,
-				4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -232,6 +231,7 @@
 		4CDB88302BC06E2A0019AC71 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */,
 				4CDB87FF2BC06BFB0019AC71 /* Assets.xcassets */,
 			);
 			path = Resource;

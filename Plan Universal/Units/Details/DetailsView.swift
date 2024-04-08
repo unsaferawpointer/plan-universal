@@ -22,10 +22,6 @@ struct DetailsView: View {
 
 	@State var edited: TodoItem?
 
-	#if os(iOS)
-	@State private var editMode = EditMode.inactive
-	#endif
-
 	// MARK: - Data
 
 	@Query(
@@ -67,17 +63,13 @@ struct DetailsView: View {
 		.navigationTitle(panel?.title ?? "")
 		#if os(iOS)
 		.toolbar {
-			if editMode == .inactive {
-				ToolbarItem(placement: .primaryAction) {
-					Button {
-						newTodo()
-					} label: {
-						Image(systemName: "plus")
-					}
-				}
+			ToolbarItem(placement: .bottomBar) {
+				Spacer()
 			}
-			ToolbarItem {
-				EditButton()
+			ToolbarItem(placement: .bottomBar) {
+				Button(action: newTodo) {
+					Image(systemName: "plus")
+				}
 			}
 			ToolbarItem(placement: .status) {
 				Text("\(todos.count) Todos")
@@ -85,7 +77,6 @@ struct DetailsView: View {
 					.font(.callout)
 			}
 		}
-		.environment(\.editMode, $editMode)
 		#else
 		.navigationSubtitle("\(todos.count) Todos")
 		.toolbar {
@@ -101,18 +92,8 @@ struct DetailsView: View {
 	}
 }
 
+// MARK: - Helpers
 private extension DetailsView {
-
-	#if os(iOS)
-	private var addButton: some View {
-		switch editMode {
-		case .inactive:
-			return AnyView(Button(action: newTodo) { Image(systemName: "plus") })
-		default:
-			return AnyView(EmptyView())
-		}
-	}
-	#endif
 
 	@ViewBuilder
 	func makeMenu(_ todo: TodoItem) -> some View {
@@ -166,7 +147,7 @@ private extension DetailsView {
 		}
 	}
 
-	func setStatus(_ status: TodoStatus, todo: TodoItem) {
+	func setStatus(_ status: TodoStatus, todo: TodoItem?) {
 		withAnimation {
 			let modificated = calculateSelection(todo)
 			let items = todos.filter {
@@ -180,7 +161,7 @@ private extension DetailsView {
 		}
 	}
 
-	func delete(_ todo: TodoItem) {
+	func delete(_ todo: TodoItem?) {
 		withAnimation {
 			let modificated = calculateSelection(todo)
 			let items = todos.filter {
@@ -194,7 +175,10 @@ private extension DetailsView {
 		}
 	}
 
-	func calculateSelection(_ todo: TodoItem) -> Set<TodoItem.ID> {
+	func calculateSelection(_ todo: TodoItem?) -> Set<TodoItem.ID> {
+		guard let todo else {
+			return selection
+		}
 		guard selection.contains(todo.uuid) else {
 			return .init([todo.uuid])
 		}

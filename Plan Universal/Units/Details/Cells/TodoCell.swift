@@ -55,7 +55,7 @@ extension TodoCell: View {
 	var body: some View {
 		HStack {
 			Image(systemName: todo.isDone ? "checkmark" : "app")
-				.foregroundStyle(.tertiary)
+				.foregroundStyle(todo.isDone ? .secondary : .tertiary)
 				.contentShape(Rectangle())
 				.onTapGesture {
 					todo.isDone.toggle()
@@ -71,7 +71,7 @@ extension TodoCell: View {
 				.lineLimit(2)
 				if let title = todo.list?.title {
 					Text(title)
-						.foregroundStyle(.secondary)
+						.foregroundStyle(todo.isDone ? .tertiary : .secondary)
 						.font(.caption)
 						.lineLimit(1)
 				}
