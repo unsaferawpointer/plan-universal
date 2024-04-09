@@ -54,12 +54,6 @@ extension TodoCell: View {
 
 	var body: some View {
 		HStack {
-			Image(systemName: todo.isDone ? "checkmark" : "app")
-				.foregroundStyle(todo.isDone ? .secondary : .tertiary)
-				.contentShape(Rectangle())
-				.onTapGesture {
-					todo.isDone.toggle()
-				}
 			VStack(alignment: .leading, spacing: 2) {
 				Group {
 					Text(showSign ? "\(Image(systemName: "bolt.fill")) " : "")
@@ -76,8 +70,16 @@ extension TodoCell: View {
 						.lineLimit(1)
 				}
 			}
+			Spacer()
+			if todo.isDone {
+				Image(systemName: "checkmark")
+					.foregroundStyle(.primary)
+			}
 		}
-
+		.contentShape(Rectangle())
+		.onTapGesture {
+			todo.isDone.toggle()
+		}
 	}
 }
 #endif
