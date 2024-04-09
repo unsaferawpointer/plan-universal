@@ -25,26 +25,35 @@ struct TodoDetailsView: View {
 
 	@State var priority: TodoPriority
 
+	@FocusState var isFocused: Bool
+
 	init(behaviour: Behaviour, todo: TodoItem?) {
 		self.behaviour = behaviour
 		self.todo = todo
 		self._priority = State(initialValue: todo?.priority ?? .low)
-		self._text = State(initialValue: todo?.text ?? String(localized: "New Todo"))
+		self._text = State(initialValue: todo?.text ?? "")
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("", text: $text)
+				TextField("New Todo", text: $text)
+					.focused($isFocused)
 					.submitLabel(.return)
-				Picker(selection: $priority) {
+				Picker("Priority", selection: $priority) {
 					ForEach(TodoPriority.allCases) { priority in
 						Text(priority.title)
 							.tag(priority)
 					}
-				} label: {
-					Text("Priority")
 				}
+				#if os(iOS)
+				.pickerStyle(.inline)
+				#else
+				.pickerStyle(.menu)
+				#endif
+			}
+			.onAppear {
+				self.isFocused = true
 			}
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
@@ -53,29 +62,7 @@ struct TodoDetailsView: View {
 					}
 				}
 				ToolbarItem(placement: .confirmationAction) {
-					Button("Save") {
-						defer {
-							dismiss()
-						}
-						guard let todo else {
-							let new: TodoItem = .new
-
-							switch behaviour {
-							case .status(let value):
-								new.status = value
-							case .list(let value):
-								new.list = value
-							}
-							modelContext.insert(new)
-
-							new.text = text
-							new.priority = priority
-							modelContext.insert(new)
-							return
-						}
-						todo.text = text
-						todo.priority = priority
-					}
+					Button("Save", action: save)
 				}
 			}
 		}
@@ -83,6 +70,35 @@ struct TodoDetailsView: View {
 		.padding(/*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
 		.frame(minWidth: 320)
 		#endif
+	}
+}
+
+// MARK: - Helpers
+private extension TodoDetailsView {
+
+	func save() {
+		defer {
+			dismiss()
+		}
+		guard let todo else {
+			let new: TodoItem = .new
+
+			switch behaviour {
+			case .status(let value):
+				new.status = value
+			case .list(let value):
+				new.list = value
+			}
+
+			let trimmed = text.trimmingCharacters(in: .whitespaces)
+			new.text = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
+
+			new.priority = priority
+			modelContext.insert(new)
+			return
+		}
+		todo.text = text
+		todo.priority = priority
 	}
 }
 
