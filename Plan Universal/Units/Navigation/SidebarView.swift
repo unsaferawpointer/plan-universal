@@ -35,12 +35,10 @@ struct SidebarView: View {
 			NavigationLink(value: Panel.backlog) {
 				Label("Backlog", systemImage: "square.3.layers.3d")
 			}
-			.listItemTint(.monochrome)
 
 			NavigationLink(value: Panel.archieve) {
 				Label("Archieve", systemImage: "shippingbox")
 			}
-			.listItemTint(.monochrome)
 
 			Section("Lists") {
 				if lists.isEmpty {
@@ -62,7 +60,6 @@ struct SidebarView: View {
 						NavigationLink(value: Panel.list(list)) {
 							Label(list.title, systemImage: "doc.text")
 						}
-						.listItemTint(.secondary)
 						.contextMenu {
 							Button("Edit...") {
 								self.edited = list

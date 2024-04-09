@@ -21,15 +21,25 @@ struct ListDetailsView: View {
 
 	@State var title: String
 
+	@FocusState var isFocused: Bool
+
 	init(list: ListItem?) {
 		self.list = list
-		self._title = State(initialValue: list?.title ?? "New list")
+		self._title = State(initialValue: list?.title ?? "")
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
 				TextField("List name", text: $title)
+					.focused($isFocused)
+			}
+			.submitLabel(.done)
+			.onSubmit {
+				save()
+			}
+			.onAppear {
+				self.isFocused = true
 			}
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
@@ -47,7 +57,7 @@ struct ListDetailsView: View {
 				if let list {
 					ToolbarItem(placement: .destructiveAction) {
 						Button(role: .destructive) {
-							delete()
+							delete(list)
 						} label: {
 							Label("Delete", systemImage: "trash")
 						}
@@ -74,7 +84,9 @@ private extension ListDetailsView {
 			}
 			guard let list else {
 				let new: ListItem = .new
-				new.title = title
+
+				let trimmed = title.trimmingCharacters(in: .whitespaces)
+				new.title = trimmed.isEmpty ? String(localized: "New List") : trimmed
 
 				modelContext.insert(new)
 				return
@@ -87,11 +99,8 @@ private extension ListDetailsView {
 		dismiss()
 	}
 
-	func delete() {
+	func delete(_ list: ListItem) {
 		withAnimation {
-			guard let list else {
-				return
-			}
 			modelContext.delete(list)
 			dismiss()
 		}
