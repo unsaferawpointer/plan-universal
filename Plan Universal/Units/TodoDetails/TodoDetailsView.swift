@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TodoDetailsView: View {
 
@@ -13,25 +14,40 @@ struct TodoDetailsView: View {
 
 	// MARK: - Data
 
-	var behaviour: Behaviour
-
 	var todo: TodoItem?
 
 	@Environment(\.modelContext) private var modelContext
 
+	@Query private var lists: [ListItem]
+
 	// MARK: - Local state
 
-	@State var text: String
+	@State var text: String = ""
 
-	@State var priority: TodoPriority
+	@State var status: TodoStatus = .backlog
+
+	@State var priority: TodoPriority = .low
+
+	@State var list: ListItem?
 
 	@FocusState var isFocused: Bool
 
 	init(behaviour: Behaviour, todo: TodoItem?) {
-		self.behaviour = behaviour
+		guard let todo else {
+			switch behaviour {
+			case .status(let value):
+				self._status =  State(initialValue: value)
+			case .list(let value):
+				self._list = State(initialValue: value)
+			}
+			return
+		}
+
 		self.todo = todo
-		self._priority = State(initialValue: todo?.priority ?? .low)
-		self._text = State(initialValue: todo?.text ?? "")
+		self._list = State(initialValue: todo.list)
+		self._priority = State(initialValue: todo.priority)
+		self._text = State(initialValue: todo.text)
+		self._status = State(initialValue: todo.status)
 	}
 
 	var body: some View {
@@ -40,6 +56,17 @@ struct TodoDetailsView: View {
 				TextField("New Todo", text: $text)
 					.focused($isFocused)
 					.submitLabel(.return)
+				Picker("Status", selection: $status) {
+					ForEach(TodoStatus.allCases) { status in
+						Text(status.title)
+							.tag(status)
+					}
+				}
+				#if os(iOS)
+				.pickerStyle(.inline)
+				#else
+				.pickerStyle(.menu)
+				#endif
 				Picker("Priority", selection: $priority) {
 					ForEach(TodoPriority.allCases) { priority in
 						Text(priority.title)
@@ -51,6 +78,15 @@ struct TodoDetailsView: View {
 				#else
 				.pickerStyle(.menu)
 				#endif
+				Picker("List", selection: $list) {
+					Text("None")
+						.tag(Optional<ListItem>(nil))
+					Divider()
+					ForEach(lists) { list in
+						Text(list.title)
+							.tag(Optional<ListItem>(list))
+					}
+				}
 			}
 			.onAppear {
 				self.isFocused = true
@@ -80,25 +116,24 @@ private extension TodoDetailsView {
 		defer {
 			dismiss()
 		}
+
+		let trimmed = text.trimmingCharacters(in: .whitespaces)
+		let modificatedText = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
+
 		guard let todo else {
 			let new: TodoItem = .new
-
-			switch behaviour {
-			case .status(let value):
-				new.status = value
-			case .list(let value):
-				new.list = value
-			}
-
-			let trimmed = text.trimmingCharacters(in: .whitespaces)
-			new.text = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
-
-			new.priority = priority
+			modificate(new, with: modificatedText)
 			modelContext.insert(new)
 			return
 		}
-		todo.text = text
-		todo.priority = priority
+		modificate(todo, with: modificatedText)
+	}
+
+	func modificate(_ item: TodoItem, with modificatedText: String) {
+		item.status = status
+		item.priority = priority
+		item.text = modificatedText
+		item.list = list
 	}
 }
 

@@ -8,9 +8,9 @@
 import Foundation
 
 enum TodoStatus: Int {
-	case inFocus
-	case backlog
-	case done
+	case inFocus = 0
+	case backlog = 1
+	case done = 2
 }
 
 // MARK: - CaseIterable

@@ -79,7 +79,7 @@ extension TodoItem {
 
 	var status: TodoStatus {
 		get {
-			return TodoStatus(rawValue: rawPriority) ?? .backlog
+			return TodoStatus(rawValue: rawStatus) ?? .backlog
 		}
 
 		set {
