@@ -28,7 +28,7 @@ struct SidebarView: View {
 	var body: some View {
 		List(selection: $selection) {
 			NavigationLink(value: Panel.inFocus) {
-				Label("In Focus", systemImage: "sparkles")
+				NavigationRow(title: "In Focus", icon: "sparkles", predicate: .inFocus)
 			}
 			.listItemTint(.yellow)
 

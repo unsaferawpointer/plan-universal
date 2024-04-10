@@ -47,7 +47,7 @@ struct DetailsView: View {
 	var body: some View {
 		List(selection: $selection) {
 			ForEach(todos) { todo in
-				TodoCell(todo: todo)
+				TodoRow(todo: todo)
 					.contextMenu {
 						makeMenu(todo)
 					}

@@ -1,5 +1,5 @@
 //
-//  TodoCell.swift
+//  TodoRow.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 05.04.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TodoCell {
+struct TodoRow {
 
 	@Bindable var todo: TodoItem
 
@@ -23,7 +23,7 @@ struct TodoCell {
 }
 
 #if os(macOS)
-extension TodoCell: View {
+extension TodoRow: View {
 
 	var body: some View {
 		Toggle(isOn: $todo.isDone) {
@@ -50,7 +50,7 @@ extension TodoCell: View {
 #endif
 
 #if os(iOS)
-extension TodoCell: View {
+extension TodoRow: View {
 
 	var body: some View {
 		HStack {
@@ -85,7 +85,7 @@ extension TodoCell: View {
 #endif
 
 // MARK: - Helpers
-private extension TodoCell {
+private extension TodoRow {
 
 	func makePrioritySign() -> some View {
 		Image(systemName: "bolt.fill")
@@ -94,5 +94,5 @@ private extension TodoCell {
 }
 
 #Preview {
-	TodoCell(todo: .new)
+	TodoRow(todo: .new)
 }
