@@ -11,21 +11,21 @@ import Foundation
 @Model
 final class ListItem {
 
-	@Attribute(.unique) var uuid: UUID
+	var uuid: UUID = UUID()
 
-	var title: String
+	var title: String = ""
 
-	var isArchieved: Bool
+	var isArchieved: Bool = false
 
-	var isFavorite: Bool
+	var isFavorite: Bool = false
 
-	var creationDate: Date
+	var creationDate: Date = Date()
 
 	var rawIcon: Int?
 
 	// MARK: - Relationships
 
-	@Relationship(deleteRule: .cascade, inverse: \TodoItem.list) var todos: [TodoItem] = []
+	@Relationship(deleteRule: .cascade, inverse: \TodoItem.list) var todos: [TodoItem]? = []
 
 	// MARK: - Initialization
 

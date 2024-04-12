@@ -152,7 +152,7 @@ private extension DetailsView {
 		withAnimation {
 			let modificating = calculateSelection(todo)
 			let items = todos.filter {
-				modificating.contains($0.uuid)
+				modificating.contains($0.id)
 			}
 
 			try? modelContext.transaction {
@@ -167,7 +167,7 @@ private extension DetailsView {
 		withAnimation {
 			let modificated = calculateSelection(todo)
 			let items = todos.filter {
-				modificated.contains($0.uuid)
+				modificated.contains($0.id)
 			}
 			try? modelContext.transaction {
 				for item in items {
@@ -181,7 +181,7 @@ private extension DetailsView {
 		withAnimation {
 			let modificated = calculateSelection(todo)
 			let items = todos.filter {
-				modificated.contains($0.uuid)
+				modificated.contains($0.id)
 			}
 			try? modelContext.transaction {
 				for item in items {
@@ -195,8 +195,8 @@ private extension DetailsView {
 		guard let todo else {
 			return selection
 		}
-		guard selection.contains(todo.uuid) else {
-			return .init([todo.uuid])
+		guard selection.contains(todo.id) else {
+			return .init([todo.id])
 		}
 		return selection
 	}

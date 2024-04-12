@@ -11,19 +11,19 @@ import Foundation
 @Model
 final class TodoItem {
 
-	var uuid: UUID
+	var uuid: UUID = UUID()
 
-	var text: String
+	var text: String = ""
 
-	var creationDate: Date
+	var creationDate: Date?
 
 	var completionDate: Date?
 
 	// MARK: - Private properties
 
-	private (set) var rawStatus: Int
+	private (set) var rawStatus: Int = TodoStatus.backlog.rawValue
 
-	private (set) var rawPriority: Int
+	private (set) var rawPriority: Int = TodoPriority.low.rawValue
 
 	// MARK: - Relationships
 
