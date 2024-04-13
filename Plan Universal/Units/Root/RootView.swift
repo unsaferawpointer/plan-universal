@@ -13,7 +13,7 @@ struct RootView: View {
 
 	var body: some View {
 		NavigationSplitView {
-			SidebarView(selection: $selection)
+			SidebarView($selection)
 		} detail: {
 			if let selection {
 				NavigationStack {

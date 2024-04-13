@@ -11,19 +11,24 @@ import SwiftData
 struct SidebarView: View {
 
 	/// The person's selection in the sidebar
-	@Binding var selection: Panel?
+	@Binding private var selection: Panel?
 
 	// MARK: - Local state
 
-	@State var isPresented: Bool = false
+	@State private var isPresented: Bool = false
 
-	@State var edited: ListItem?
+	@State private var edited: ListItem?
 
 	// MARK: - Data
 
 	@Environment(\.modelContext) private var modelContext
 
-	@Query(sort: \ListItem.creationDate, order: .forward, animation: .default) private var lists: [ListItem]
+	@Query private var lists: [ListItem]
+
+	init(_ selection: Binding<Panel?>) {
+		self._selection = selection
+		self._lists = .all
+	}
 
 	var body: some View {
 		List(selection: $selection) {
@@ -42,34 +47,9 @@ struct SidebarView: View {
 
 			Section("Lists") {
 				if lists.isEmpty {
-					ContentUnavailableView.init(label: {
-						Label("No Lists", systemImage: "doc.text")
-					}, description: {
-						Text("New lists you create will appear here.")
-							.lineLimit(2)
-					}, actions: {
-						Button(action: {
-							self.isPresented = true
-						}) {
-							Text("New List")
-						}
-						.buttonStyle(.bordered)
-					})
+					makeContentUnavailableView()
 				} else {
-					ForEach(lists) { list in
-						NavigationLink(value: Panel.list(list)) {
-							Label(list.title, systemImage: "doc.text")
-						}
-						.contextMenu {
-							Button("Edit...") {
-								self.edited = list
-							}
-							Divider()
-							Button("Delete") {
-								modelContext.delete(list)
-							}
-						}
-					}
+					makeSection(lists)
 				}
 			}
 		}
@@ -110,12 +90,53 @@ struct SidebarView: View {
 	}
 }
 
+// MARK: - Helpers
+private extension SidebarView {
+
+	@ViewBuilder
+	func makeContentUnavailableView() -> some View {
+		ContentUnavailableView.init(label: {
+			Label("No Lists", systemImage: "doc.text")
+		}, description: {
+			Text("New lists you create will appear here.")
+				.lineLimit(2)
+		}, actions: {
+			Button(action: {
+				self.isPresented = true
+			}) {
+				Text("New List")
+			}
+			.buttonStyle(.bordered)
+		})
+	}
+
+	@ViewBuilder
+	func makeSection(_ lists: [ListItem]) -> some View {
+		ForEach(lists) { list in
+			NavigationLink(value: Panel.list(list)) {
+				Label(list.title, systemImage: "doc.text")
+			}
+			.contextMenu {
+				Button("Edit...") {
+					self.edited = list
+				}
+				Divider()
+				Button(role: .destructive) {
+					modelContext.delete(list)
+				} label: {
+					Text("Delete")
+				}
+			}
+		}
+	}
+}
+
 struct Sidebar_Previews: PreviewProvider {
 
 	struct Preview: View {
 		@State private var selection: Panel? = Panel.inFocus
 		var body: some View {
-			SidebarView(selection: $selection)
+			SidebarView($selection)
 		}
 	}
 

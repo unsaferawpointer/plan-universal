@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C059C362BCAA5350048F5FA /* Query+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C352BCAA5350048F5FA /* Query+Extension.swift */; };
 		4C3EFC942BC1630A006CE43F /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC932BC1630A006CE43F /* Behaviour.swift */; };
 		4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		4C059C2E2BC9E62C0048F5FA /* Plan-Universal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Plan-Universal-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4C059C352BCAA5350048F5FA /* Query+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Query+Extension.swift"; sourceTree = "<group>"; };
 		4C3EFC932BC1630A006CE43F /* Behaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
 		4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsView.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C059C342BCAA51A0048F5FA /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				4C059C352BCAA5350048F5FA /* Query+Extension.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
 		4C3EFC992BC17CF8006CE43F /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +247,7 @@
 		4CDB882E2BC06E120019AC71 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4C059C342BCAA51A0048F5FA /* SwiftData */,
 				4C3EFC932BC1630A006CE43F /* Behaviour.swift */,
 			);
 			path = Services;
@@ -431,6 +442,7 @@
 				4CDB88372BC077D30019AC71 /* TodoItem.swift in Sources */,
 				4C88934B2BC712EF005A5DD0 /* Predicate+Extension.swift in Sources */,
 				4CDB883B2BC07E4E0019AC71 /* ListDetailsView.swift in Sources */,
+				4C059C362BCAA5350048F5FA /* Query+Extension.swift in Sources */,
 				4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
