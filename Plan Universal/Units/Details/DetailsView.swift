@@ -10,36 +10,29 @@ import SwiftData
 
 struct DetailsView: View {
 
-	var behaviour: Behaviour
-
-	@Binding var panel: Panel?
+	var panel: Panel
 
 	// MARK: - Local state
 
 	@State var selection: Set<TodoItem.ID> = .init()
 
-	@State var isPresented: Bool = false
+	@State var editedTodo: TodoItem?
 
-	@State var edited: TodoItem?
+	@State var todoDetailsIsPresented: Bool = false
 
 	// MARK: - Data
 
-	@Query(
-		sort: \TodoItem.creationDate,
-		order: .forward,
-		animation: .default
-	) private var todos: [TodoItem]
+	@Query private var todos: [TodoItem]
 
 	@Environment(\.modelContext) private var modelContext
 
 	// MARK: - Initialization
 
-	init(behaviour: Behaviour, panel: Binding<Panel?>) {
-		self.behaviour = behaviour
-		self._panel = panel
+	init(panel: Panel) {
+		self.panel = panel
 		self._todos = Query(
-			filter: predicate(for: behaviour),
-			sort: sortDescriptors(for: behaviour),
+			filter: predicate(for: panel),
+			sort: sortDescriptors(for: panel),
 			animation: .default
 		)
 	}
@@ -54,13 +47,36 @@ struct DetailsView: View {
 			}
 			.listRowSeparator(.hidden)
 		}
-		.sheet(isPresented: $isPresented) {
-			TodoDetailsView(behaviour: behaviour, todo: nil)
+		.sheet(item: $editedTodo) { todo in
+			TodoDetailsView(todo.configuration) { configuration in
+				todo.configuration = configuration
+			}
 		}
-		.sheet(item: $edited) { item in
-			TodoDetailsView(behaviour: behaviour, todo: item)
+		.sheet(isPresented: $todoDetailsIsPresented) {
+			let configuration: TodoConfiguration = {
+				switch panel {
+				case .inFocus:			.inFocus
+				case .backlog:			.backlog
+				case .archieve:			.done
+				case .list(let value):	.init(list: value)
+				}
+			}()
+
+			return TodoDetailsView(configuration) { newConfiguration in
+
+				let trimmed = newConfiguration.text.trimmingCharacters(in: .whitespaces)
+				let modificatedText = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
+
+				try? modelContext.transaction {
+					let new: TodoItem = .new
+					new.configuration = newConfiguration
+					new.text = modificatedText
+
+					modelContext.insert(new)
+				}
+			}
 		}
-		.navigationTitle(panel?.title ?? "")
+		.navigationTitle(panel.title)
 		.overlay {
 			if todos.isEmpty {
 				ContentUnavailableView.init(label: {
@@ -114,7 +130,7 @@ private extension DetailsView {
 	@ViewBuilder
 	func makeMenu(_ todo: TodoItem) -> some View {
 		Button("Edit...") {
-			self.edited = todo
+			self.editedTodo = todo
 		}
 		Divider()
 		Section("Status") {
@@ -145,7 +161,7 @@ private extension DetailsView {
 private extension DetailsView {
 
 	func newTodo() {
-		self.isPresented = true
+		self.todoDetailsIsPresented = true
 	}
 
 	func setPriority(priority: TodoPriority, todo: TodoItem) {
@@ -201,10 +217,20 @@ private extension DetailsView {
 		return selection
 	}
 
-	func predicate(for behaviour: Behaviour) -> Predicate<TodoItem> {
-		switch behaviour {
-		case .status(let value):
-			let rawValue = value.rawValue
+	func predicate(for panel: Panel) -> Predicate<TodoItem> {
+		switch panel {
+		case .inFocus:
+			let rawValue = TodoStatus.inFocus.rawValue
+			return #Predicate { todo in
+				todo.rawStatus == rawValue
+			}
+		case .backlog:
+			let rawValue = TodoStatus.backlog.rawValue
+			return #Predicate { todo in
+				todo.rawStatus == rawValue
+			}
+		case .archieve:
+			let rawValue = TodoStatus.done.rawValue
 			return #Predicate { todo in
 				todo.rawStatus == rawValue
 			}
@@ -216,30 +242,26 @@ private extension DetailsView {
 		}
 	}
 
-	func sortDescriptors(for behaviour: Behaviour) -> [SortDescriptor<TodoItem>] {
-		switch behaviour {
-		case .status(let value):
-			switch value {
-			case .inFocus, .backlog:
-				return [
-							SortDescriptor(\TodoItem.rawPriority, order: .reverse),
-							SortDescriptor(\TodoItem.creationDate, order: .forward)
-					   ]
-			case .done:
-				return [SortDescriptor(\TodoItem.completionDate, order: .reverse)]
-			}
-
-		case .list(let value):
+	func sortDescriptors(for panel: Panel?) -> [SortDescriptor<TodoItem>] {
+		switch panel {
+		case .inFocus, .backlog:
 			return [
-						SortDescriptor(\TodoItem.rawPriority, order: .reverse),
-						SortDescriptor(\TodoItem.creationDate, order: .forward)
-				   ]
+				SortDescriptor(\TodoItem.rawPriority, order: .reverse),
+				SortDescriptor(\TodoItem.creationDate, order: .forward)
+			       ]
+		case .archieve:
+			return [SortDescriptor(\TodoItem.completionDate, order: .reverse)]
+		default:
+			return [
+				SortDescriptor(\TodoItem.rawPriority, order: .reverse),
+				SortDescriptor(\TodoItem.creationDate, order: .forward)
+			       ]
 		}
 	}
 }
 
 #Preview {
-	DetailsView(behaviour: .status(.inFocus), panel: .constant(.inFocus))
+	DetailsView(panel: .inFocus)
 		.modelContainer(for: TodoItem.self, inMemory: true)
 }
 

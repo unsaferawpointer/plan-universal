@@ -17,27 +17,11 @@ struct RootView: View {
 		} detail: {
 			if let selection {
 				NavigationStack {
-					DetailsView(behaviour: behaviour(for: selection), panel: $selection)
+					DetailsView(panel: selection)
 				}
 			} else {
 				Text("Select sidebar item")
 			}
-		}
-	}
-}
-
-extension RootView {
-
-	func behaviour(for panel: Panel) -> Behaviour {
-		switch panel {
-		case .inFocus:
-			.status(.inFocus)
-		case .backlog:
-			.status(.backlog)
-		case .archieve:
-			.status(.done)
-		case .list(let id):
-			.list(id)
 		}
 	}
 }

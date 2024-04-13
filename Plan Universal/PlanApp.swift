@@ -10,13 +10,13 @@ import SwiftData
 
 @main
 struct PlanApp: App {
+
 	var sharedModelContainer: ModelContainer = {
 		let schema = Schema([
 			ListItem.self,
 			TodoItem.self
 		])
 		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-		print(modelConfiguration.id)
 
 		do {
 			return try ModelContainer(for: schema, configurations: [modelConfiguration])

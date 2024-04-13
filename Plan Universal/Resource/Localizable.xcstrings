@@ -112,6 +112,16 @@
     "Details" : {
 
     },
+    "Edit List..." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать список..."
+          }
+        }
+      }
+    },
     "Edit..." : {
       "localizations" : {
         "ru" : {
@@ -208,17 +218,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Новые списки появятся здесь"
-          }
-        }
-      }
-    },
-    "New todo" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Новое задание"
           }
         }
       }

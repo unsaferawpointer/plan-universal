@@ -87,6 +87,23 @@ extension TodoItem {
 			self.completionDate = newValue == .done ? .now : nil
 		}
 	}
+
+	var configuration: TodoConfiguration {
+		get {
+			return .init(
+				text: text,
+				status: status,
+				priority: priority,
+				list: list
+			)
+		}
+		set {
+			self.text = newValue.text
+			self.status = newValue.status
+			self.priority = newValue.priority
+			self.list = newValue.list
+		}
+	}
 }
 
 // MARK: - Identifiable

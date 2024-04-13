@@ -15,9 +15,9 @@ struct SidebarView: View {
 
 	// MARK: - Local state
 
-	@State private var isPresented: Bool = false
+	@State private var listDetailsIsPresented: Bool = false
 
-	@State private var edited: ListItem?
+	@State private var editedList: ListItem?
 
 	// MARK: - Data
 
@@ -53,10 +53,10 @@ struct SidebarView: View {
 				}
 			}
 		}
-		.sheet(isPresented: $isPresented) {
+		.sheet(isPresented: $listDetailsIsPresented) {
 			ListDetailsView(list: nil)
 		}
-		.sheet(item: $edited) { item in
+		.sheet(item: $editedList) { item in
 			ListDetailsView(list: item)
 		}
 		.navigationTitle("Plan")
@@ -67,7 +67,7 @@ struct SidebarView: View {
 			}
 			ToolbarItem(placement: .bottomBar) {
 				Button {
-					self.isPresented = true
+					self.listDetailsIsPresented = true
 				} label: {
 					Image(systemName: "doc.badge.plus")
 				}
@@ -80,7 +80,7 @@ struct SidebarView: View {
 			}
 			ToolbarItem(placement: .primaryAction) {
 				Button {
-					self.isPresented = true
+					self.listDetailsIsPresented = true
 				} label: {
 					Image(systemName: "doc.badge.plus")
 				}
@@ -102,7 +102,7 @@ private extension SidebarView {
 				.lineLimit(2)
 		}, actions: {
 			Button(action: {
-				self.isPresented = true
+				self.listDetailsIsPresented = true
 			}) {
 				Text("New List")
 			}
@@ -117,8 +117,8 @@ private extension SidebarView {
 				Label(list.title, systemImage: "doc.text")
 			}
 			.contextMenu {
-				Button("Edit...") {
-					self.edited = list
+				Button("Edit List...") {
+					self.editedList = list
 				}
 				Divider()
 				Button(role: .destructive) {
