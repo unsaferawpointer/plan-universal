@@ -28,6 +28,6 @@ struct RootView: View {
 
 #Preview {
 	RootView()
-		.modelContainer(for: ListItem.self, inMemory: true)
-		.modelContainer(for: TodoItem.self, inMemory: true)
+//		.modelContainer(for: ListItem.self, inMemory: true)
+//		.modelContainer(for: TodoItem.self, inMemory: true)
 }

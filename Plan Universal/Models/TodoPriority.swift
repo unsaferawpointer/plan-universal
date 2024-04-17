@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TodoPriority: Int {
+enum TodoPriority: Int64 {
 	case low
 	case medium
 	case high
@@ -34,7 +34,7 @@ extension TodoPriority {
 // MARK: - Identifiable
 extension TodoPriority: Identifiable {
 
-	var id: Int {
+	var id: Int64 {
 		return rawValue
 	}
 }

@@ -163,6 +163,7 @@
       }
     },
     "List name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -171,6 +172,9 @@
           }
         }
       }
+    },
+    "List Name" : {
+
     },
     "Lists" : {
       "localizations" : {

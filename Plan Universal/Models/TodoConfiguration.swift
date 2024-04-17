@@ -15,7 +15,7 @@ struct TodoConfiguration {
 
 	var priority: TodoPriority = .low
 
-	var list: ListItem?
+	var list: ListEntity?
 
 }
 

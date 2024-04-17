@@ -9,5 +9,5 @@ import Foundation
 
 enum Behaviour {
 	case status(_ value: TodoStatus)
-	case list(_ id: ListItem)
+	case list(_ id: ListEntity)
 }

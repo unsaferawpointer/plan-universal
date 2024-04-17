@@ -18,7 +18,7 @@ struct TodoRow {
 
 	// MARK: - Data
 
-	@Bindable var todo: TodoItem
+	@ObservedObject var todo: TodoEntity
 
 	// MARK: - Calculated properties
 
@@ -26,7 +26,7 @@ struct TodoRow {
 		return todo.isImportant
 	}
 
-	init(todo: TodoItem) {
+	init(todo: TodoEntity) {
 		self.todo = todo
 	}
 }
@@ -141,5 +141,5 @@ private extension TodoRow {
 }
 
 #Preview {
-	TodoRow(todo: .new)
+	TodoRow(todo: .new(in: .init(.mainQueue)))
 }

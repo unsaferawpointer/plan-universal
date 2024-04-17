@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TodoStatus: Int {
+enum TodoStatus: Int64 {
 	case inFocus = 0
 	case backlog = 1
 	case done = 2
@@ -34,7 +34,7 @@ extension TodoStatus {
 // MARK: - Identifiable
 extension TodoStatus: Identifiable {
 
-	var id: Int {
+	var id: Int64 {
 		return rawValue
 	}
 }

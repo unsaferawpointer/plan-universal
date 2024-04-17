@@ -14,37 +14,26 @@ struct TodoDetailsView: View {
 
 	// MARK: - Data
 
-	@Query private var lists: [ListItem]
+	@ObservedObject var model: TodoDetailsModel
 
 	// MARK: - Local state
 
-	@State var configuration: TodoConfiguration
-
 	@FocusState var isFocused: Bool
 
-	// MARK: - Action
+	// MARK: - Initialization
 
-	var confirm: (TodoConfiguration) -> Void
-
-	var cancel: (() -> Void)?
-
-	init(
-		_ configuration: TodoConfiguration,
-		confirm: @escaping (TodoConfiguration) -> Void,
-		cancel: (() -> Void)? = nil
-	) {
-		self._configuration = State(initialValue: configuration)
-		self.confirm = confirm
-		self.cancel = cancel
+	init(action: DetailsAction<TodoEntity>, with configuration: TodoConfiguration) {
+		let model = TodoDetailsModel(action, initialConfiguration: configuration)
+		self._model = ObservedObject(initialValue: model)
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("New Todo", text: $configuration.text)
+				TextField("New Todo", text: $model.configuration.text)
 					.focused($isFocused)
 					.submitLabel(.return)
-				Picker("Status", selection: $configuration.status) {
+				Picker("Status", selection: $model.configuration.status) {
 					ForEach(TodoStatus.allCases) { status in
 						Text(status.title)
 							.tag(status)
@@ -55,7 +44,7 @@ struct TodoDetailsView: View {
 				#else
 				.pickerStyle(.menu)
 				#endif
-				Picker("Priority", selection: $configuration.priority) {
+				Picker("Priority", selection: $model.configuration.priority) {
 					ForEach(TodoPriority.allCases) { priority in
 						Text(priority.title)
 							.tag(priority)
@@ -66,13 +55,13 @@ struct TodoDetailsView: View {
 				#else
 				.pickerStyle(.menu)
 				#endif
-				Picker("List", selection: $configuration.list) {
+				Picker("List", selection: $model.configuration.list) {
 					Text("None")
-						.tag(Optional<ListItem>(nil))
+						.tag(Optional<ListEntity>(nil))
 					Divider()
-					ForEach(lists) { list in
+					ForEach(model.lists) { list in
 						Text(list.title)
-							.tag(Optional<ListItem>(list))
+							.tag(Optional<ListEntity>(list))
 					}
 				}
 			}
@@ -80,14 +69,26 @@ struct TodoDetailsView: View {
 				self.isFocused = true
 			}
 			.toolbar {
+				if model.buttonToDeleteIsEnabled {
+					ToolbarItem(placement: .destructiveAction) {
+						Button(role: .destructive) {
+							delete()
+						} label: {
+							Label("Delete", systemImage: "trash")
+						}
+
+					}
+				}
 				ToolbarItem(placement: .cancellationAction) {
 					Button("Cancel") {
 						dismiss()
-						cancel?()
 					}
 				}
 				ToolbarItem(placement: .confirmationAction) {
-					Button("Save", action: save)
+					Button("Save") {
+						save()
+					}
+					.disabled(!model.buttonToSaveIsEnabled)
 				}
 			}
 		}
@@ -101,13 +102,23 @@ struct TodoDetailsView: View {
 // MARK: - Helpers
 private extension TodoDetailsView {
 
+	func delete() {
+		withAnimation {
+			model.delete()
+			dismiss()
+		}
+	}
+
 	func save() {
-		confirm(configuration)
-		dismiss()
+		defer {
+			dismiss()
+		}
+		withAnimation {
+			model.save()
+		}
 	}
 }
 
 #Preview {
-	TodoDetailsView(.backlog, confirm: { _ in }, cancel: { })
+	TodoDetailsView(action: .new, with: .inFocus)
 }
-

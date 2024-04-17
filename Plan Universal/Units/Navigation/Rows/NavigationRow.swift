@@ -16,18 +16,18 @@ struct NavigationRow: View {
 
 	// MARK: - Data
 
-	@Query private var todos: [TodoItem]
+	@ObservedObject var model: Model
 
-	init(title: String, icon: String, predicate: Predicate<TodoItem>) {
+	init(title: String, icon: String, predicate: TodosPredicate) {
 		self.title = title
 		self.icon = icon
-		self._todos = Query(filter: predicate, animation: .default)
+		self._model = ObservedObject(initialValue: .init(predicate: predicate))
 	}
 
 	var body: some View {
-		if !todos.isEmpty {
+		if !model.isEmpty {
 			Label(title, systemImage: icon)
-				.badge("\(Image(systemName: "bolt.fill")) \(todos.count)")
+				.badge("\(Image(systemName: "bolt.fill")) \(model.count)")
 				.badgeProminence(.increased)
 				.imageScale(.small)
 		} else {
@@ -37,5 +37,28 @@ struct NavigationRow: View {
 }
 
 #Preview {
-	NavigationRow(title: "In Focus", icon: "sparkles", predicate: .inFocus)
+	NavigationRow(title: "In Focus", icon: "sparkles", predicate: .status(value: .inFocus))
+}
+
+extension NavigationRow {
+
+	final class Model: ObservableObject {
+
+		var predicate: TodosPredicate
+
+		init(predicate: TodosPredicate) {
+			self.predicate = predicate
+		}
+	}
+}
+
+extension NavigationRow.Model {
+
+	var isEmpty: Bool {
+		return false
+	}
+
+	var count: Int {
+		return 0
+	}
 }

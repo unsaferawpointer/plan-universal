@@ -17,23 +17,22 @@ struct SidebarView: View {
 
 	@State private var listDetailsIsPresented: Bool = false
 
-	@State private var editedList: ListItem?
+	@State private var editedList: ListEntity?
 
 	// MARK: - Data
 
-	@Environment(\.modelContext) private var modelContext
+	@StateObject var model: NavigationModel = .init()
 
-	@Query private var lists: [ListItem]
+	// MARK: - Initialization
 
 	init(_ selection: Binding<Panel?>) {
 		self._selection = selection
-		self._lists = .all
 	}
 
 	var body: some View {
 		List(selection: $selection) {
 			NavigationLink(value: Panel.inFocus) {
-				NavigationRow(title: "In Focus", icon: "sparkles", predicate: .inFocus)
+				NavigationRow(title: "In Focus", icon: "sparkles", predicate: .status(value: .inFocus))
 			}
 			.listItemTint(.yellow)
 
@@ -46,18 +45,18 @@ struct SidebarView: View {
 			}
 
 			Section("Lists") {
-				if lists.isEmpty {
+				if model.lists.isEmpty {
 					makeContentUnavailableView()
 				} else {
-					makeSection(lists)
+					makeSection($model.lists)
 				}
 			}
 		}
 		.sheet(isPresented: $listDetailsIsPresented) {
-			ListDetailsView(list: nil)
+			ListDetailsView(.new)
 		}
 		.sheet(item: $editedList) { item in
-			ListDetailsView(list: item)
+			ListDetailsView(.edit(item))
 		}
 		.navigationTitle("Plan")
 		#if os(iOS)
@@ -111,18 +110,20 @@ private extension SidebarView {
 	}
 
 	@ViewBuilder
-	func makeSection(_ lists: [ListItem]) -> some View {
+	func makeSection(_ lists: Binding<[ListEntity]>) -> some View {
 		ForEach(lists) { list in
-			NavigationLink(value: Panel.list(list)) {
-				Label(list.title, systemImage: "doc.text")
+			NavigationLink(value: Panel.list(list.wrappedValue)) {
+				Label(list.wrappedValue.title, systemImage: "doc.text")
 			}
 			.contextMenu {
 				Button("Edit List...") {
-					self.editedList = list
+					self.editedList = list.wrappedValue
 				}
 				Divider()
 				Button(role: .destructive) {
-					modelContext.delete(list)
+					withAnimation {
+						model.deleteList(list.wrappedValue)
+					}
 				} label: {
 					Text("Delete")
 				}

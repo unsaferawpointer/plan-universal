@@ -13,30 +13,32 @@ struct ListDetailsView: View {
 
 	// MARK: - Data
 
-	var list: ListItem?
-
-	@Environment(\.modelContext) private var modelContext
+	@StateObject private var model: ListDetailsModel
 
 	// MARK: - Local state
 
-	@State var title: String
+	@FocusState private var isFocused: Bool
 
-	@FocusState var isFocused: Bool
+	// MARK: - Initialization
 
-	init(list: ListItem?) {
-		self.list = list
-		self._title = State(initialValue: list?.title ?? "")
+	init(_ action: DetailsAction<ListEntity>) {
+		self._model = StateObject(wrappedValue:  ListDetailsModel(action))
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("List name", text: $title)
+				TextField("List Name", text: $model.configuration.title)
 					.focused($isFocused)
 			}
 			.submitLabel(.done)
 			.onSubmit {
-				save()
+				withAnimation {
+					defer {
+						dismiss()
+					}
+					model.save()
+				}
 			}
 			.onAppear {
 				self.isFocused = true
@@ -44,20 +46,29 @@ struct ListDetailsView: View {
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
 					Button(role: .cancel) {
-						cancel()
+						dismiss()
 					} label: {
 						Text("Cancel")
 					}
 				}
 				ToolbarItem(placement: .confirmationAction) {
 					Button("Save") {
-						save()
+						withAnimation {
+							defer {
+								dismiss()
+							}
+							model.save()
+						}
 					}
+					.disabled(!model.buttonToSaveIsEnabled)
 				}
-				if let list {
+				if model.buttonToDeleteIsEnabled {
 					ToolbarItem(placement: .destructiveAction) {
 						Button(role: .destructive) {
-							delete(list)
+							withAnimation {
+								model.delete()
+								dismiss()
+							}
 						} label: {
 							Label("Delete", systemImage: "trash")
 						}
@@ -74,40 +85,7 @@ struct ListDetailsView: View {
 
 }
 
-// MARK: - Helpers
-private extension ListDetailsView {
-
-	func save() {
-		withAnimation {
-			defer {
-				dismiss()
-			}
-			guard let list else {
-				let new: ListItem = .new
-
-				let trimmed = title.trimmingCharacters(in: .whitespaces)
-				new.title = trimmed.isEmpty ? String(localized: "New List") : trimmed
-
-				modelContext.insert(new)
-				return
-			}
-			list.title = title
-		}
-	}
-
-	func cancel() {
-		dismiss()
-	}
-
-	func delete(_ list: ListItem) {
-		withAnimation {
-			modelContext.delete(list)
-			dismiss()
-		}
-	}
-}
-
 #Preview {
-	ListDetailsView(list: .new)
+	ListDetailsView(.new)
 		.frame(width: 240)
 }
