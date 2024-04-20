@@ -17,7 +17,7 @@ final class NavigationModel: ObservableObject {
 	var dataStorage: DataStorageProtocol
 
 	init(
-		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all).eraseToAnyPublisher(),
+		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all, order: ListOrder.creationDate).eraseToAnyPublisher(),
 		dataStorage: DataStorageProtocol = DataStorage()
 	) {
 		self.dataStorage = dataStorage

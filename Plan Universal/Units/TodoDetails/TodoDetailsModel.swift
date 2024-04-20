@@ -31,7 +31,7 @@ final class TodoDetailsModel: ObservableObject {
 	init(
 		_ action: DetailsAction<TodoEntity>,
 		dataStorage: DataStorageProtocol = DataStorage(),
-		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all).eraseToAnyPublisher(),
+		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all, order: ListOrder.creationDate).eraseToAnyPublisher(),
 		initialConfiguration: TodoConfiguration
 	) {
 		self.action = action

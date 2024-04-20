@@ -26,7 +26,6 @@ struct DetailsView: View {
 
 	init(panel: Panel) {
 		self.panel = panel
-
 		self._model = ObservedObject(initialValue: .init(panel: panel))
 	}
 
@@ -170,48 +169,6 @@ private extension DetailsView {
 		}
 		return model.selection
 	}
-
-//	func predicate(for panel: Panel) -> Predicate<TodoItem> {
-//		switch panel {
-//		case .inFocus:
-//			let rawValue = TodoStatus.inFocus.rawValue
-//			return #Predicate { todo in
-//				todo.rawStatus == rawValue
-//			}
-//		case .backlog:
-//			let rawValue = TodoStatus.backlog.rawValue
-//			return #Predicate { todo in
-//				todo.rawStatus == rawValue
-//			}
-//		case .archieve:
-//			let rawValue = TodoStatus.done.rawValue
-//			return #Predicate { todo in
-//				todo.rawStatus == rawValue
-//			}
-//		case .list(let value):
-//			let id = value.uuid
-//			return #Predicate { todo in
-//				todo.list?.uuid == id
-//			}
-//		}
-//	}
-
-//	func sortDescriptors(for panel: Panel?) -> [SortDescriptor<TodoItem>] {
-//		switch panel {
-//		case .inFocus, .backlog:
-//			return [
-//				SortDescriptor(\TodoItem.rawPriority, order: .reverse),
-//				SortDescriptor(\TodoItem.creationDate, order: .forward)
-//			       ]
-//		case .archieve:
-//			return [SortDescriptor(\TodoItem.completionDate, order: .reverse)]
-//		default:
-//			return [
-//				SortDescriptor(\TodoItem.rawPriority, order: .reverse),
-//				SortDescriptor(\TodoItem.creationDate, order: .forward)
-//			       ]
-//		}
-//	}
 }
 
 #Preview {

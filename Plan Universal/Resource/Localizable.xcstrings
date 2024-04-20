@@ -17,6 +17,9 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "%lld Todos" : {
       "localizations" : {
         "en" : {

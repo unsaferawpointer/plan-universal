@@ -18,10 +18,11 @@ final class NavigationRowModel: ObservableObject {
 
 	private var cancellable: AnyCancellable?
 
-	init(filter: TodoFilter) {
+	init<Filter: CoreDataFilter>(filter: Filter) where Filter.Entity == TodoEntity {
 		let publisher = PersistentContainer.shared.mainContext.publisher(
 			for: TodoEntity.self,
-			filter: filter
+			filter: filter,
+			order: TodoOrder.backlog
 		).eraseToAnyPublisher()
 		cancellable = publisher.sink { entities in
 			self.todos = entities

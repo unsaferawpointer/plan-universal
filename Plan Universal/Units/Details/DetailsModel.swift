@@ -27,7 +27,8 @@ final class DetailsModel: ObservableObject {
 	init(panel: Panel) {
 		let publisher = PersistentContainer.shared.mainContext.publisher(
 			for: TodoEntity.self,
-			filter: panel.filter
+			filter: panel.filter,
+			order: panel.order
 		).eraseToAnyPublisher()
 		self.dataStorage = DataStorage()
 		cancellable = publisher.sink { entities in
@@ -92,6 +93,19 @@ extension Panel {
 			return .status(.done)
 		case .list(let value):
 			return .list(value.uuid)
+		}
+	}
+
+	var order: TodoOrder {
+		switch self {
+		case .inFocus:
+			return .inFocus
+		case .backlog:
+			return .backlog
+		case .archieve:
+			return .archieve
+		case .list:
+			return .list
 		}
 	}
 }

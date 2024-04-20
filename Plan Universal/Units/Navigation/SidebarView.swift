@@ -32,12 +32,17 @@ struct SidebarView: View {
 	var body: some View {
 		List(selection: $selection) {
 			NavigationLink(value: Panel.inFocus) {
-				NavigationRow(title: "In Focus", icon: "sparkles", filter: .status(.inFocus))
+				NavigationRow(title: "In Focus", icon: "sparkles", sign: nil, filter: TodoFilter.status(.inFocus))
 			}
 			.listItemTint(.yellow)
 
 			NavigationLink(value: Panel.backlog) {
-				Label("Backlog", systemImage: "square.3.layers.3d")
+				NavigationRow(
+					title: "Backlog",
+					icon: "square.3.layers.3d", 
+					sign: "bolt.fill",
+					filter: CompoundFilter<TodoFilter>(filters: [.status(.backlog), .highPriority])
+				)
 			}
 
 			NavigationLink(value: Panel.archieve) {

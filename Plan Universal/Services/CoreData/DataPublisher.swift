@@ -16,11 +16,18 @@ struct FetchedResultsPublisher<Entity: NSManagedObject> {
 
 	private let predicate: NSPredicate?
 
+	private let sortDescriptors: [NSSortDescriptor]
+
 	/// Creates a publisher that retains the managed object context passed to it.
 	/// - Parameter managedObjectContext: the managed object context to monitor
-	public init<T: CoreDataFilter>(managedObjectContext: NSManagedObjectContext, filter: T) where T.Entity == Entity {
+	public init<T: CoreDataFilter, O: CoreDataOrder>(
+		managedObjectContext: NSManagedObjectContext,
+		filter: T,
+		order: O
+	) where T.Entity == Entity, O.Entity == Entity {
 		self.managedObjectContext = managedObjectContext
 		self.predicate = filter.predicate
+		self.sortDescriptors = order.sortDescriptors
 	}
 }
 
@@ -36,7 +43,8 @@ extension FetchedResultsPublisher: Publisher {
 			subscriber: subscriber,
 			entity: Entity.self,
 			managedObjectContext: managedObjectContext,
-			predicate: predicate
+			predicate: predicate, 
+			sortDescriptors: sortDescriptors
 		))
 	}
 }
@@ -59,6 +67,8 @@ final class FetchedResultsSubscription<SubscriberType: Subscriber, Entity: NSMan
 
 	private var predicate: NSPredicate?
 
+	private var sortDescriptors: [NSSortDescriptor]
+
 	/// Internal buffer of the latest set of entities of the fetched results controller
 	private var subject = CurrentValueSubject<[Entity], Never>([])
 
@@ -79,11 +89,12 @@ final class FetchedResultsSubscription<SubscriberType: Subscriber, Entity: NSMan
 		subscriber = nil
 	}
 
-	init(subscriber: SubscriberType, entity: Entity.Type, managedObjectContext: NSManagedObjectContext, predicate: NSPredicate?) {
+	init(subscriber: SubscriberType, entity: Entity.Type, managedObjectContext: NSManagedObjectContext, predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]) {
 		self.managedObjectContext = managedObjectContext
 		self.entity = entity
 		self.subscriber = subscriber
 		self.predicate = predicate
+		self.sortDescriptors = sortDescriptors
 
 		super.init()
 
@@ -113,7 +124,7 @@ final class FetchedResultsSubscription<SubscriberType: Subscriber, Entity: NSMan
 
 		// Since we do not know anything about the entity, we are not able to add sorting to the fetch.
 		// In future updates one could add protocol requirements to sort by common properties of entities.
-		request.sortDescriptors = []
+		request.sortDescriptors = sortDescriptors
 
 		let fetchedResultsController = NSFetchedResultsController(
 			fetchRequest: request,
@@ -157,9 +168,11 @@ extension NSManagedObjectContext {
 	/// whenever updates to the objects occur.
 	/// - Parameter entity: The entity type to receive updates for
 	/// - Returns: Publisher that emits up-to-date lists of the entities.
-	func publisher<Entity: NSManagedObject, Filter: CoreDataFilter>(
-		for entity: Entity.Type, filter: Filter
-	) -> FetchedResultsPublisher<Entity> where Filter.Entity == Entity {
-		FetchedResultsPublisher(managedObjectContext: self, filter: filter)
+	func publisher<Entity: NSManagedObject, Filter: CoreDataFilter, Order: CoreDataOrder>(
+		for entity: Entity.Type,
+		filter: Filter,
+		order: Order
+	) -> FetchedResultsPublisher<Entity> where Filter.Entity == Entity, Order.Entity == Entity {
+		FetchedResultsPublisher(managedObjectContext: self, filter: filter, order: order)
 	}
 }
