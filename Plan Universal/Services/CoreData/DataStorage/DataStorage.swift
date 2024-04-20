@@ -8,32 +8,11 @@
 import Foundation
 import CoreData
 
-protocol DataStorageProtocol {
-
-	@discardableResult
-	func insertList(_ configuration: ListConfiguration) -> ListEntity
-
-	@discardableResult
-	func insertTodo(_ configuration: TodoConfiguration) -> TodoEntity
-
-	func deleteTodos(_ todos: [TodoEntity])
-
-	func deleteLists(_ lists: [ListEntity])
-
-	func update(_ todo: TodoEntity, with configuration: TodoConfiguration)
-
-	func update(_ list: ListEntity, with configuration: ListConfiguration)
-
-	func setStatus(_ status: TodoStatus, for todos: [TodoEntity])
-
-	func setPriority(_ priority: TodoPriority, for todos: [TodoEntity])
-
-	func save() throws
-}
-
 final class DataStorage {
 
 	var context: NSManagedObjectContext
+
+	// MARK: - Initialization
 
 	init(context: NSManagedObjectContext = PersistentContainer.shared.mainContext) {
 		self.context = context

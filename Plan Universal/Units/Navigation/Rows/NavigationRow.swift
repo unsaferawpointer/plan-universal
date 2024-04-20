@@ -16,12 +16,14 @@ struct NavigationRow: View {
 
 	// MARK: - Data
 
-	@ObservedObject var model: Model
+	@ObservedObject var model: NavigationRowModel
 
-	init(title: String, icon: String, predicate: TodosPredicate) {
+	// MARK: - Initialization
+
+	init(title: String, icon: String, filter: TodoFilter) {
 		self.title = title
 		self.icon = icon
-		self._model = ObservedObject(initialValue: .init(predicate: predicate))
+		self._model = ObservedObject(initialValue: .init(filter: filter))
 	}
 
 	var body: some View {
@@ -37,28 +39,5 @@ struct NavigationRow: View {
 }
 
 #Preview {
-	NavigationRow(title: "In Focus", icon: "sparkles", predicate: .status(value: .inFocus))
-}
-
-extension NavigationRow {
-
-	final class Model: ObservableObject {
-
-		var predicate: TodosPredicate
-
-		init(predicate: TodosPredicate) {
-			self.predicate = predicate
-		}
-	}
-}
-
-extension NavigationRow.Model {
-
-	var isEmpty: Bool {
-		return false
-	}
-
-	var count: Int {
-		return 0
-	}
+	NavigationRow(title: "In Focus", icon: "sparkles", filter: .all)
 }

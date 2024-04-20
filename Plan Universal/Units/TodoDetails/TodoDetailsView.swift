@@ -103,9 +103,11 @@ struct TodoDetailsView: View {
 private extension TodoDetailsView {
 
 	func delete() {
+		defer {
+			dismiss()
+		}
 		withAnimation {
 			model.delete()
-			dismiss()
 		}
 	}
 
