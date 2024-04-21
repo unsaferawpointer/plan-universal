@@ -36,13 +36,15 @@ struct DetailsTodoRow {
 extension DetailsTodoRow: View {
 
 	var body: some View {
-		Toggle(
-			isOn: .init {
+		HStack(alignment: .center) {
+			Toggle("", isOn: .init {
 				model.isDone
 			} set: { newValue in
 				model.setCompletion(newValue)
-			}
-		) {
+			})
+			.toggleStyle(.checkbox)
+			.labelsHidden()
+
 			HStack(spacing: 2) {
 				Group {
 					Text(model.showSign ? "\(Image(systemName: "bolt.fill")) " : "")
@@ -61,7 +63,6 @@ extension DetailsTodoRow: View {
 				}
 			}
 		}
-		.toggleStyle(.checkbox)
 	}
 }
 #endif
