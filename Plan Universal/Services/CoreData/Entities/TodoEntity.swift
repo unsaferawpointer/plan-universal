@@ -97,7 +97,7 @@ extension TodoEntity {
 		self.uuid = .init()
 		self.text = configutation.text
 		self.creationDate = .now
-		self.completionDate = nil
+		self.completionDate = configutation.status == .done ? .now : nil
 		self.rawStatus = configutation.status.rawValue
 		self.rawPriority = configutation.status.rawValue
 		self.estimation = 0
