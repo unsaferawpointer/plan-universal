@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 
 final class DetailsModel: ObservableObject {
@@ -15,6 +16,8 @@ final class DetailsModel: ObservableObject {
 	@Published var selection: Set<TodoEntity.ID> = .init()
 
 	@Published var todos: [TodoEntity] = []
+
+	@Published var elements: DetailsTodoRowElements
 
 	// MARK: - DI
 
@@ -31,8 +34,11 @@ final class DetailsModel: ObservableObject {
 			order: panel.order
 		).eraseToAnyPublisher()
 		self.dataStorage = DataStorage()
+		self.elements = panel.elements
 		cancellable = publisher.sink { entities in
-			self.todos = entities
+			withAnimation {
+				self.todos = entities
+			}
 		}
 	}
 }
@@ -86,6 +92,15 @@ private extension DetailsModel {
 }
 
 extension Panel {
+
+	var elements: DetailsTodoRowElements {
+		switch self {
+		case .inFocus, .backlog, .completed:
+			return [.listLabel]
+		case .list:
+			return []
+		}
+	}
 
 	var filter: TodoFilter {
 		switch self {

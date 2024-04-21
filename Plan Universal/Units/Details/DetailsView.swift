@@ -42,7 +42,7 @@ struct DetailsView: View {
 	var body: some View {
 		List(selection: $model.selection) {
 			ForEach(model.todos) { todo in
-				TodoRow(todo: todo)
+				DetailsTodoRow(todo: todo, elements: model.elements)
 					.contextMenu {
 						makeMenu(todo)
 					}
