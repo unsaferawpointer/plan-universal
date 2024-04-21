@@ -10,6 +10,14 @@ import SwiftData
 
 struct SidebarView: View {
 
+	#if os(iOS)
+	private var isCompact: Bool {
+		UIDevice.current.userInterfaceIdiom != .pad
+	}
+	#else
+	private let isCompact = false
+	#endif
+
 	/// The person's selection in the sidebar
 	@Binding private var selection: Panel?
 
@@ -18,6 +26,8 @@ struct SidebarView: View {
 	@State private var listDetailsIsPresented: Bool = false
 
 	@State private var editedList: ListEntity?
+
+	@State var todoDetailsIsPresented: Bool = false
 
 	// MARK: - Data
 
@@ -60,6 +70,9 @@ struct SidebarView: View {
 		.sheet(isPresented: $listDetailsIsPresented) {
 			ListDetailsView(.new)
 		}
+		.sheet(isPresented: $todoDetailsIsPresented) {
+			TodoDetailsView(action: .new, with: .default)
+		}
 		.sheet(item: $editedList) { item in
 			ListDetailsView(.edit(item))
 		}
@@ -69,24 +82,17 @@ struct SidebarView: View {
 			ToolbarItem(placement: .bottomBar) {
 				Spacer()
 			}
-			ToolbarItem(placement: .bottomBar) {
-				Button {
-					self.listDetailsIsPresented = true
-				} label: {
-					Image(systemName: "doc.badge.plus")
-				}
-			}
-		}
-		#else
-		.toolbar {
-			ToolbarItem {
-				Spacer()
-			}
-			ToolbarItem(placement: .primaryAction) {
-				Button {
-					self.listDetailsIsPresented = true
-				} label: {
-					Image(systemName: "doc.badge.plus")
+			if isCompact {
+				ToolbarItem(placement: .primaryAction) {
+					Menu("Add", systemImage: "plus") {
+						Button {
+							self.listDetailsIsPresented = true
+						} label: {
+							Text("New List")
+						}
+					} primaryAction: {
+						self.todoDetailsIsPresented = true
+					}
 				}
 			}
 		}

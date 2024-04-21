@@ -54,6 +54,7 @@ extension TodoRow: View {
 				}
 			}
 		}
+		.toggleStyle(.checkbox)
 	}
 }
 #endif

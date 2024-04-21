@@ -51,20 +51,24 @@ extension DetailsModel {
 	func delete(_ todo: TodoEntity) {
 		var selected = selected(for: todo)
 		dataStorage.deleteTodos(selected)
+		try? dataStorage.save()
 	}
 
 	func setStatus(_ status: TodoStatus, todo: TodoEntity) {
 		var selected = selected(for: todo)
 		dataStorage.setStatus(status, for: selected)
+		try? dataStorage.save()
 	}
 
 	func setPriority(_ priority: TodoPriority, todo: TodoEntity) {
 		var selected = selected(for: todo)
 		dataStorage.setPriority(priority, for: selected)
+		try? dataStorage.save()
 	}
 
 	func insert(with conficuration: TodoConfiguration) {
 		dataStorage.insertTodo(conficuration)
+		try? dataStorage.save()
 	}
 }
 

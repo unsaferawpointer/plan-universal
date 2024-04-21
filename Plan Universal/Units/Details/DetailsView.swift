@@ -10,17 +10,27 @@ import SwiftData
 
 struct DetailsView: View {
 
+	#if os(iOS)
+	private var isCompact: Bool {
+		UIDevice.current.userInterfaceIdiom != .pad
+	}
+	#else
+	private let isCompact = false
+	#endif
+
 	var panel: Panel
 
 	// MARK: - Local state
 
-	@State var editedTodo: TodoEntity?
+	@State private var editedTodo: TodoEntity?
 
-	@State var todoDetailsIsPresented: Bool = false
+	@State private var todoDetailsIsPresented: Bool = false
+
+	@State private var listDetailsIsPresented: Bool = false
 
 	// MARK: - Data
 
-	@ObservedObject var model: DetailsModel
+	@ObservedObject private var model: DetailsModel
 
 	// MARK: - Initialization
 
@@ -54,6 +64,9 @@ struct DetailsView: View {
 
 			TodoDetailsView(action: .new, with: configuration)
 		}
+		.sheet(isPresented: $listDetailsIsPresented) {
+			ListDetailsView(.new)
+		}
 		.navigationTitle(panel.title)
 		.overlay {
 			if model.isEmpty {
@@ -76,25 +89,52 @@ struct DetailsView: View {
 			ToolbarItem(placement: .bottomBar) {
 				Spacer()
 			}
-			ToolbarItem(placement: .bottomBar) {
-				Button(action: newTodo) {
-					Image(systemName: "plus")
-				}
-			}
+
 			ToolbarItem(placement: .status) {
 				Text("\(model.count) Todos")
 					.foregroundStyle(.secondary)
 					.font(.callout)
+			}
+
+			if !isCompact {
+				ToolbarItem(placement: .bottomBar) {
+					Menu("Add", systemImage: "plus") {
+						Button {
+							self.listDetailsIsPresented = true
+						} label: {
+							Text("New List")
+						}
+						Button {
+							self.todoDetailsIsPresented = true
+						} label: {
+							Text("New Todo")
+						}
+					} primaryAction: {
+						self.todoDetailsIsPresented = true
+					}
+				}
+			} else {
+				ToolbarItem(placement: .bottomBar) {
+					Button {
+						self.todoDetailsIsPresented = true
+					} label: {
+						Image(systemName: "plus")
+					}
+				}
 			}
 		}
 		#else
 		.navigationSubtitle("\(model.count) Todos")
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
-				Button {
-					newTodo()
-				} label: {
-					Image(systemName: "plus")
+				Menu("Add", systemImage: "plus") {
+					Button {
+						self.listDetailsIsPresented = true
+					} label: {
+						Text("New List")
+					}
+				} primaryAction: {
+					self.todoDetailsIsPresented = true
 				}
 			}
 		}
