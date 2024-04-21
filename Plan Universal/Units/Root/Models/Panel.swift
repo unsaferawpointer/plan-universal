@@ -13,7 +13,7 @@ import Foundation
 enum Panel: Hashable {
 	case inFocus
 	case backlog
-	case archieve
+	case completed
 	case list(_ value: ListEntity)
 }
 
@@ -25,8 +25,8 @@ extension Panel {
 			return String(localized: "In Focus")
 		case .backlog:
 			return String(localized: "Backlog")
-		case .archieve:
-			return String(localized: "Archieve")
+		case .completed:
+			return String(localized: "Completed")
 		case .list(let value):
 			return value.title
 		}

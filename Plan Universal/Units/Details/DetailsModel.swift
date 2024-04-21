@@ -93,7 +93,7 @@ extension Panel {
 			return .status(.inFocus)
 		case .backlog:
 			return .status(.backlog)
-		case .archieve:
+		case .completed:
 			return .status(.done)
 		case .list(let value):
 			return .list(value.uuid)
@@ -106,7 +106,7 @@ extension Panel {
 			return .inFocus
 		case .backlog:
 			return .backlog
-		case .archieve:
+		case .completed:
 			return .archieve
 		case .list:
 			return .list

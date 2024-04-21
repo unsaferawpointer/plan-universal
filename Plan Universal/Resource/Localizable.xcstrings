@@ -73,7 +73,14 @@
       }
     },
     "Add" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        }
+      }
     },
     "Archieve" : {
       "localizations" : {
@@ -101,6 +108,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отменить"
+          }
+        }
+      }
+    },
+    "Completed" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завершенные"
           }
         }
       }
@@ -180,7 +197,14 @@
       }
     },
     "List Name" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название списка"
+          }
+        }
+      }
     },
     "Lists" : {
       "localizations" : {

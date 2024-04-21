@@ -57,7 +57,7 @@ struct DetailsView: View {
 				switch panel {
 				case .inFocus:			.inFocus
 				case .backlog:			.backlog
-				case .archieve:			.done
+				case .completed:			.done
 				case .list(let value):	.init(list: value)
 				}
 			}()
@@ -198,16 +198,6 @@ private extension DetailsView {
 		withAnimation {
 			model.delete(todo)
 		}
-	}
-
-	func calculateSelection(_ todo: TodoEntity?) -> Set<TodoEntity.ID> {
-		guard let todo else {
-			return model.selection
-		}
-		guard model.selection.contains(todo.id) else {
-			return .init([todo.id])
-		}
-		return model.selection
 	}
 }
 
