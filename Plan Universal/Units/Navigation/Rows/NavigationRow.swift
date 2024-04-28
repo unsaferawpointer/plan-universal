@@ -18,32 +18,32 @@ struct NavigationRow: View {
 
 	// MARK: - Data
 
-	@ObservedObject var model: NavigationRowModel
+	@Query var todos: [TodoItem]
 
 	// MARK: - Initialization
 
-	init<Filter: CoreDataFilter>(
+	init<T: Filter>(
 		title: String,
 		icon: String,
 		sign: String?,
-		filter: Filter
-	) where Filter.Entity == TodoEntity {
+		filter: T
+	) where T.Element == TodoItem {
 		self.title = title
 		self.icon = icon
 		self.sign = sign
-		self._model = ObservedObject(initialValue: .init(filter: filter))
+		self._todos = Query(filter: filter.predicate)
 	}
 
 	var body: some View {
-		if !model.isEmpty {
+		if !todos.isEmpty {
 			if let sign {
 				Label(title, systemImage: icon)
-					.badge("\(Image(systemName: sign)) \(model.count)")
+					.badge("\(Image(systemName: sign)) \(todos.count)")
 					.badgeProminence(.increased)
 					.imageScale(.small)
 			} else {
 				Label(title, systemImage: icon)
-					.badge("\(model.count)")
+					.badge("\(todos.count)")
 					.badgeProminence(.increased)
 					.imageScale(.small)
 			}
@@ -54,5 +54,5 @@ struct NavigationRow: View {
 }
 
 #Preview {
-	NavigationRow(title: "In Focus", icon: "sparkles", sign: "bolt.fill", filter: TodoFilter.all)
+	NavigationRow(title: "In Focus", icon: "sparkles", sign: "bolt.fill", filter: TodoFilterV2(base: .status(.backlog), constainsText: nil))
 }

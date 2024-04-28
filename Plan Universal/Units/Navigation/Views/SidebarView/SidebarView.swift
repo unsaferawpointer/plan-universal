@@ -18,20 +18,19 @@ struct SidebarView: View {
 	private let isCompact = false
 	#endif
 
-	/// The person's selection in the sidebar
 	@Binding private var selection: Panel?
 
 	// MARK: - Local state
 
 	@State private var listDetailsIsPresented: Bool = false
 
-	@State private var editedList: ListEntity?
+	@State var editedList: ListItem?
 
-	@State var todoDetailsIsPresented: Bool = false
+	@State private var todoDetailsIsPresented: Bool = false
 
 	// MARK: - Data
 
-	@StateObject var model: NavigationModel = .init()
+	@Query private var lists: [ListItem]
 
 	// MARK: - Initialization
 
@@ -45,37 +44,31 @@ struct SidebarView: View {
 				NavigationRow(
 					title: Panel.inFocus.title,
 					icon: "sparkles",
-					sign: nil, filter: TodoFilter.status(.inFocus)
+					sign: nil, 
+					filter: TodoFilterV2(base: .status(.inFocus), constainsText: nil)
 				)
 			}
 			.listItemTint(.yellow)
 
 			NavigationLink(value: Panel.backlog) {
-				NavigationRow(
-					title: Panel.backlog.title,
-					icon: "square.3.layers.3d",
-					sign: "bolt.fill",
-					filter: CompoundFilter<TodoFilter>(filters: [.status(.backlog), .highPriority])
-				)
+				Label(Panel.backlog.title, systemImage: "square.3.layers.3d")
 			}
 
 			NavigationLink(value: Panel.completed) {
 				Label(Panel.completed.title, systemImage: "shippingbox")
 			}
 
-			Section("Lists") {
-				if model.lists.isEmpty {
-					makeContentUnavailableView()
-				} else {
-					makeSection($model.lists)
-				}
-			}
+			ListsSection(
+				editedList: $editedList,
+				listDetailsIsPresented: $listDetailsIsPresented,
+				lists: lists
+			)
 		}
 		.sheet(isPresented: $listDetailsIsPresented) {
-			ListDetailsView(.new)
+			ListDetailsView(.new(.init()))
 		}
 		.sheet(isPresented: $todoDetailsIsPresented) {
-			TodoDetailsView(action: .new, with: .default)
+			TodoDetailsView(action: .new(.init()))
 		}
 		.sheet(item: $editedList) { item in
 			ListDetailsView(.edit(item))
@@ -101,49 +94,6 @@ struct SidebarView: View {
 			}
 		}
 		#endif
-	}
-}
-
-// MARK: - Helpers
-private extension SidebarView {
-
-	@ViewBuilder
-	func makeContentUnavailableView() -> some View {
-		ContentUnavailableView.init(label: {
-			Label("No Lists", systemImage: "doc.text")
-		}, description: {
-			Text("New lists you create will appear here.")
-				.lineLimit(2)
-		}, actions: {
-			Button(action: {
-				self.listDetailsIsPresented = true
-			}) {
-				Text("New List")
-			}
-			.buttonStyle(.bordered)
-		})
-	}
-
-	@ViewBuilder
-	func makeSection(_ lists: Binding<[ListEntity]>) -> some View {
-		ForEach(lists) { list in
-			NavigationLink(value: Panel.list(list.wrappedValue)) {
-				Label(list.wrappedValue.title, systemImage: "doc.text")
-			}
-			.contextMenu {
-				Button("Edit List...") {
-					self.editedList = list.wrappedValue
-				}
-				Divider()
-				Button(role: .destructive) {
-					withAnimation {
-						model.deleteList(list.wrappedValue)
-					}
-				} label: {
-					Text("Delete")
-				}
-			}
-		}
 	}
 }
 

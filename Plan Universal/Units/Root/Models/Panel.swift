@@ -14,7 +14,7 @@ enum Panel: Hashable {
 	case inFocus
 	case backlog
 	case completed
-	case list(_ value: ListEntity)
+	case list(_ value: ListItem)
 }
 
 extension Panel {

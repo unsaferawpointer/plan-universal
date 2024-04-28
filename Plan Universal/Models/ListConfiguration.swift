@@ -2,7 +2,7 @@
 //  ListConfiguration.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 17.04.2024.
+//  Created by Anton Cherkasov on 24.04.2024.
 //
 
 import Foundation
@@ -17,6 +17,20 @@ struct ListConfiguration {
 
 	var isFavorite: Bool
 
+	// MARK: - Initialization
+
+	init(
+		uuid: UUID = .init(),
+		title: String = "",
+		isArchieved: Bool = false,
+		isFavorite: Bool = false
+	) {
+		self.uuid = uuid
+		self.title = title
+		self.isArchieved = isArchieved
+		self.isFavorite = isFavorite
+	}
+
 }
 
 // MARK: - Identifiable
@@ -29,17 +43,3 @@ extension ListConfiguration: Identifiable {
 
 // MARK: - Hashable
 extension ListConfiguration: Hashable { }
-
-// MARK: - Templates
-extension ListConfiguration {
-
-	static var `default`: ListConfiguration {
-		return .init(
-			uuid: .init(),
-			title: "",
-			isArchieved: false,
-			isFavorite: false
-		)
-	}
-}
-

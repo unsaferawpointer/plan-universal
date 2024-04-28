@@ -24,7 +24,7 @@ struct DetailsTodoRow {
 
 	// MARK: - Initialization
 
-	init(todo: TodoEntity, elements: DetailsTodoRowElements) {
+	init(todo: TodoItem, elements: DetailsTodoRowElements) {
 		self._animation = State(initialValue: todo.isDone)
 
 		let model = DetailsTodoRowModel(todo: todo, elemens: elements)
@@ -90,30 +90,31 @@ extension DetailsTodoRow: View {
 		}
 	}
 }
-#endif
 
 extension DetailsTodoRow {
 
 	@ViewBuilder
 	func makeCompact() -> some View {
+		Checkmark(animate: $animation)
 		VStack(alignment: .leading, spacing: 2) {
 			makeTitle()
 			makeInfo()
 		}
 		Spacer()
-		Checkmark(animate: $animation)
+
 	}
 
 	@ViewBuilder
 	func makeExtended() -> some View {
+		Checkmark(animate: $animation)
 		HStack(alignment: .firstTextBaseline, spacing: 2) {
 			makeTitle()
 			Spacer()
 			makeInfo()
 		}
-		Checkmark(animate: $animation)
 	}
 }
+#endif
 
 // MARK: - Helpers
 private extension DetailsTodoRow {
@@ -148,6 +149,6 @@ private extension DetailsTodoRow {
 }
 
 #Preview {
-	DetailsTodoRow(todo: .new(in: PersistentContainer.shared.mainContext), elements: [])
+	DetailsTodoRow(todo: .init(.init(text: "New todo")), elements: [.listLabel])
 		.frame(height: 100)
 }

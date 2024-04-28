@@ -10,13 +10,13 @@ import SwiftUI
 
 final class DetailsTodoRowModel: ObservableObject {
 
-	@Published var todo: TodoEntity
+	@Published var todo: TodoItem
 
 	var elemens: DetailsTodoRowElements
 
 	// MARK: - Initialization
 
-	init(todo: TodoEntity, elemens: DetailsTodoRowElements) {
+	init(todo: TodoItem, elemens: DetailsTodoRowElements) {
 		self.todo = todo
 		self.elemens = elemens
 	}
@@ -55,13 +55,5 @@ extension DetailsTodoRowModel {
 
 	func setCompletion(_ value: Bool) {
 		todo.isDone = value
-		save()
-	}
-}
-
-extension DetailsTodoRowModel {
-
-	func save() {
-		try? todo.managedObjectContext?.save()
 	}
 }

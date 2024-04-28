@@ -11,24 +11,27 @@ struct ListDetailsView: View {
 
 	@Environment(\.dismiss) var dismiss
 
-	// MARK: - Data
-
-	@StateObject private var model: ListDetailsModel
+	@Environment(\.modelContext) var modelContext
 
 	// MARK: - Local state
 
 	@FocusState private var isFocused: Bool
 
+	@State private var configuration: ListConfiguration
+
+	private var action: Action<ListItem>
+
 	// MARK: - Initialization
 
-	init(_ action: DetailsAction<ListEntity>) {
-		self._model = StateObject(wrappedValue:  ListDetailsModel(action))
+	init(_ action: Action<ListItem>) {
+		self.action = action
+		self._configuration = State(initialValue:  action.configuration)
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("List Name", text: $model.configuration.title)
+				TextField("List Name", text: $configuration.title)
 					.focused($isFocused)
 			}
 			.submitLabel(.done)
@@ -37,7 +40,7 @@ struct ListDetailsView: View {
 					defer {
 						dismiss()
 					}
-					model.save()
+					save()
 				}
 			}
 			.onAppear {
@@ -57,16 +60,16 @@ struct ListDetailsView: View {
 							defer {
 								dismiss()
 							}
-							model.save()
+							save()
 						}
 					}
-					.disabled(!model.buttonToSaveIsEnabled)
+					.disabled(!canSave)
 				}
-				if model.buttonToDeleteIsEnabled {
+				if canDelete {
 					ToolbarItem(placement: .destructiveAction) {
 						Button(role: .destructive) {
 							withAnimation {
-								model.delete()
+								delete()
 								dismiss()
 							}
 						} label: {
@@ -85,7 +88,49 @@ struct ListDetailsView: View {
 
 }
 
+// MARK: - Public interface
+extension ListDetailsView {
+
+	func delete() {
+		switch action {
+		case .new:
+			fatalError()
+		case .edit(let list):
+			list.title = configuration.title
+		}
+	}
+
+	func save() {
+
+		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
+		let title = trimmed.isEmpty ? String(localized: "New List") : trimmed
+
+		switch action {
+		case .new:
+			let new = ListItem(configuration)
+			modelContext.insert(new)
+		case .edit(let list):
+			try? modelContext.transaction {
+				list.configuration = configuration
+				list.title = title
+			}
+		}
+	}
+
+	var canDelete: Bool {
+		guard case .edit = action else {
+			return false
+		}
+		return true
+	}
+
+	var canSave: Bool {
+		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
+		return !trimmed.isEmpty
+	}
+}
+
 #Preview {
-	ListDetailsView(.new)
-		.frame(width: 240)
+	ListDetailsView(.new(.init()))
+		.modelContainer(previewContainer)
 }

@@ -10,11 +10,15 @@ import SwiftData
 
 struct TodoDetailsView: View {
 
+	@Environment(\.modelContext) var modelContext
+
 	@Environment(\.dismiss) var dismiss
 
 	// MARK: - Data
 
-	@ObservedObject var model: TodoDetailsModel
+	@Query private var lists: [ListItem]
+
+	@State var model: TodoDetailsModel
 
 	// MARK: - Local state
 
@@ -22,9 +26,8 @@ struct TodoDetailsView: View {
 
 	// MARK: - Initialization
 
-	init(action: DetailsAction<TodoEntity>, with configuration: TodoConfiguration) {
-		let model = TodoDetailsModel(action, initialConfiguration: configuration)
-		self._model = ObservedObject(initialValue: model)
+	init(action: Action<TodoItem>) {
+		self._model = State(initialValue: TodoDetailsModel(action: action))
 	}
 
 	var body: some View {
@@ -57,11 +60,11 @@ struct TodoDetailsView: View {
 				#endif
 				Picker("List", selection: $model.configuration.list) {
 					Text("None")
-						.tag(Optional<ListEntity>(nil))
+						.tag(Optional<ListItem>(nil))
 					Divider()
-					ForEach(model.lists) { list in
+					ForEach(lists) { list in
 						Text(list.title)
-							.tag(Optional<ListEntity>(list))
+							.tag(Optional<ListItem>(list))
 					}
 				}
 			}
@@ -69,7 +72,7 @@ struct TodoDetailsView: View {
 				self.isFocused = true
 			}
 			.toolbar {
-				if model.buttonToDeleteIsEnabled {
+				if model.canDelete {
 					ToolbarItem(placement: .destructiveAction) {
 						Button(role: .destructive) {
 							delete()
@@ -88,7 +91,7 @@ struct TodoDetailsView: View {
 					Button("Save") {
 						save()
 					}
-					.disabled(!model.buttonToSaveIsEnabled)
+					.disabled(!model.canSave)
 				}
 			}
 		}
@@ -107,7 +110,7 @@ private extension TodoDetailsView {
 			dismiss()
 		}
 		withAnimation {
-			model.delete()
+			model.delete(in: modelContext)
 		}
 	}
 
@@ -116,11 +119,11 @@ private extension TodoDetailsView {
 			dismiss()
 		}
 		withAnimation {
-			model.save()
+			model.save(in: modelContext)
 		}
 	}
 }
 
-#Preview {
-	TodoDetailsView(action: .new, with: .inFocus)
-}
+//#Preview {
+//	TodoDetailsView(action: .new, with: .inFocus)
+//}

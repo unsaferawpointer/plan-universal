@@ -9,11 +9,15 @@ import Foundation
 import SwiftData
 
 protocol DataManagerProtocol {
-	func insert(_ todo: TodoConfiguration, in context: ModelContext)
-	func insert(_ list: ListConfiguration, in context: ModelContext)
 
-	func delete(_ todo: TodoConfiguration, in context: ModelContext)
-	func delete(_ list: ListConfiguration, in context: ModelContext)
+	func insert(_ configuration: TodoConfiguration, in context: ModelContext)
+	func insert(_ configuration: ListConfiguration, in context: ModelContext)
+
+	func delete(_ todo: TodoItem, in context: ModelContext)
+	func delete(_ list: ListItem, in context: ModelContext)
+
+	func update<Item: PersistentModel, T>(_ item: Item, keyPath: ReferenceWritableKeyPath<Item, T>, value: T)
+
 }
 
 final class DataManager {
@@ -23,19 +27,25 @@ final class DataManager {
 // MARK: - DataManagerProtocol
 extension DataManager: DataManagerProtocol {
 
-	func insert(_ todo: TodoConfiguration, in context: ModelContext) {
-		<#code#>
+	func insert(_ configuration: TodoConfiguration, in context: ModelContext) {
+		let new = TodoItem(configuration)
+		context.insert(new)
 	}
 	
-	func insert(_ list: ListConfiguration, in context: ModelContext) {
-		<#code#>
+	func insert(_ configuration: ListConfiguration, in context: ModelContext) {
+		let new = ListItem(configuration)
+		context.insert(new)
 	}
 
-	func delete(_ todo: TodoConfiguration, in context: ModelContext) {
-		<#code#>
+	func delete(_ todo: TodoItem, in context: ModelContext) {
+		context.delete(todo)
 	}
 
-	func delete(_ list: ListConfiguration, in context: ModelContext) {
-		<#code#>
+	func delete(_ list: ListItem, in context: ModelContext) {
+		context.delete(list)
+	}
+
+	func update<Item: PersistentModel, T>(_ item: Item, keyPath: ReferenceWritableKeyPath<Item, T>, value: T) {
+		item[keyPath: keyPath] = value
 	}
 }

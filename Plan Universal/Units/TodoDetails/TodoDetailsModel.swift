@@ -6,81 +6,142 @@
 //
 
 import Foundation
-import Combine
+import SwiftData
 
-final class TodoDetailsModel: ObservableObject {
+@Observable
+final class TodoDetailsModel {
 
-	// MARK: - Published
+	var action: Action<TodoItem>
 
-	@Published var configuration: TodoConfiguration
+	var configuration: TodoConfiguration
 
-	@Published var lists: [ListEntity] = []
+	private var dataManager: DataManager = DataManager()
 
-	// MARK: - DI
+	// MARK: Initialization
 
-	private (set) var action: DetailsAction<TodoEntity>
-
-	private let dataStorage: DataStorageProtocol
-
-	// MARK: - Internal state
-
-	private var cancellable: AnyCancellable?
-
-	// MARK: - Initialization
-
-	init(
-		_ action: DetailsAction<TodoEntity>,
-		dataStorage: DataStorageProtocol = DataStorage(),
-		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all, order: ListOrder.creationDate).eraseToAnyPublisher(),
-		initialConfiguration: TodoConfiguration
-	) {
+	init(action: Action<TodoItem>) {
 		self.action = action
-		self.dataStorage = dataStorage
-		let initialConfiguration = action.wrappedValue?.configuration ?? initialConfiguration
-		self._configuration = Published(initialValue: initialConfiguration)
-		cancellable = publisher.sink { entities in
-			self.lists = entities
-		}
+		self.configuration = action.configuration
 	}
 }
 
+// MARK: - Public interface
 extension TodoDetailsModel {
 
-	func delete() {
+	func delete(in context: ModelContext) {
 		switch action {
 		case .new:
-			fatalError()
+			fatalError("\(#function) is unavailable because action is <new>")
 		case .edit(let todo):
-			dataStorage.deleteTodos([todo])
+			dataManager.delete(todo, in: context)
 		}
-		try? dataStorage.save()
 	}
 
-	func save() {
-
+	func save(in context: ModelContext) {
 		let trimmed = configuration.text.trimmingCharacters(in: .whitespaces)
 		let text = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
 
 		switch action {
 		case .new:
-			let new = dataStorage.insertTodo(configuration)
-			new.text = text
+			dataManager.insert(configuration, in: context)
 		case .edit(let todo):
-			todo.configuration = configuration
-			todo.text = text
+			try? context.transaction {
+				todo.configuration = configuration
+			}
 		}
-		try? dataStorage.save()
 	}
 
-	var buttonToDeleteIsEnabled: Bool {
+}
+
+// MARK: - Computed properties
+extension TodoDetailsModel {
+
+	var canDelete: Bool {
 		guard case .edit = action else {
 			return false
 		}
 		return true
 	}
 
-	var buttonToSaveIsEnabled: Bool {
+	var canSave: Bool {
 		let trimmed = configuration.text.trimmingCharacters(in: .whitespaces)
 		return !trimmed.isEmpty
 	}
 }
+
+//final class TodoDetailsModel: ObservableObject {
+//
+//	// MARK: - Published
+//
+//	@Published var configuration: TodoConfigurationV2
+//
+//	@Published var lists: [ListItem] = []
+//
+//	// MARK: - DI
+//
+//	private (set) var action: DetailsAction<TodoItem>
+//
+//	private let dataStorage: DataStorageProtocol
+//
+//	// MARK: - Internal state
+//
+//	private var cancellable: AnyCancellable?
+//
+//	// MARK: - Initialization
+//
+//	init(
+//		_ action: DetailsAction<TodoEntity>,
+//		dataStorage: DataStorageProtocol = DataStorage(),
+//		publisher: AnyPublisher<[ListEntity], Never> = PersistentContainer.shared.mainContext.publisher(for: ListEntity.self, filter: ListFilter.all, order: ListOrder.creationDate).eraseToAnyPublisher(),
+//		initialConfiguration: TodoConfiguration
+//	) {
+//		self.action = action
+//		self.dataStorage = dataStorage
+//		let initialConfiguration = action.wrappedValue?.configuration ?? initialConfiguration
+//		self._configuration = Published(initialValue: initialConfiguration)
+//		cancellable = publisher.sink { entities in
+//			self.lists = entities
+//		}
+//	}
+//}
+//
+//extension TodoDetailsModel {
+//
+//	func delete() {
+//		switch action {
+//		case .new:
+//			fatalError()
+//		case .edit(let todo):
+//			dataStorage.deleteTodos([todo])
+//		}
+//		try? dataStorage.save()
+//	}
+//
+//	func save() {
+//
+//		let trimmed = configuration.text.trimmingCharacters(in: .whitespaces)
+//		let text = trimmed.isEmpty ? String(localized: "New Todo") : trimmed
+//
+//		switch action {
+//		case .new:
+//			let new = dataStorage.insertTodo(configuration)
+//			new.text = text
+//		case .edit(let todo):
+//			todo.configuration = configuration
+//			todo.text = text
+//		}
+//		try? dataStorage.save()
+//	}
+//
+//	var buttonToDeleteIsEnabled: Bool {
+//		guard case .edit = action else {
+//			return false
+//		}
+//		return true
+//	}
+//
+//	var buttonToSaveIsEnabled: Bool {
+//		let trimmed = configuration.text.trimmingCharacters(in: .whitespaces)
+//		return !trimmed.isEmpty
+//	}
+//}
