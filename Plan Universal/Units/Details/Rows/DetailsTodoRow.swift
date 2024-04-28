@@ -86,6 +86,8 @@ extension DetailsTodoRow: View {
 				withAnimation {
 					model.setCompletion(animation)
 				}
+				let impact = UIImpactFeedbackGenerator(style: .medium)
+				impact.impactOccurred()
 			}
 		}
 	}
