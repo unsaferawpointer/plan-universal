@@ -47,19 +47,15 @@ extension DetailsTodoRow: View {
 
 			HStack(spacing: 2) {
 				Group {
-					Text(model.showSign ? "\(Image(systemName: "bolt.fill")) " : "")
-						.foregroundStyle(model.isDone ? .secondary : model.signColor)
-					+ Text(model.text)
+					Text(model.text)
 						.strikethrough(model.isDone)
 						.foregroundStyle(model.isDone ? .secondary: .primary)
 				}
 				.lineLimit(2)
 				Spacer()
-				if let list = model.listTitle, model.showList {
-					Text(list)
-						.foregroundStyle(.tertiary)
-						.font(.body)
-						.lineLimit(1)
+				if model.showSign {
+					Image(systemName: "bolt.fill")
+						.foregroundStyle(model.isDone ? .secondary : model.signColor)
 				}
 			}
 		}
@@ -123,25 +119,20 @@ private extension DetailsTodoRow {
 	@ViewBuilder
 	func makeTitle() -> some View {
 		Group {
-			Text(model.showSign ? "\(Image(systemName: "bolt.fill")) " : "")
-				.foregroundStyle(model.isDone ? .secondary : model.signColor)
-			+ Text(model.todo.text)
+			Text(model.todo.text)
 				.foregroundStyle(model.isDone ? .secondary: .primary)
 				.strikethrough(model.isDone)
 		}
 		.font(.body)
-		.animation(nil)
 		.lineLimit(2)
+		.animation(nil)
 	}
 
 	@ViewBuilder
 	func makeInfo() -> some View {
-		if let title = model.listTitle, model.showList {
-			Text(title)
-				.foregroundStyle(model.isDone ? .tertiary : .secondary)
-				.font(.caption)
-				.lineLimit(1)
-				.animation(nil)
+		if model.showSign {
+			Image(systemName: "bolt.fill")
+				.foregroundStyle(model.isDone ? .secondary : model.signColor)
 		}
 	}
 
