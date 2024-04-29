@@ -21,6 +21,12 @@ struct ListDetailsView: View {
 
 	private var action: Action<ListItem>
 
+	let items = Icon.allCases
+
+	let config = [
+		GridItem(.adaptive(minimum: 40))
+	]
+
 	// MARK: - Initialization
 
 	init(_ action: Action<ListItem>) {
@@ -33,6 +39,12 @@ struct ListDetailsView: View {
 			Form {
 				TextField("List Name", text: $configuration.title)
 					.focused($isFocused)
+				Picker("Icon", selection: $configuration.icon) {
+					ForEach(items, id: \.self) { icon in
+						Label(icon.iconName, systemImage: icon.iconName)
+							.tag(icon)
+					}
+				}
 			}
 			.submitLabel(.done)
 			.onSubmit {

@@ -29,6 +29,7 @@
 		4C059C992BDE6D7F0048F5FA /* TodoOrderV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C982BDE6D7F0048F5FA /* TodoOrderV2.swift */; };
 		4C059C9B2BDE6D8E0048F5FA /* OrderV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C9A2BDE6D8E0048F5FA /* OrderV2.swift */; };
 		4C059C9D2BDEC1260048F5FA /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */; };
+		4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA02BDFAFCF0048F5FA /* Icon.swift */; };
 		4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
 		4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8893472BC71109005A5DD0 /* NavigationRow.swift */; };
@@ -89,6 +90,7 @@
 		4C059C982BDE6D7F0048F5FA /* TodoOrderV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOrderV2.swift; sourceTree = "<group>"; };
 		4C059C9A2BDE6D8E0048F5FA /* OrderV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderV2.swift; sourceTree = "<group>"; };
 		4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
+		4C059CA02BDFAFCF0048F5FA /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsView.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4C8893472BC71109005A5DD0 /* NavigationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRow.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				4C059C722BD57C7B0048F5FA /* Checkmark.swift */,
+				4C059CA02BDFAFCF0048F5FA /* Icon.swift */,
 			);
 			path = "Design System";
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				4C059C9B2BDE6D8E0048F5FA /* OrderV2.swift in Sources */,
 				4C059C6C2BD3B38D0048F5FA /* NavigationRowModel.swift in Sources */,
 				4C059C822BD9A08F0048F5FA /* TodoConfiguration.swift in Sources */,
+				4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */,
 				4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */,
 				4CDB88412BC090F60019AC71 /* TodoStatus.swift in Sources */,
 				4C059C992BDE6D7F0048F5FA /* TodoOrderV2.swift in Sources */,

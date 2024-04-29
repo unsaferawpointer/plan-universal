@@ -36,7 +36,7 @@ struct ListsSection: View {
 			} else {
 				ForEach(lists) { list in
 					NavigationLink(value: Panel.list(list)) {
-						Label(list.title, systemImage: "doc.text")
+						Label(list.title, systemImage: list.icon.iconName)
 					}
 					.contextMenu {
 						Button("Edit List...") {

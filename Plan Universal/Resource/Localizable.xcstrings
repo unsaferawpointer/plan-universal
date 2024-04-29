@@ -165,6 +165,16 @@
         }
       }
     },
+    "Icon" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Иконка"
+          }
+        }
+      }
+    },
     "In Focus" : {
       "localizations" : {
         "ru" : {

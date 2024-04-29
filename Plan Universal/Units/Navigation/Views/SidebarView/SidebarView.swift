@@ -112,5 +112,6 @@ struct Sidebar_Previews: PreviewProvider {
 		} detail: {
 			Text("Details")
 		}
+		.modelContainer(previewContainer)
 	}
 }

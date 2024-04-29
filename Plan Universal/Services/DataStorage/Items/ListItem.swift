@@ -35,6 +35,19 @@ extension ListItem: Identifiable {
 	}
 }
 
+// MARK: - Computed properties
+extension ListItem {
+
+	var icon: Icon {
+		get {
+			return Icon(rawValue: rawIcon) ?? .doc
+		}
+		set {
+			rawIcon = newValue.rawValue
+		}
+	}
+}
+
 // MARK: - ConfigurableItem
 extension ListItem: ConfigurableItem {
 
@@ -46,13 +59,15 @@ extension ListItem: ConfigurableItem {
 				uuid: uuid,
 				title: title,
 				isArchieved: isArchieved,
-				isFavorite: isFavorite
+				isFavorite: isFavorite,
+				icon: Icon(rawValue: rawIcon) ?? .doc
 			)
 		}
 		set {
 			self.title = newValue.title
 			self.isArchieved = newValue.isArchieved
 			self.isFavorite = newValue.isFavorite
+			self.rawIcon = newValue.icon.rawValue
 		}
 	}
 
