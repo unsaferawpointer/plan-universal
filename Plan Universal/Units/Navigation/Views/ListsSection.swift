@@ -11,6 +11,8 @@ struct ListsSection: View {
 
 	@Environment(\.modelContext) var modelContext
 
+	var title: String
+
 	@Binding var editedList: ListItem?
 
 	@Binding var listDetailsIsPresented: Bool
@@ -18,7 +20,7 @@ struct ListsSection: View {
 	var lists: [ListItem]
 
 	var body: some View {
-		Section("Lists") {
+		Section(title) {
 			if lists.isEmpty {
 				ContentUnavailableView.init(label: {
 					Label("No Lists", systemImage: "doc.text")
@@ -41,6 +43,12 @@ struct ListsSection: View {
 					.contextMenu {
 						Button("Edit List...") {
 							self.editedList = list
+						}
+						Divider()
+						Button(list.isFavorite ? "Delete from Favorites" : "Move to Favorites") {
+							withAnimation {
+								list.isFavorite.toggle()
+							}
 						}
 						Divider()
 						Button(role: .destructive) {
@@ -68,6 +76,11 @@ private extension ListsSection {
 }
 
 #Preview {
-	ListsSection(editedList: .constant(nil), listDetailsIsPresented: .constant(false), lists: [])
+	ListsSection(
+		title: "Lists",
+		editedList: .constant(nil),
+		listDetailsIsPresented: .constant(false),
+		lists: []
+	)
 		.modelContainer(previewContainer)
 }

@@ -32,10 +32,21 @@ struct SidebarView: View {
 
 	@Query private var lists: [ListItem]
 
+	@Query private var favorites: [ListItem]
+
 	// MARK: - Initialization
 
 	init(_ selection: Binding<Panel?>) {
 		self._selection = selection
+		let listPredicate: Predicate<ListItem> = #Predicate {
+			$0.isFavorite == false
+		}
+		self._lists = Query(filter: listPredicate, sort: [], animation: .default)
+
+		let favoritesPredicate: Predicate<ListItem> = #Predicate {
+			$0.isFavorite == true
+		}
+		self._favorites = Query(filter: favoritesPredicate, sort: [], animation: .default)
 	}
 
 	var body: some View {
@@ -59,6 +70,14 @@ struct SidebarView: View {
 			}
 
 			ListsSection(
+				title: "Favorites",
+				editedList: $editedList,
+				listDetailsIsPresented: $listDetailsIsPresented,
+				lists: favorites
+			)
+
+			ListsSection(
+				title: "Lists",
 				editedList: $editedList,
 				listDetailsIsPresented: $listDetailsIsPresented,
 				lists: lists

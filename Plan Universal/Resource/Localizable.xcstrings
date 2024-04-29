@@ -132,6 +132,16 @@
         }
       }
     },
+    "Delete from Favorites" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить из Избранного"
+          }
+        }
+      }
+    },
     "Details" : {
 
     },
@@ -181,6 +191,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "В фокусе"
+          }
+        }
+      }
+    },
+    "Is Favorite" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В Избранном"
           }
         }
       }
@@ -242,6 +262,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Средний"
+          }
+        }
+      }
+    },
+    "Move to Favorites" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переместить в Избранное"
           }
         }
       }

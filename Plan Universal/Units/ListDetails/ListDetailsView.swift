@@ -39,6 +39,12 @@ struct ListDetailsView: View {
 			Form {
 				TextField("List Name", text: $configuration.title)
 					.focused($isFocused)
+				Toggle(isOn: $configuration.isFavorite, label: {
+					Text("Is Favorite")
+				})
+				#if os(iOS)
+				.tint(.accent)
+				#endif
 				Picker("Icon", selection: $configuration.icon) {
 					ForEach(items, id: \.self) { icon in
 						Label(icon.iconName, systemImage: icon.iconName)
