@@ -14,12 +14,6 @@ let previewContainer: ModelContainer = {
 	do {
 
 		let container = try ModelContainer(for: TodoItem.self, configurations: .init(isStoredInMemoryOnly: true))
-		for i in 0..<10 {
-			let todo = TodoItem()
-			todo.text = "New todo \(i)"
-			container.mainContext.insert(todo)
-		}
-
 		return container
 
 	} catch {

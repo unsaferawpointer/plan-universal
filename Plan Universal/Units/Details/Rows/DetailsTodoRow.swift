@@ -100,7 +100,6 @@ extension DetailsTodoRow {
 		Checkmark(animate: $animation)
 		VStack(alignment: .leading, spacing: 2) {
 			makeTitle()
-			makeInfo()
 		}
 		Spacer()
 
@@ -130,6 +129,8 @@ private extension DetailsTodoRow {
 				.foregroundStyle(model.isDone ? .secondary: .primary)
 				.strikethrough(model.isDone)
 		}
+		.font(.body)
+		.animation(nil)
 		.lineLimit(2)
 	}
 
@@ -138,8 +139,9 @@ private extension DetailsTodoRow {
 		if let title = model.listTitle, model.showList {
 			Text(title)
 				.foregroundStyle(model.isDone ? .tertiary : .secondary)
-				.font(.body)
+				.font(.caption)
 				.lineLimit(1)
+				.animation(nil)
 		}
 	}
 
