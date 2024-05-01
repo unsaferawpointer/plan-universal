@@ -77,18 +77,11 @@ struct DetailsView: View {
 		.navigationTitle(panel.title)
 		.overlay {
 			if todos.isEmpty {
-				ContentUnavailableView.init(label: {
-					Label("No Todos", systemImage: "tray.fill")
-				}, description: {
-					Text("New todos you create will appear here.")
-				}, actions: {
-					Button(action: {
-						newTodo()
-					}) {
-						Text("New Todo")
-					}
-					.buttonStyle(.bordered)
-				})
+				ContentUnavailableView(
+					"No Todos",
+					image: "ghost",
+					description: Text("New todos you create will appear here.")
+				)
 			}
 		}
 		#if os(iOS)
