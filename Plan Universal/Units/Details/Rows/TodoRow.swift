@@ -12,7 +12,7 @@ struct TodoRow {
 
 	// MARK: - Data
 
-	@ObservedObject var model: DetailsTodoRowModel
+	@ObservedObject var model: TodoRowModel
 
 	// MARK: - Locale state
 
@@ -33,7 +33,7 @@ struct TodoRow {
 
 	// MARK: - Data
 
-	@ObservedObject var model: DetailsTodoRowModel
+	@ObservedObject var model: TodoRowModel
 
 	// MARK: - Initialization
 
@@ -72,10 +72,10 @@ extension TodoRow: View {
 			withAnimation {
 				animate.toggle()
 			} completion: {
-				model.setCompletion(animate)
+				model.isDone.toggle()
 			}
 		}
-		.onChange(of: model.todo.isDone) { newValue, _ in
+		.onChange(of: model.isDone) { oldValue, newValue in
 			withAnimation {
 				animate = newValue
 			}

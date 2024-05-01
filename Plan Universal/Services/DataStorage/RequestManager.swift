@@ -8,19 +8,18 @@
 import Foundation
 
 protocol RequestManagerProtocol {
-	func predicate(for panel: Panel, containsText text: String?) -> TodoFilterV2
-	func sorting(for panel: Panel) -> [TodoOrderV2]
-	func configuration(for panel: Panel) -> TodoConfiguration
+	func predicate(for panel: Panel, containsText text: String?) -> TodoFilter
+	func sorting(for panel: Panel) -> [TodoOrder]
+	func listPredicate(isFavorite: Bool) -> ListFilter
+	func todoConfiguration(for panel: Panel) -> TodoConfiguration
 }
 
-final class RequestManager {
-	
-}
+final class RequestManager { }
 
 // MARK: - RequestManagerProtocol
 extension RequestManager: RequestManagerProtocol {
 
-	func sorting(for panel: Panel) -> [TodoOrderV2] {
+	func sorting(for panel: Panel) -> [TodoOrder] {
 		switch panel {
 		case .inFocus, .backlog:
 			return [.priority(.reverse), .creationDate(.reverse)]
@@ -31,7 +30,7 @@ extension RequestManager: RequestManagerProtocol {
 		}
 	}
 
-	func predicate(for panel: Panel, containsText text: String?) -> TodoFilterV2 {
+	func predicate(for panel: Panel, containsText text: String?) -> TodoFilter {
 		switch panel {
 		case .inFocus:
 			return .init(base: .status(.inFocus), constainsText: text)
@@ -44,7 +43,7 @@ extension RequestManager: RequestManagerProtocol {
 		}
 	}
 
-	func configuration(for panel: Panel) -> TodoConfiguration {
+	func todoConfiguration(for panel: Panel) -> TodoConfiguration {
 		switch panel {
 		case .inFocus:
 			return TodoConfiguration(text: "", status: .inFocus, priority: .low, list: nil)
@@ -55,5 +54,9 @@ extension RequestManager: RequestManagerProtocol {
 		case .list(let value):
 			return TodoConfiguration(text: "", status: .backlog, priority: .low, list: value)
 		}
+	}
+
+	func listPredicate(isFavorite: Bool) -> ListFilter {
+		return ListFilter(isFavorite: isFavorite)
 	}
 }

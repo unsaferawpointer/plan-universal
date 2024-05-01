@@ -1,5 +1,5 @@
 //
-//  TodoFilterV2.swift
+//  TodoFilter.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 26.04.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TodoFilterV2 {
+struct TodoFilter {
 
 	var constainsText: String?
 
@@ -20,7 +20,7 @@ struct TodoFilterV2 {
 }
 
 // MARK: - Filter
-extension TodoFilterV2: Filter {
+extension TodoFilter: Filter {
 
 	typealias Element = TodoItem
 
@@ -49,7 +49,7 @@ extension TodoFilterV2: Filter {
 	}
 }
 
-extension TodoFilterV2 {
+extension TodoFilter {
 
 	enum Base {
 		case status(_ value: TodoStatus)

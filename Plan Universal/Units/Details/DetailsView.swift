@@ -69,7 +69,7 @@ struct DetailsView: View {
 			TodoDetailsView(action: .edit(todo))
 		}
 		.sheet(isPresented: $todoDetailsIsPresented) {
-			TodoDetailsView(action: .new(requestManager.configuration(for: panel)))
+			TodoDetailsView(action: .new(requestManager.todoConfiguration(for: panel)))
 		}
 		.sheet(isPresented: $listDetailsIsPresented) {
 			ListDetailsView(.new(.init(uuid: UUID(), title: "", isArchieved: false, isFavorite: false)))

@@ -1,5 +1,5 @@
 //
-//  DetailsTodoRowModel.swift
+//  TodoRowModel.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 21.04.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-final class DetailsTodoRowModel: ObservableObject {
+final class TodoRowModel: ObservableObject {
 
 	@Published var todo: TodoItem
 
@@ -20,7 +20,7 @@ final class DetailsTodoRowModel: ObservableObject {
 }
 
 // MARK: - Calculated properties
-extension DetailsTodoRowModel {
+extension TodoRowModel {
 
 	var signIcon: String? {
 		guard todo.status == .inFocus else {
@@ -40,18 +40,15 @@ extension DetailsTodoRowModel {
 	}
 
 	var isDone: Bool {
-		todo.isDone
+		get {
+			todo.isDone
+		}
+		set {
+			todo.isDone = newValue
+		}
 	}
 
 	var text: String {
 		return todo.text
-	}
-}
-
-// MARK: - Public interface
-extension DetailsTodoRowModel {
-
-	func setCompletion(_ value: Bool) {
-		todo.status = value ? .done : .backlog
 	}
 }

@@ -1,5 +1,5 @@
 //
-//  OrderV2.swift
+//  Order.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 28.04.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol OrderV2 {
+protocol Order {
 	
 	associatedtype Element
 

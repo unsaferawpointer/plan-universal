@@ -1,5 +1,5 @@
 //
-//  TodoOrderV2.swift
+//  TodoOrder.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 28.04.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TodoOrderV2 {
+enum TodoOrder {
 	case creationDate(_ order: SortOrder)
 	case completionDate(_ order: SortOrder)
 	case priority(_ order: SortOrder)
@@ -15,7 +15,7 @@ enum TodoOrderV2 {
 }
 
 // MARK: - Order
-extension TodoOrderV2: OrderV2 {
+extension TodoOrder: Order {
 
 	typealias Element = TodoItem
 

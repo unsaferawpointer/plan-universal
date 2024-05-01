@@ -54,5 +54,5 @@ struct NavigationRow: View {
 }
 
 #Preview {
-	NavigationRow(title: "In Focus", icon: "sparkles", sign: "bolt.fill", filter: TodoFilterV2(base: .status(.backlog), constainsText: nil))
+	NavigationRow(title: "In Focus", icon: "sparkles", sign: "bolt.fill", filter: TodoFilter(base: .status(.backlog), constainsText: nil))
 }

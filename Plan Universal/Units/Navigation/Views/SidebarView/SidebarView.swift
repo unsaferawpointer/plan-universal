@@ -34,19 +34,24 @@ struct SidebarView: View {
 
 	@Query private var favorites: [ListItem]
 
+	// MARK: - Utilities
+
+	let requestManager = RequestManager()
+
 	// MARK: - Initialization
 
 	init(_ selection: Binding<Panel?>) {
 		self._selection = selection
-		let listPredicate: Predicate<ListItem> = #Predicate {
-			$0.isFavorite == false
-		}
-		self._lists = Query(filter: listPredicate, sort: [], animation: .default)
-
-		let favoritesPredicate: Predicate<ListItem> = #Predicate {
-			$0.isFavorite == true
-		}
-		self._favorites = Query(filter: favoritesPredicate, sort: [], animation: .default)
+		self._lists = Query(
+			filter: requestManager.listPredicate(isFavorite: false).predicate,
+			sort: [],
+			animation: .default
+		)
+		self._favorites = Query(
+			filter: requestManager.listPredicate(isFavorite: true).predicate,
+			sort: [],
+			animation: .default
+		)
 	}
 
 	var body: some View {
@@ -56,7 +61,7 @@ struct SidebarView: View {
 					title: Panel.inFocus.title,
 					icon: "sparkles",
 					sign: nil, 
-					filter: TodoFilterV2(base: .status(.inFocus), constainsText: nil)
+					filter: TodoFilter(base: .status(.inFocus), constainsText: nil)
 				)
 			}
 			.listItemTint(.yellow)
