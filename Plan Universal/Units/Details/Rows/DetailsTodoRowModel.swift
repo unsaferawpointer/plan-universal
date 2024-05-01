@@ -12,21 +12,31 @@ final class DetailsTodoRowModel: ObservableObject {
 
 	@Published var todo: TodoItem
 
-	var elemens: DetailsTodoRowElements
-
 	// MARK: - Initialization
 
-	init(todo: TodoItem, elemens: DetailsTodoRowElements) {
+	init(todo: TodoItem) {
 		self.todo = todo
-		self.elemens = elemens
 	}
 }
 
 // MARK: - Calculated properties
 extension DetailsTodoRowModel {
 
-	var showSign: Bool {
-		return todo.isImportant
+	var signIcon: String? {
+		guard todo.status == .inFocus else {
+			return "bolt.fill"
+		}
+		return todo.isImportant ? "sparkles" : nil
+	}
+
+	var signColor: Color {
+		guard todo.status != .done else {
+			return .secondary
+		}
+		guard todo.status == .inFocus else {
+			return todo.priority.color
+		}
+		return .yellow
 	}
 
 	var isDone: Bool {
@@ -36,24 +46,12 @@ extension DetailsTodoRowModel {
 	var text: String {
 		return todo.text
 	}
-
-	var listTitle: String? {
-		return todo.list?.title
-	}
-
-	var showList: Bool {
-		return elemens.contains(.listLabel)
-	}
-
-	var signColor: Color {
-		return todo.priority.color
-	}
 }
 
 // MARK: - Public interface
 extension DetailsTodoRowModel {
 
 	func setCompletion(_ value: Bool) {
-		todo.isDone = value
+		todo.status = value ? .done : .backlog
 	}
 }

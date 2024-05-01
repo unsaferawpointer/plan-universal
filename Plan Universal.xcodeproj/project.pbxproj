@@ -15,7 +15,6 @@
 		4C059C6C2BD3B38D0048F5FA /* NavigationRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C6B2BD3B38D0048F5FA /* NavigationRowModel.swift */; };
 		4C059C702BD576890048F5FA /* DetailsTodoRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C6F2BD576890048F5FA /* DetailsTodoRowModel.swift */; };
 		4C059C732BD57C7B0048F5FA /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C722BD57C7B0048F5FA /* Checkmark.swift */; };
-		4C059C752BD589AB0048F5FA /* DetailsTodoRowElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C742BD589AB0048F5FA /* DetailsTodoRowElements.swift */; };
 		4C059C7C2BD991290048F5FA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C7B2BD991290048F5FA /* DataManager.swift */; };
 		4C059C7F2BD991F90048F5FA /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C7D2BD991F90048F5FA /* ListItem.swift */; };
 		4C059C802BD991F90048F5FA /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C7E2BD991F90048F5FA /* TodoItem.swift */; };
@@ -30,6 +29,7 @@
 		4C059C9B2BDE6D8E0048F5FA /* OrderV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C9A2BDE6D8E0048F5FA /* OrderV2.swift */; };
 		4C059C9D2BDEC1260048F5FA /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */; };
 		4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA02BDFAFCF0048F5FA /* Icon.swift */; };
+		4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA22BE026A30048F5FA /* TodoSign.swift */; };
 		4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
 		4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8893472BC71109005A5DD0 /* NavigationRow.swift */; };
@@ -44,7 +44,7 @@
 		4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882C2BC06D530019AC71 /* DetailsView.swift */; };
 		4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88322BC06F7D0019AC71 /* Panel.swift */; };
 		4CDB883B2BC07E4E0019AC71 /* ListDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883A2BC07E4E0019AC71 /* ListDetailsView.swift */; };
-		4CDB883D2BC08E7F0019AC71 /* DetailsTodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883C2BC08E7F0019AC71 /* DetailsTodoRow.swift */; };
+		4CDB883D2BC08E7F0019AC71 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883C2BC08E7F0019AC71 /* TodoRow.swift */; };
 		4CDB883F2BC090930019AC71 /* TodoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883E2BC090930019AC71 /* TodoPriority.swift */; };
 		4CDB88412BC090F60019AC71 /* TodoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88402BC090F60019AC71 /* TodoStatus.swift */; };
 /* End PBXBuildFile section */
@@ -76,7 +76,6 @@
 		4C059C6B2BD3B38D0048F5FA /* NavigationRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowModel.swift; sourceTree = "<group>"; };
 		4C059C6F2BD576890048F5FA /* DetailsTodoRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTodoRowModel.swift; sourceTree = "<group>"; };
 		4C059C722BD57C7B0048F5FA /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
-		4C059C742BD589AB0048F5FA /* DetailsTodoRowElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTodoRowElements.swift; sourceTree = "<group>"; };
 		4C059C7B2BD991290048F5FA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4C059C7D2BD991F90048F5FA /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
 		4C059C7E2BD991F90048F5FA /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		4C059C9A2BDE6D8E0048F5FA /* OrderV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderV2.swift; sourceTree = "<group>"; };
 		4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		4C059CA02BDFAFCF0048F5FA /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		4C059CA22BE026A30048F5FA /* TodoSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSign.swift; sourceTree = "<group>"; };
 		4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsView.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4C8893472BC71109005A5DD0 /* NavigationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRow.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		4CDB882C2BC06D530019AC71 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		4CDB88322BC06F7D0019AC71 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		4CDB883A2BC07E4E0019AC71 /* ListDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsView.swift; sourceTree = "<group>"; };
-		4CDB883C2BC08E7F0019AC71 /* DetailsTodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTodoRow.swift; sourceTree = "<group>"; };
+		4CDB883C2BC08E7F0019AC71 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
 		4CDB883E2BC090930019AC71 /* TodoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPriority.swift; sourceTree = "<group>"; };
 		4CDB88402BC090F60019AC71 /* TodoStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,9 +375,9 @@
 		4CDB88422BC094070019AC71 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
-				4CDB883C2BC08E7F0019AC71 /* DetailsTodoRow.swift */,
+				4CDB883C2BC08E7F0019AC71 /* TodoRow.swift */,
 				4C059C6F2BD576890048F5FA /* DetailsTodoRowModel.swift */,
-				4C059C742BD589AB0048F5FA /* DetailsTodoRowElements.swift */,
+				4C059CA22BE026A30048F5FA /* TodoSign.swift */,
 			);
 			path = Rows;
 			sourceTree = "<group>";
@@ -521,7 +521,6 @@
 				4C059C672BD2F8DB0048F5FA /* TodoDetailsModel.swift in Sources */,
 				4C059C8B2BDC32BB0048F5FA /* FilterV2.swift in Sources */,
 				4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */,
-				4C059C752BD589AB0048F5FA /* DetailsTodoRowElements.swift in Sources */,
 				4C059C632BD1BBE60048F5FA /* DetailsModel.swift in Sources */,
 				4CDB882D2BC06D530019AC71 /* DetailsView.swift in Sources */,
 				4C059C8D2BDE2AEB0048F5FA /* ConfigurableItem.swift in Sources */,
@@ -537,7 +536,8 @@
 				4CDB88412BC090F60019AC71 /* TodoStatus.swift in Sources */,
 				4C059C992BDE6D7F0048F5FA /* TodoOrderV2.swift in Sources */,
 				4C059C5D2BD05B180048F5FA /* Action.swift in Sources */,
-				4CDB883D2BC08E7F0019AC71 /* DetailsTodoRow.swift in Sources */,
+				4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */,
+				4CDB883D2BC08E7F0019AC71 /* TodoRow.swift in Sources */,
 				4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */,
 				4C059C732BD57C7B0048F5FA /* Checkmark.swift in Sources */,
 				4C059C7C2BD991290048F5FA /* DataManager.swift in Sources */,

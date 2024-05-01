@@ -22,8 +22,10 @@ extension RequestManager: RequestManagerProtocol {
 
 	func sorting(for panel: Panel) -> [TodoOrderV2] {
 		switch panel {
-		case .inFocus, .backlog, .list:
-			return [.priority(.reverse), .completionDate(.reverse)]
+		case .inFocus, .backlog:
+			return [.priority(.reverse), .creationDate(.reverse)]
+		case .list:
+			return [.status(.forward), .priority(.reverse), .creationDate(.reverse)]
 		case .completed:
 			return [.completionDate(.reverse)]
 		}

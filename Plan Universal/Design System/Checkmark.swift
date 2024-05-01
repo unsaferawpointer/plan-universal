@@ -10,7 +10,15 @@ import SwiftUI
 #if os(iOS)
 struct Checkmark: View {
 
+	// MARK: - Locale state
+
 	@Binding var animate: Bool
+
+	// MARK: - Initialization
+
+	init(animate: Binding<Bool>) {
+		self._animate = animate
+	}
 
 	var body: some View {
 		ZStack {
@@ -19,7 +27,7 @@ struct Checkmark: View {
 				style: .continuous
 			)
 			.fill(Color(animate ? UIColor(named: "checkmarkBackground")! : .secondarySystemFill))
-				.frame(width: 24, height: 24)
+			.frame(width: 24, height: 24)
 			Path { path in
 				path.move(to: .init(x: 0.20 * 10, y: 0.55 * 10))
 				path.addLine(to: .init(x: 0.43 * 10, y: 0.75 * 10))
@@ -37,10 +45,11 @@ struct Checkmark: View {
 			.opacity(animate ? 1 : 0)
 			.frame(width: 10, height: 10)
 		}
-
 	}
 }
+#endif
 
+#if os(iOS)
 #Preview {
 	Checkmark(animate: .constant(false))
 }
