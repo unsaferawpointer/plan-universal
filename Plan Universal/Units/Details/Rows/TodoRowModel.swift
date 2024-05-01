@@ -12,6 +12,8 @@ final class TodoRowModel: ObservableObject {
 
 	@Published var todo: TodoItem
 
+	let hapticFeedback = ImpactFeedbackFacade()
+
 	// MARK: - Initialization
 
 	init(todo: TodoItem) {
@@ -45,6 +47,7 @@ extension TodoRowModel {
 		}
 		set {
 			todo.isDone = newValue
+			hapticFeedback.impactOccurred()
 		}
 	}
 

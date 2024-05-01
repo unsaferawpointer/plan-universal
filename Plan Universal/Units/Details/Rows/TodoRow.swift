@@ -52,7 +52,7 @@ extension TodoRow: View {
 			#if os(iOS)
 			Checkmark(animate: $animate)
 			#else
-			Toggle("", isOn: $model.todo.isDone)
+			Toggle("", isOn: $model.isDone)
 				.toggleStyle(.checkbox)
 				.labelsHidden()
 			#endif

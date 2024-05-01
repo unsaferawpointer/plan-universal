@@ -32,6 +32,7 @@
 		4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA22BE026A30048F5FA /* TodoSign.swift */; };
 		4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */; };
 		4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5332BE2B5DE0059474A /* ListFilter.swift */; };
+		4C4ED5362BE2C2010059474A /* ImpactFeedbackFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
 		4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8893472BC71109005A5DD0 /* NavigationRow.swift */; };
 		4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB87F92BC06BFA0019AC71 /* PlanApp.swift */; };
@@ -94,6 +95,7 @@
 		4C059CA22BE026A30048F5FA /* TodoSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSign.swift; sourceTree = "<group>"; };
 		4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsView.swift; sourceTree = "<group>"; };
 		4C4ED5332BE2B5DE0059474A /* ListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFilter.swift; sourceTree = "<group>"; };
+		4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedbackFacade.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4C8893472BC71109005A5DD0 /* NavigationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRow.swift; sourceTree = "<group>"; };
 		4CDB87F62BC06BFA0019AC71 /* Plan Universal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plan Universal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -334,6 +336,7 @@
 			children = (
 				4C059C8C2BDE2AEB0048F5FA /* ConfigurableItem.swift */,
 				4C059C7A2BD991100048F5FA /* DataStorage */,
+				4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4ED5362BE2C2010059474A /* ImpactFeedbackFacade.swift in Sources */,
 				4C059C9D2BDEC1260048F5FA /* PreviewContainer.swift in Sources */,
 				4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */,
 				4C059C702BD576890048F5FA /* TodoRowModel.swift in Sources */,
