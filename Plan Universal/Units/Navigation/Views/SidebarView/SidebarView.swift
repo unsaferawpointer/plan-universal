@@ -95,10 +95,10 @@ struct SidebarView: View {
 		.navigationTitle("Plan")
 		#if os(iOS)
 		.toolbar {
-			ToolbarItem(placement: .bottomBar) {
-				Spacer()
-			}
 			if isCompact {
+				ToolbarItem(placement: .bottomBar) {
+					Spacer()
+				}
 				ToolbarItem(placement: .primaryAction) {
 					Menu("Add", systemImage: "plus") {
 						Button {
