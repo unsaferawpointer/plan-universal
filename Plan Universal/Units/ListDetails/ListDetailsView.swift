@@ -114,7 +114,7 @@ extension ListDetailsView {
 		case .new:
 			fatalError()
 		case .edit(let list):
-			list.title = configuration.title
+			modelContext.delete(list)
 		}
 	}
 
