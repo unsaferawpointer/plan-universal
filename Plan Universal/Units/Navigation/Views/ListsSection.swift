@@ -37,28 +37,27 @@ struct ListsSection: View {
 				})
 			} else {
 				ForEach(lists) { list in
-					NavigationLink(value: Panel.list(list)) {
-						Label(list.title, systemImage: list.icon.iconName)
-					}
-					.contextMenu {
-						Button("Edit List...") {
-							self.editedList = list
-						}
-						Divider()
-						Button(list.isFavorite ? "Delete from Favorites" : "Move to Favorites") {
-							withAnimation {
-								list.isFavorite.toggle()
+					Label(list.title, systemImage: list.icon.iconName)
+						.contextMenu {
+							Button("Edit List...") {
+								self.editedList = list
+							}
+							Divider()
+							Button(list.isFavorite ? "Delete from Favorites" : "Move to Favorites") {
+								withAnimation {
+									list.isFavorite.toggle()
+								}
+							}
+							Divider()
+							Button(role: .destructive) {
+								withAnimation {
+									delete(list)
+								}
+							} label: {
+								Text("Delete")
 							}
 						}
-						Divider()
-						Button(role: .destructive) {
-							withAnimation {
-								delete(list)
-							}
-						} label: {
-							Text("Delete")
-						}
-					}
+						.tag(Panel.list(list))
 				}
 			}
 		}

@@ -56,23 +56,20 @@ struct SidebarView: View {
 
 	var body: some View {
 		List(selection: $selection) {
-			NavigationLink(value: Panel.inFocus) {
-				NavigationRow(
-					title: Panel.inFocus.title,
-					icon: "sparkles",
-					sign: nil, 
-					filter: TodoFilter(base: .status(.inFocus), constainsText: nil)
-				)
-			}
+			NavigationRow(
+				title: Panel.inFocus.title,
+				icon: "sparkles",
+				sign: nil,
+				filter: TodoFilter(base: .status(.inFocus), constainsText: nil)
+			)
+			.tag(Panel.inFocus)
 			.listItemTint(.yellow)
 
-			NavigationLink(value: Panel.backlog) {
-				Label(Panel.backlog.title, systemImage: "square.3.layers.3d")
-			}
+			Label(Panel.backlog.title, systemImage: "square.3.layers.3d")
+				.tag(Panel.backlog)
 
-			NavigationLink(value: Panel.completed) {
-				Label(Panel.completed.title, systemImage: "shippingbox")
-			}
+			Label(Panel.completed.title, systemImage: "shippingbox")
+				.tag(Panel.completed)
 
 			ListsSection(
 				title: "Favorites",
