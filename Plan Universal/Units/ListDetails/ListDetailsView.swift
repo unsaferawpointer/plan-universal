@@ -21,12 +21,6 @@ struct ListDetailsView: View {
 
 	@FocusState private var isFocused: Bool
 
-	let items = Icon.allCases
-
-	let config = [
-		GridItem(.adaptive(minimum: 65))
-	]
-
 	// MARK: - Initialization
 
 	init(_ action: Action<ListItem>) {
@@ -38,18 +32,21 @@ struct ListDetailsView: View {
 			Form {
 				TextField("List Name", text: $model.configuration.title)
 					.focused($isFocused)
-				Toggle(isOn: $model.configuration.isFavorite, label: {
-					Text("Is Favorite")
-				})
 				#if os(iOS)
 				.tint(.accent)
 				#endif
 				Picker("Icon", selection: $model.configuration.icon) {
-					ForEach(items, id: \.self) { icon in
-						Label(icon.iconName, systemImage: icon.iconName)
-							.tag(icon)
+					ForEach(Icon.allCases, id: \.self) { icon in
+						HStack {
+							Image(systemName: icon.iconName)
+							Text(icon.iconName)
+						}
+						.tag(icon)
 					}
 				}
+				Toggle(isOn: $model.configuration.isFavorite, label: {
+					Text("Is Favorite")
+				})
 			}
 			.submitLabel(.done)
 			.onSubmit {
