@@ -6,62 +6,63 @@
 //
 
 import Foundation
+import SwiftData
 
-//final class ListDetailsModel: ObservableObject {
-//
-//	// MARK: - Published
-//
-//	@Published var configuration: ListConfiguration
-//
-//	// MARK: - DI
-//
-//	private (set) var action: DetailsAction<ListItem>
-//
-//	// MARK: - Initialization
-//
-//	init(action: DetailsAction<ListItem>) {
-//		self.action = action
-//		self._configuration = Published(initialValue: action.configuration)
-//	}
-//}
-//
-//// MARK: - Public interface
-//extension ListDetailsModel {
-//
-//	func delete() {
-//		switch action {
-//		case .new:
-//			fatalError()
-//		case .edit(let list):
-//			dataStorage.deleteLists([list])
-//		}
-//	}
-//
-//	func save() {
-//
-//		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
-//		let title = trimmed.isEmpty ? String(localized: "New List") : trimmed
-//
-//		switch action {
-//		case .new:
-//			let new = dataStorage.insertList(configuration)
-//			new.title = title
-//		case .edit(let list):
-//			list.configuration = configuration
-//			list.title = title
-//		}
-//		try? dataStorage.save()
-//	}
-//
-//	var buttonToDeleteIsEnabled: Bool {
-//		guard case .edit = action else {
-//			return false
-//		}
-//		return true
-//	}
-//
-//	var buttonToSaveIsEnabled: Bool {
-//		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
-//		return !trimmed.isEmpty
-//	}
-//}
+@Observable
+final class ListDetailsModel {
+
+	private var action: Action<ListItem>
+
+	var configuration: ListConfiguration
+
+	// MARK: - Initialization
+
+	init(action: Action<ListItem>) {
+		self.action = action
+		self.configuration = action.configuration
+	}
+}
+
+// MARK: - Public interface
+extension ListDetailsModel {
+	
+	var canDelete: Bool {
+		guard case .edit = action else {
+			return false
+		}
+		return true
+	}
+
+	var canSave: Bool {
+		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
+		return !trimmed.isEmpty
+	}
+}
+
+// MARK: - Public interface
+extension ListDetailsModel {
+
+	func delete(in context: ModelContext) {
+		guard case let .edit(item) = action else {
+			return
+		}
+		context.delete(item)
+	}
+
+	func save(in context: ModelContext) {
+
+		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
+		let title = trimmed.isEmpty ? String(localized: "New List") : trimmed
+
+		switch action {
+		case .new:
+			let new = ListItem(configuration)
+			context.insert(new)
+		case .edit(let list):
+			try? context.transaction {
+				list.configuration = configuration
+				list.title = title
+			}
+		}
+	}
+}

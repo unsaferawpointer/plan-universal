@@ -13,39 +13,38 @@ struct ListDetailsView: View {
 
 	@Environment(\.modelContext) var modelContext
 
+	// MARK: - Data
+
+	@State var model: ListDetailsModel
+
 	// MARK: - Local state
 
 	@FocusState private var isFocused: Bool
 
-	@State private var configuration: ListConfiguration
-
-	private var action: Action<ListItem>
-
 	let items = Icon.allCases
 
 	let config = [
-		GridItem(.adaptive(minimum: 40))
+		GridItem(.adaptive(minimum: 65))
 	]
 
 	// MARK: - Initialization
 
 	init(_ action: Action<ListItem>) {
-		self.action = action
-		self._configuration = State(initialValue:  action.configuration)
+		self._model = State(initialValue: .init(action: action))
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("List Name", text: $configuration.title)
+				TextField("List Name", text: $model.configuration.title)
 					.focused($isFocused)
-				Toggle(isOn: $configuration.isFavorite, label: {
+				Toggle(isOn: $model.configuration.isFavorite, label: {
 					Text("Is Favorite")
 				})
 				#if os(iOS)
 				.tint(.accent)
 				#endif
-				Picker("Icon", selection: $configuration.icon) {
+				Picker("Icon", selection: $model.configuration.icon) {
 					ForEach(items, id: \.self) { icon in
 						Label(icon.iconName, systemImage: icon.iconName)
 							.tag(icon)
@@ -58,7 +57,7 @@ struct ListDetailsView: View {
 					defer {
 						dismiss()
 					}
-					save()
+					model.save(in: modelContext)
 				}
 			}
 			.onAppear {
@@ -74,20 +73,20 @@ struct ListDetailsView: View {
 				}
 				ToolbarItem(placement: .confirmationAction) {
 					Button("Save") {
+						defer {
+							dismiss()
+						}
 						withAnimation {
-							defer {
-								dismiss()
-							}
-							save()
+							model.save(in: modelContext)
 						}
 					}
-					.disabled(!canSave)
+					.disabled(!model.canSave)
 				}
-				if canDelete {
+				if model.canDelete {
 					ToolbarItem(placement: .destructiveAction) {
 						Button(role: .destructive) {
 							withAnimation {
-								delete()
+								model.delete(in: modelContext)
 								dismiss()
 							}
 						} label: {
@@ -104,48 +103,6 @@ struct ListDetailsView: View {
 		#endif
 	}
 
-}
-
-// MARK: - Public interface
-extension ListDetailsView {
-
-	func delete() {
-		switch action {
-		case .new:
-			fatalError()
-		case .edit(let list):
-			modelContext.delete(list)
-		}
-	}
-
-	func save() {
-
-		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
-		let title = trimmed.isEmpty ? String(localized: "New List") : trimmed
-
-		switch action {
-		case .new:
-			let new = ListItem(configuration)
-			modelContext.insert(new)
-		case .edit(let list):
-			try? modelContext.transaction {
-				list.configuration = configuration
-				list.title = title
-			}
-		}
-	}
-
-	var canDelete: Bool {
-		guard case .edit = action else {
-			return false
-		}
-		return true
-	}
-
-	var canSave: Bool {
-		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
-		return !trimmed.isEmpty
-	}
 }
 
 #Preview {
