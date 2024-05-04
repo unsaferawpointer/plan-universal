@@ -26,9 +26,9 @@ extension TodoRowModel {
 
 	var signIcon: String? {
 		guard todo.status == .inFocus else {
-			return "bolt.fill"
+			return todo.isImportant ? "bolt.fill" : nil
 		}
-		return todo.isImportant ? "sparkles" : nil
+		return "sparkles"
 	}
 
 	var signColor: Color {
