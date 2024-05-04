@@ -14,6 +14,7 @@ protocol DataManagerProtocol {
 	func insert(_ configuration: ListConfiguration, in context: ModelContext)
 
 	func delete(_ todo: TodoItem, in context: ModelContext)
+	func delete(_ todos: [TodoItem], in context: ModelContext)
 	func delete(_ list: ListItem, in context: ModelContext)
 
 	func update<Item: PersistentModel, T>(_ item: Item, keyPath: ReferenceWritableKeyPath<Item, T>, value: T)
@@ -39,6 +40,14 @@ extension DataManager: DataManagerProtocol {
 
 	func delete(_ todo: TodoItem, in context: ModelContext) {
 		context.delete(todo)
+	}
+
+	func delete(_ todos: [TodoItem], in context: ModelContext) {
+		try? context.transaction {
+			for todo in todos {
+				context.delete(todo)
+			}
+		}
 	}
 
 	func delete(_ list: ListItem, in context: ModelContext) {

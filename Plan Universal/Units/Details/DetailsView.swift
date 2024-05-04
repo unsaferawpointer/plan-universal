@@ -36,18 +36,19 @@ struct DetailsView: View {
 
 	@Query private var todos: [TodoItem]
 
-	// MARK: - Utilities
-
-	private var dataManager: DataManager = .init()
-
-	let requestManager = RequestManager()
+	@State var model: DetailsModel
 
 	// MARK: - Initialization
 
 	init(panel: Panel) {
 		self.panel = panel
-		let filter = requestManager.predicate(for: panel, containsText: nil).predicate
-		self._todos = Query(filter: filter, sort: requestManager.sorting(for: panel).map(\.sortDescriptor), animation: .default)
+		self._model = State(initialValue: .init())
+		let filter = model.predicate(for: panel, containsText: nil).predicate
+		self._todos = Query(
+			filter: filter,
+			sort: model.sorting(for: panel).map(\.sortDescriptor),
+			animation: .default
+		)
 	}
 
 	var body: some View {
@@ -69,7 +70,7 @@ struct DetailsView: View {
 			TodoDetailsView(action: .edit(todo))
 		}
 		.sheet(isPresented: $todoDetailsIsPresented) {
-			TodoDetailsView(action: .new(requestManager.todoConfiguration(for: panel)))
+			TodoDetailsView(action: .new(model.todoConfiguration(for: panel)))
 		}
 		.sheet(isPresented: $listDetailsIsPresented) {
 			ListDetailsView(.new(.init(uuid: UUID(), title: "", isArchieved: false, isFavorite: false)))
@@ -180,13 +181,13 @@ private extension DetailsView {
 
 	func setPriority(priority: TodoPriority, todo: TodoItem) {
 		withAnimation {
-			dataManager.update(todo, keyPath: \.priority, value: priority)
+			model.setPriority(priority: priority, todo: todo)
 		}
 	}
 
 	func setStatus(_ status: TodoStatus, todo: TodoItem) {
 		withAnimation {
-			dataManager.update(todo, keyPath: \.status, value: status)
+			model.setStatus(status, todo: todo)
 		}
 	}
 
@@ -194,13 +195,9 @@ private extension DetailsView {
 		withAnimation {
 			if selection.contains(todo.id) {
 				let selected = todos.filter { selection.contains($0.id) }
-				try? modelContext.transaction {
-					for item in selected {
-						modelContext.delete(item)
-					}
-				}
+				model.delete(selected, in: modelContext)
 			} else {
-				dataManager.delete(todo, in: modelContext)
+				model.delete([todo], in: modelContext)
 			}
 		}
 	}
