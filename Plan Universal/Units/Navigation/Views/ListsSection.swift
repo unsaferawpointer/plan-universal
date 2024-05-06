@@ -81,5 +81,5 @@ private extension ListsSection {
 		listDetailsIsPresented: .constant(false),
 		lists: []
 	)
-		.modelContainer(previewContainer)
+		.modelContainer(PreviewContainer.preview)
 }

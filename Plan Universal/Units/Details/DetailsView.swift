@@ -201,7 +201,7 @@ private extension DetailsView {
 
 #Preview {
 	DetailsView(panel: .inFocus)
-		.modelContainer(previewContainer)
+		.modelContainer(PreviewContainer.preview)
 }
 
 extension TodoPriority {

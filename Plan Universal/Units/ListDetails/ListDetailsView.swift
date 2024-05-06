@@ -104,5 +104,5 @@ struct ListDetailsView: View {
 
 #Preview {
 	ListDetailsView(.new(.init()))
-		.modelContainer(previewContainer)
+		.modelContainer(PreviewContainer.preview)
 }

@@ -155,6 +155,7 @@
 		4C059C7A2BD991100048F5FA /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */,
 				4C059C872BDC32980048F5FA /* Filters */,
 				4C059C7B2BD991290048F5FA /* DataManager.swift */,
 				4C059C852BDC32870048F5FA /* RequestManager.swift */,
@@ -268,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				4CDB88032BC06BFB0019AC71 /* Preview Assets.xcassets */,
-				4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
