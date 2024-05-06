@@ -20,8 +20,6 @@ struct DetailsView: View {
 	private let isCompact = false
 	#endif
 
-	var panel: Panel
-
 	// MARK: - Local state
 
 	@State private var editedTodo: TodoItem?
@@ -36,17 +34,15 @@ struct DetailsView: View {
 
 	@Query private var todos: [TodoItem]
 
-	@State var model: DetailsModel
+	var model: DetailsModel
 
 	// MARK: - Initialization
 
 	init(panel: Panel) {
-		self.panel = panel
-		self._model = State(initialValue: .init())
-		let filter = model.predicate(for: panel, containsText: nil).predicate
+		self.model = .init(panel: panel)
 		self._todos = Query(
-			filter: filter,
-			sort: model.sorting(for: panel).map(\.sortDescriptor),
+			filter: model.predicate(containsText: nil).predicate,
+			sort: model.sorting().map(\.sortDescriptor),
 			animation: .default
 		)
 	}
@@ -70,12 +66,12 @@ struct DetailsView: View {
 			TodoDetailsView(action: .edit(todo))
 		}
 		.sheet(isPresented: $todoDetailsIsPresented) {
-			TodoDetailsView(action: .new(model.todoConfiguration(for: panel)))
+			TodoDetailsView(action: .new(model.todoConfiguration()))
 		}
 		.sheet(isPresented: $listDetailsIsPresented) {
-			ListDetailsView(.new(.init(uuid: UUID(), title: "", isArchieved: false, isFavorite: false)))
+			ListDetailsView(.new(.default))
 		}
-		.navigationTitle(panel.title)
+		.navigationTitle(model.title)
 		.overlay {
 			if todos.isEmpty {
 				ContentUnavailableView(

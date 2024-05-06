@@ -47,3 +47,11 @@ extension ListConfiguration: Identifiable {
 
 // MARK: - Hashable
 extension ListConfiguration: Hashable { }
+
+// MARK: - Templates
+extension ListConfiguration {
+
+	static var `default`: Self {
+		return .init()
+	}
+}

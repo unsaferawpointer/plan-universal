@@ -10,15 +10,26 @@ import SwiftData
 import Combine
 
 final class DetailsModel {
-	
+
+	var panel: Panel
+
 	private var dataManager: DataManagerProtocol
 
 	private let requestManager = RequestManager()
 
 	// MARK: - Initialization
 
-	init(dataManager: DataManagerProtocol = DataManager()) {
+	init(panel: Panel, dataManager: DataManagerProtocol = DataManager()) {
+		self.panel = panel
 		self.dataManager = dataManager
+	}
+}
+
+// MARK: - Computed properties
+extension DetailsModel {
+
+	var title: String {
+		panel.title
 	}
 }
 
@@ -45,15 +56,15 @@ extension DetailsModel {
 // MARK: - RequestManager Proxy
 extension DetailsModel {
 	
-	func sorting(for panel: Panel) -> [TodoOrder] {
+	func sorting() -> [TodoOrder] {
 		requestManager.sorting(for: panel)
 	}
 
-	func predicate(for panel: Panel, containsText text: String?) -> TodoFilter {
+	func predicate(containsText text: String?) -> TodoFilter {
 		requestManager.predicate(for: panel, containsText: text)
 	}
 
-	func todoConfiguration(for panel: Panel) -> TodoConfiguration {
+	func todoConfiguration() -> TodoConfiguration {
 		requestManager.todoConfiguration(for: panel)
 	}
 }
