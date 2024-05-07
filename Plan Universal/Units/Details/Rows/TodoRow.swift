@@ -66,6 +66,9 @@ extension TodoRow: View {
 					.foregroundStyle(model.signColor)
 			}
 		}
+		.padding()
+		.background(Color(.quaternarySystemFill))
+		.cornerRadius(8)
 		.contentShape(Rectangle())
 		#if os(iOS)
 		.onTapGesture {
