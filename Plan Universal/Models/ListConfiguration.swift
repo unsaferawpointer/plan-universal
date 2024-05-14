@@ -13,28 +13,26 @@ struct ListConfiguration {
 
 	var title: String
 
-	var isArchieved: Bool
-
-	var isFavorite: Bool
-
-	var icon: Icon
+	var isArchived: Bool
 
 	// MARK: - Initialization
 
 	init(
 		uuid: UUID = .init(),
-		title: String = "",
-		isArchieved: Bool = false,
-		isFavorite: Bool = false,
-		icon: Icon = .doc
+		title: String = "New List",
+		isArchived: Bool = false
 	) {
 		self.uuid = uuid
 		self.title = title
-		self.isArchieved = isArchieved
-		self.isFavorite = isFavorite
-		self.icon = icon
+		self.isArchived = isArchived
 	}
 
+}
+
+// MARK: - ItemConfiguration
+extension ListConfiguration: ItemConfiguration {
+
+	typealias Item = ListItem
 }
 
 // MARK: - Identifiable

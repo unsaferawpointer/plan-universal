@@ -9,42 +9,44 @@
 import Foundation
 import SwiftData
 
-
 @Model
-class ListItem {
+final class ListItem {
 
 	var uuid: UUID = UUID()
 	var title: String = ""
-	var isArchieved: Bool = false
-	var isFavorite: Bool = false
-	var creationDate: Date = Date()
-	var rawIcon: Int64 = 0
 	var options: Int64 = 0
+
+	var creationDate: Date = Date()
+
+	// MARK: - Relationships
+
+	@Relationship(deleteRule: .nullify) var project: ProjectItem?
 
 	@Relationship(deleteRule: .cascade, inverse: \TodoItem.list) var todos: [TodoItem]?
 
+	// MARK: - Order
+
+	var order: Int = 1
+
+	// MARK: - Initialization
+
 	public init() { }
 
+	required init(_ configuration: ListConfiguration) {
+		self.uuid = configuration.uuid
+		self.title = configuration.title
+	}
+
 }
+
+// MARK: - Sortable
+extension ListItem: Sortable { }
 
 // MARK: - Identifiable
 extension ListItem: Identifiable {
 
 	var id: UUID {
 		return uuid
-	}
-}
-
-// MARK: - Computed properties
-extension ListItem {
-
-	var icon: Icon {
-		get {
-			return Icon(rawValue: rawIcon) ?? .doc
-		}
-		set {
-			rawIcon = newValue.rawValue
-		}
 	}
 }
 
@@ -57,30 +59,12 @@ extension ListItem: ConfigurableItem {
 		get {
 			return .init(
 				uuid: uuid,
-				title: title,
-				isArchieved: isArchieved,
-				isFavorite: isFavorite,
-				icon: Icon(rawValue: rawIcon) ?? .doc
+				title: title
 			)
 		}
 		set {
 			self.title = newValue.title
-			self.isArchieved = newValue.isArchieved
-			self.isFavorite = newValue.isFavorite
-			self.rawIcon = newValue.icon.rawValue
 		}
 	}
 
-}
-
-// MARK: - Convenience initialization
-extension ListItem {
-
-	convenience init(_ configuration: ListConfiguration) {
-		self.init()
-		self.uuid = configuration.uuid
-		self.title = configuration.title
-		self.isArchieved = configuration.isArchieved
-		self.isFavorite = configuration.isFavorite
-	}
 }

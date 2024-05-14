@@ -43,7 +43,8 @@ extension TodoDetailsModel {
 
 		switch action {
 		case .new:
-			dataManager.insert(configuration, in: context)
+			break
+//			dataManager.insert(configuration, in: context)
 		case .edit(let todo):
 			try? context.transaction {
 				todo.configuration = configuration

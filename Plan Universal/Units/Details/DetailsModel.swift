@@ -36,10 +36,6 @@ extension DetailsModel {
 // MARK: - DataManager Proxy
 extension DetailsModel {
 
-	func setPriority(priority: TodoPriority, todo: TodoItem) {
-		dataManager.update(todo, keyPath: \.priority, value: priority)
-	}
-
 	func setStatus(_ status: TodoStatus, todo: TodoItem) {
 		dataManager.update(todo, keyPath: \.status, value: status)
 	}

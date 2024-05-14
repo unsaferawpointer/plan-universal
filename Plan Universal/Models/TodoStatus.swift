@@ -8,9 +8,10 @@
 import Foundation
 
 enum TodoStatus: Int64 {
-	case inFocus = 0
-	case backlog = 1
-	case done = 2
+	case backlog
+	case inFocus
+	case done
+	case archieved
 }
 
 // MARK: - CaseIterable
@@ -21,12 +22,14 @@ extension TodoStatus {
 
 	var title: String {
 		switch self {
-		case .inFocus:
-			String(localized: "In Focus")
 		case .backlog:
 			String(localized: "Backlog")
+		case .inFocus:
+			String(localized: "In Focus")
 		case .done:
-			String(localized: "Archieve")
+			String(localized: "Done")
+		case .archieved:
+			String(localized: "Archieved")
 		}
 	}
 }

@@ -35,9 +35,6 @@ extension TodoRowModel {
 		guard todo.status != .done else {
 			return .secondary
 		}
-		guard todo.status == .inFocus else {
-			return todo.priority.color
-		}
 		return .yellow
 	}
 

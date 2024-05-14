@@ -153,14 +153,6 @@ private extension DetailsView {
 			}
 		}
 		Divider()
-		Section("Priority") {
-			ForEach(TodoPriority.allCases) { priority in
-				Button(priority.title) {
-					setPriority(priority: priority, todo: todo)
-				}
-			}
-		}
-		Divider()
 		Button(role: .destructive) {
 			delete(todo)
 		} label: {
@@ -174,12 +166,6 @@ private extension DetailsView {
 
 	func newTodo() {
 		self.todoDetailsIsPresented = true
-	}
-
-	func setPriority(priority: TodoPriority, todo: TodoItem) {
-		withAnimation {
-			model.setPriority(priority: priority, todo: todo)
-		}
 	}
 
 	func setStatus(_ status: TodoStatus, todo: TodoItem) {

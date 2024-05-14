@@ -9,28 +9,41 @@
 import Foundation
 import SwiftData
 
-
 @Model 
-class TodoItem {
+final class TodoItem {
 
 	var uuid: UUID = UUID()
 	var text: String = ""
-	var creationDate: Date = Date()
-	var completionDate: Date?
-	var estimation: Int64 = 0
+	var isUrgent: Bool = false
 	var options: Int64 = 0
 
 	// MARK: - Private properties
 
 	private (set) var rawStatus: Int64 = 0
-	private (set) var rawPriority: Int64 = 0
+
+	private (set) var creationDate: Date = Date()
 
 	// MARK: - Relationships
 
 	@Relationship(deleteRule: .nullify) var list: ListItem?
 
+	// MARK: - Order
+
+	var order: Int = 1
+
+	// MARK: - Initialization
+
 	public init() { }
+
+	required init(_ configuration: TodoConfiguration) {
+		self.text = configuration.text
+		self.status = configuration.status
+		self.list = configuration.list
+	}
 }
+
+// MARK: - Sortable
+extension TodoItem: Sortable { }
 
 // MARK: - Identifiable
 extension TodoItem: Identifiable { }
@@ -40,7 +53,10 @@ extension TodoItem {
 
 	var isDone: Bool {
 		get {
-			return rawStatus == TodoStatus.done.rawValue
+			guard case .done = status else {
+				return false
+			}
+			return true
 		}
 		set {
 			rawStatus = newValue ? TodoStatus.done.rawValue : TodoStatus.backlog.rawValue
@@ -54,22 +70,11 @@ extension TodoItem {
 
 		set {
 			self.rawStatus = newValue.rawValue
-			self.completionDate = newValue == .done ? .now : nil
-		}
-	}
-
-	var priority: TodoPriority {
-		get {
-			return TodoPriority(rawValue: rawPriority) ?? .low
-		}
-
-		set {
-			self.rawPriority = newValue.rawValue
 		}
 	}
 
 	var isImportant: Bool {
-		return priority == .medium || priority == .high
+		return false
 	}
 }
 
@@ -83,28 +88,14 @@ extension TodoItem: ConfigurableItem {
 			return .init(
 				text: text,
 				status: status,
-				priority: priority,
 				list: list
 			)
 		}
 		set {
 			self.text = newValue.text
 			self.status = newValue.status
-			self.priority = newValue.priority
 			self.list = newValue.list
 		}
 	}
 
-}
-
-// MARK: - Convenience initialization
-extension TodoItem {
-
-	convenience init(_ configuration: TodoConfiguration) {
-		self.init()
-		self.text = configuration.text
-		self.status = configuration.status
-		self.priority = configuration.priority
-		self.list = configuration.list
-	}
 }

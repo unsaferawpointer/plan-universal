@@ -12,4 +12,11 @@ protocol ConfigurableItem {
 	associatedtype Configuration
 
 	var configuration: Configuration { get set }
+
+	init(_ configuration: Configuration)
+}
+
+protocol ItemConfiguration {
+
+	associatedtype Item: ConfigurableItem where Item.Configuration == Self
 }

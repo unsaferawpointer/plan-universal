@@ -15,9 +15,13 @@ struct RootView: View {
 		NavigationSplitView {
 			SidebarView($selection)
 		} detail: {
-			if let selection {
+			if let selection, selection == .inFocus {
 				NavigationStack {
-					DetailsView(panel: selection)
+					InFocusView()
+				}
+			} else if case let .list(value) = selection {
+				NavigationStack {
+					ProjectTodosView(project: value)
 				}
 			} else {
 				Text("Select sidebar item")
@@ -28,4 +32,5 @@ struct RootView: View {
 
 #Preview {
 	RootView()
+		.modelContainer(PreviewContainer.preview)
 }

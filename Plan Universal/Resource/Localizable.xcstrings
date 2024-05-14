@@ -14,6 +14,16 @@
         }
       }
     },
+    "%@ %lld " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld "
+          }
+        }
+      }
+    },
     "%lld" : {
 
     },
@@ -69,6 +79,9 @@
         }
       }
     },
+    "10 Items" : {
+
+    },
     "Add" : {
       "localizations" : {
         "ru" : {
@@ -79,6 +92,9 @@
         }
       }
     },
+    "Add Todo" : {
+
+    },
     "Archieve" : {
       "localizations" : {
         "ru" : {
@@ -88,6 +104,9 @@
           }
         }
       }
+    },
+    "Archieved" : {
+
     },
     "Backlog" : {
       "localizations" : {
@@ -130,6 +149,7 @@
       }
     },
     "Delete from Favorites" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -142,7 +162,11 @@
     "Details" : {
 
     },
+    "Done" : {
+
+    },
     "Edit List..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -151,6 +175,9 @@
           }
         }
       }
+    },
+    "Edit project..." : {
+
     },
     "Edit..." : {
       "localizations" : {
@@ -173,6 +200,7 @@
       }
     },
     "Icon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -192,7 +220,11 @@
         }
       }
     },
+    "Is Archieved" : {
+
+    },
     "Is Favorite" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -234,6 +266,7 @@
       }
     },
     "Lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -264,6 +297,7 @@
       }
     },
     "Move to Favorites" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -284,6 +318,7 @@
       }
     },
     "New lists you create will appear here." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -292,6 +327,9 @@
           }
         }
       }
+    },
+    "New Project" : {
+
     },
     "New Todo" : {
       "localizations" : {
@@ -314,6 +352,7 @@
       }
     },
     "No Lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -322,6 +361,9 @@
           }
         }
       }
+    },
+    "No Projects" : {
+
     },
     "No Todos" : {
       "localizations" : {
@@ -363,6 +405,12 @@
         }
       }
     },
+    "Project Name" : {
+
+    },
+    "Projects" : {
+
+    },
     "Save" : {
       "localizations" : {
         "ru" : {
@@ -392,6 +440,9 @@
           }
         }
       }
+    },
+    "Type here..." : {
+
     }
   },
   "version" : "1.0"

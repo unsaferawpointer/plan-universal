@@ -1,13 +1,13 @@
 //
-//  ListDetailsView.swift
+//  ProjectDetailView.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 05.04.2024.
+//  Created by Anton Cherkasov on 15.05.2024.
 //
 
 import SwiftUI
 
-struct ListDetailsView: View {
+struct ProjectDetailView: View {
 
 	@Environment(\.dismiss) var dismiss
 
@@ -15,7 +15,7 @@ struct ListDetailsView: View {
 
 	// MARK: - Data
 
-	@State var model: ListDetailsModel
+	@State var model: ProjectDetailsModel
 
 	// MARK: - Local state
 
@@ -23,19 +23,19 @@ struct ListDetailsView: View {
 
 	// MARK: - Initialization
 
-	init(_ action: Action<ListItem>) {
+	init(_ action: Action<ProjectItem>) {
 		self._model = State(initialValue: .init(action: action))
 	}
 
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("List Name", text: $model.configuration.title)
+				TextField("Project Name", text: $model.configuration.name)
 					.focused($isFocused)
-				#if os(iOS)
-				.tint(.accent)
-				#endif
-				Toggle(isOn: $model.configuration.isArchived, label: {
+#if os(iOS)
+					.tint(.accent)
+#endif
+				Toggle(isOn: $model.configuration.isArchieved, label: {
 					Text("Is Archieved")
 				})
 			}
@@ -85,15 +85,13 @@ struct ListDetailsView: View {
 				}
 			}
 		}
-		#if os(macOS)
+#if os(macOS)
 		.padding(10)
 		.frame(minWidth: 320)
-		#endif
+#endif
 	}
-
 }
 
 #Preview {
-	ListDetailsView(.new(.init()))
-		.modelContainer(PreviewContainer.preview)
+	ProjectDetailView(.new(.default))
 }

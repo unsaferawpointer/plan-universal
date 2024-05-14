@@ -11,6 +11,7 @@ protocol RequestManagerProtocol {
 	func predicate(for panel: Panel, containsText text: String?) -> TodoFilter
 	func sorting(for panel: Panel) -> [TodoOrder]
 	func listPredicate(isFavorite: Bool) -> ListFilter
+	func projectPredicate() -> ProjectFilter
 	func todoConfiguration(for panel: Panel) -> TodoConfiguration
 }
 
@@ -20,14 +21,7 @@ final class RequestManager { }
 extension RequestManager: RequestManagerProtocol {
 
 	func sorting(for panel: Panel) -> [TodoOrder] {
-		switch panel {
-		case .inFocus, .backlog:
-			return [.priority(.reverse), .creationDate(.reverse)]
-		case .list:
-			return [.status(.forward), .priority(.reverse), .creationDate(.reverse)]
-		case .completed:
-			return [.completionDate(.reverse)]
-		}
+		return [.creationDate(.reverse)]
 	}
 
 	func predicate(for panel: Panel, containsText text: String?) -> TodoFilter {
@@ -52,11 +46,15 @@ extension RequestManager: RequestManagerProtocol {
 		case .completed:
 			return TodoConfiguration(text: "", status: .done, priority: .low, list: nil)
 		case .list(let value):
-			return TodoConfiguration(text: "", status: .backlog, priority: .low, list: value)
+			return TodoConfiguration(text: "", status: .done, priority: .low, list: nil)
 		}
 	}
 
 	func listPredicate(isFavorite: Bool) -> ListFilter {
 		return ListFilter(isFavorite: isFavorite)
+	}
+
+	func projectPredicate() -> ProjectFilter {
+		return ProjectFilter()
 	}
 }
