@@ -18,9 +18,13 @@ struct ListSectionView: View {
 
 	@Query var todos: [TodoItem]
 
+	// MARK: - Locale state
+
+	@Binding var editedList: ListItem?
+
 	// MARK: - Initialization
 
-	init(list: ListItem) {
+	init(list: ListItem, editedList: Binding<ListItem?>) {
 		self.list = list
 
 		let uuid = list.uuid
@@ -28,26 +32,27 @@ struct ListSectionView: View {
 			$0.list?.uuid == uuid
 		}
 
+		self._editedList = editedList
 		self._todos = Query(filter: predicate, sort: \.order, animation: .default)
 	}
 
 	var body: some View {
 		Section {
-			if !todos.isEmpty {
-				ForEach(todos) { todo in
-					TodoView(todo: todo)
-				}
-				.listRowSeparator(.hidden)
-			} else {
-				BannerView(systemIcon: "magnifyingglass", message: "No todos", color: .secondary)
+			if !list.details.isEmpty {
+				Text(list.details)
+					.foregroundStyle(.secondary)
+					.font(.body)
 					.selectionDisabled()
 			}
+			ForEach(todos) { todo in
+				TodoView(todo: todo)
+			}
+			.listRowSeparator(.hidden)
 		} header: {
 			HStack {
-				TextField("Type here...", text: $list.title)
-//				Text(list.title)
+				Text(list.title)
+					.foregroundStyle(.primary)
 					.font(.headline)
-					.textFieldStyle(.plain)
 				Spacer()
 				Menu {
 					Button("Add Todo") {
@@ -62,6 +67,10 @@ struct ListSectionView: View {
 						}
 					}
 					Divider()
+					Button("Edit...") {
+						editedList = list
+					}
+					Divider()
 					Button("Delete") {
 						withAnimation {
 							modelContext.delete(list)
@@ -74,7 +83,7 @@ struct ListSectionView: View {
 				.menuStyle(BorderlessButtonMenuStyle())
 				.fixedSize()
 			}
-			.listRowSeparator(.hidden)
+			.listRowSeparator(.visible)
 		}
 	}
 }

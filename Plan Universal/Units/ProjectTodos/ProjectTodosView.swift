@@ -22,6 +22,25 @@ struct ProjectTodosView: View {
 
 	@State private var selection: Set<UUID> = .init()
 
+	@State private var isListDetailsPresented: Bool = false
+
+	@State private var editedList: ListItem?
+
+	// MARK: - Initialization
+
+	init(_ project: ProjectItem) {
+		self.project = project
+		let uuid = project.uuid
+		let predicate = #Predicate<ListItem> {
+			$0.project?.uuid == uuid
+		}
+		self._lists = Query(
+			filter: predicate,
+			sort: \ListItem.order,
+			animation: .default
+		)
+	}
+
 	var body: some View {
 		List(selection: $selection) {
 			BannerView(
@@ -29,51 +48,32 @@ struct ProjectTodosView: View {
 				message: project.name,
 				color: .secondary
 			)
+			.listRowSeparator(.hidden)
 			ForEach(lists) { list in
-				ListSectionView(list: list)
+				ListSectionView(list: list, editedList: $editedList)
 			}
 		}
+		.listStyle(.inset)
 		.scrollIndicators(.never)
 		.navigationTitle(project.name)
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button("Add", systemImage: "plus") {
-					let configuration = ListConfiguration()
-					DataManager().insert(configuration, toProject: project, in: modelContext)
+					self.isListDetailsPresented = true
 				}
 			}
 		}
-	}
-
-
-}
-
-extension ProjectTodosView {
-
-	struct Header: Identifiable {
-		var id: UUID
-		var title: String
-
-		var items: [Item]
-
-		init(id: UUID = UUID(), title: String, items: [Item] = []) {
-			self.id = id
-			self.title = title
-			self.items = items
+		.sheet(isPresented: $isListDetailsPresented) {
+			var configuration: ListConfiguration = .default
+			configuration.project = project
+			return ListDetailsView(.new(configuration))
+		}
+		.sheet(item: $editedList) { list in
+			ListDetailsView(.edit(list))
 		}
 	}
 
-	struct Item: Identifiable {
-		var id: UUID
-		var text: String
-		var isDone: Bool
 
-		init(id: UUID = UUID(), text: String, isDone: Bool = false) {
-			self.id = id
-			self.text = text
-			self.isDone = isDone
-		}
-	}
 }
 
 //#Preview {

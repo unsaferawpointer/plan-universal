@@ -28,11 +28,15 @@ struct SidebarView: View {
 
 	@State var editedProject: ProjectItem?
 
+	@State var editedList: ListItem?
+
 	@State private var todoDetailsIsPresented: Bool = false
 
 	// MARK: - Data
 
 	@Query private var projects: [ProjectItem]
+
+	@Query private var lists: [ListItem]
 
 	// MARK: - Utilities
 
@@ -50,6 +54,16 @@ struct SidebarView: View {
 				],
 			animation: .default
 		)
+
+		let listsPredicate = #Predicate<ListItem> {
+			$0.project == nil
+		}
+
+		self._lists = Query(
+			filter: listsPredicate,
+			sort: [SortDescriptor(\ListItem.order, order: .forward)],
+			animation: .default
+		)
 	}
 
 	var body: some View {
@@ -65,10 +79,10 @@ struct SidebarView: View {
 
 			Section("Projects") {
 				if projects.isEmpty {
-					ContentUnavailableView("No Projects", systemImage: "doc.text")
+					ContentUnavailableView("No Projects", systemImage: "square.stack.3d.up")
 				} else {
 					ForEach(projects, id: \.self) { project in
-						Label("\(project.name) \(project.order) ", systemImage: "doc.text")
+						Label(project.name, systemImage: "square.stack.3d.up")
 							.contextMenu {
 								Button("Edit project...") {
 									self.editedProject = project
@@ -82,7 +96,42 @@ struct SidebarView: View {
 									Text("Delete")
 								}
 							}
-							.tag(Panel.list(project))
+							.tag(Panel.project(project))
+					}
+					.onMove { indices, newOffset in
+						withAnimation {
+							var sorted = projects
+							sorted.move(fromOffsets: indices, toOffset: newOffset)
+							try? modelContext.transaction {
+								for (offset, model) in sorted.enumerated() {
+									model.order = offset
+								}
+							}
+						}
+					}
+				}
+			}
+
+			Section("Lists") {
+				if lists.isEmpty {
+					ContentUnavailableView("No Lists", systemImage: "doc.text")
+				} else {
+					ForEach(lists, id: \.self) { list in
+						Label(list.title, systemImage: "doc.text")
+							.contextMenu {
+								Button("Edit List...") {
+									self.editedList = list
+								}
+								Divider()
+								Button(role: .destructive) {
+									withAnimation {
+										delete(list)
+									}
+								} label: {
+									Text("Delete")
+								}
+							}
+							.tag(Panel.list(list))
 					}
 					.onMove { indices, newOffset in
 						withAnimation {
@@ -119,6 +168,9 @@ struct SidebarView: View {
 		.sheet(item: $editedProject) { item in
 			ProjectDetailView(.edit(item))
 		}
+		.sheet(item: $editedList) { item in
+			ListDetailsView(.edit(item))
+		}
 		.navigationTitle("Plan")
 		#if os(iOS)
 		.toolbar {
@@ -146,7 +198,7 @@ struct SidebarView: View {
 // MARK: - Helpers
 private extension SidebarView {
 
-	func delete(_ item: ProjectItem) {
+	func delete<T: PersistentModel>(_ item: T) {
 		modelContext.delete(item)
 	}
 }

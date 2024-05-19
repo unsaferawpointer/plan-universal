@@ -15,6 +15,8 @@ final class ListItem {
 	var uuid: UUID = UUID()
 	var title: String = ""
 	var options: Int64 = 0
+	var details: String = ""
+	var isArchieved: Bool = false
 
 	var creationDate: Date = Date()
 
@@ -35,6 +37,8 @@ final class ListItem {
 	required init(_ configuration: ListConfiguration) {
 		self.uuid = configuration.uuid
 		self.title = configuration.title
+		self.details = configuration.details
+		self.project = configuration.project
 	}
 
 }
@@ -59,11 +63,17 @@ extension ListItem: ConfigurableItem {
 		get {
 			return .init(
 				uuid: uuid,
-				title: title
+				title: title,
+				details: details,
+				isArchived: isArchieved,
+				project: project
 			)
 		}
 		set {
 			self.title = newValue.title
+			self.details = newValue.details
+			self.isArchieved = newValue.isArchived
+			self.project = newValue.project
 		}
 	}
 

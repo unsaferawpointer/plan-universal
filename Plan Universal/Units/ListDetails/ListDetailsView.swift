@@ -30,11 +30,13 @@ struct ListDetailsView: View {
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("List Name", text: $model.configuration.title)
+				TextField("Name", text: $model.configuration.title)
 					.focused($isFocused)
 				#if os(iOS)
 				.tint(.accent)
 				#endif
+				TextField("Details", text: $model.configuration.details, axis: .vertical)
+					.lineLimit(2, reservesSpace: true)
 				Toggle(isOn: $model.configuration.isArchived, label: {
 					Text("Is Archieved")
 				})

@@ -19,9 +19,13 @@ struct RootView: View {
 				NavigationStack {
 					InFocusView()
 				}
+			} else if case let .project(value) = selection {
+				NavigationStack {
+					ProjectTodosView(value)
+				}
 			} else if case let .list(value) = selection {
 				NavigationStack {
-					ProjectTodosView(project: value)
+					ListTodosView(value)
 				}
 			} else {
 				Text("Select sidebar item")

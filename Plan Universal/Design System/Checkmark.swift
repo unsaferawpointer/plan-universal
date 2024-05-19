@@ -27,7 +27,7 @@ struct Checkmark: View {
 					cornerSize: CGSize(width: 4, height: 4),
 					style: .continuous
 				)
-				.fill(Color(isDone ? .secondaryLabelColor : .secondarySystemFill))
+				.fill(Color(isDone ? .textColor : .secondarySystemFill))
 				.stroke(Color(.quaternaryLabelColor), lineWidth: 1.2)
 				Path { path in
 					path.move(to:

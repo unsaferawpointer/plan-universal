@@ -35,7 +35,7 @@ struct TodoView: View {
 						.foregroundStyle(.yellow)
 				}
 				Text(todo.text)
-					.strikethrough(todo.isDone)
+//					.strikethrough(todo.isDone)
 					.foregroundStyle(todo.isDone ? .secondary : .primary)
 			}
 		}

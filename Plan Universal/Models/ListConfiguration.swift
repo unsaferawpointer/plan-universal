@@ -13,18 +13,26 @@ struct ListConfiguration {
 
 	var title: String
 
+	var details: String
+
 	var isArchived: Bool
+
+	var project: ProjectItem?
 
 	// MARK: - Initialization
 
 	init(
 		uuid: UUID = .init(),
 		title: String = "New List",
-		isArchived: Bool = false
+		details: String = "",
+		isArchived: Bool = false,
+		project: ProjectItem? = nil
 	) {
 		self.uuid = uuid
 		self.title = title
+		self.details = details
 		self.isArchived = isArchived
+		self.project = project
 	}
 
 }

@@ -14,6 +14,7 @@ final class ProjectItem {
 	var uuid: UUID = UUID()
 	var name: String = ""
 	var isArchieved: Bool = false
+	var details: String = ""
 	var options: Int64 = 0
 
 	var creationDate: Date = Date()

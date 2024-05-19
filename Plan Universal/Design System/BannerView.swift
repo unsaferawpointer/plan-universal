@@ -25,7 +25,7 @@ struct BannerView: View {
 		}
 		.padding()
 		.background(Color(.quaternarySystemFill))
-		.cornerRadius(10, antialiased: true)
+		.cornerRadius(8, antialiased: true)
 	}
 }
 

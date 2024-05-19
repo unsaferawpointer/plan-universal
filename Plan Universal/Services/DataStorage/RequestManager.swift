@@ -32,6 +32,8 @@ extension RequestManager: RequestManagerProtocol {
 			return .init(base: .status(.backlog), constainsText: text)
 		case .completed:
 			return .init(base: .status(.done), constainsText: text)
+		case .project(let value):
+			return .init(base: .list(value.uuid), constainsText: text)
 		case .list(let value):
 			return .init(base: .list(value.uuid), constainsText: text)
 		}
@@ -44,6 +46,8 @@ extension RequestManager: RequestManagerProtocol {
 		case .backlog:
 			return TodoConfiguration(text: "", status: .backlog, priority: .low, list: nil)
 		case .completed:
+			return TodoConfiguration(text: "", status: .done, priority: .low, list: nil)
+		case .project(let value):
 			return TodoConfiguration(text: "", status: .done, priority: .low, list: nil)
 		case .list(let value):
 			return TodoConfiguration(text: "", status: .done, priority: .low, list: nil)

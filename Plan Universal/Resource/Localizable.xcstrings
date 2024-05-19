@@ -14,16 +14,6 @@
         }
       }
     },
-    "%@ %lld " : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld "
-          }
-        }
-      }
-    },
     "%lld" : {
 
     },
@@ -166,7 +156,6 @@
 
     },
     "Edit List..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -256,6 +245,7 @@
       }
     },
     "List Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -266,7 +256,6 @@
       }
     },
     "Lists" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -306,6 +295,9 @@
           }
         }
       }
+    },
+    "Name" : {
+
     },
     "New List" : {
       "localizations" : {
@@ -352,7 +344,6 @@
       }
     },
     "No Lists" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -440,9 +431,6 @@
           }
         }
       }
-    },
-    "Type here..." : {
-
     }
   },
   "version" : "1.0"
