@@ -25,14 +25,14 @@ final class TodoRowModel: ObservableObject {
 extension TodoRowModel {
 
 	var signIcon: String? {
-		guard todo.status == .inFocus else {
-			return todo.isImportant ? "bolt.fill" : nil
+		guard todo.inFocus else {
+			return todo.isUrgent ? "bolt.fill" : nil
 		}
 		return "sparkles"
 	}
 
 	var signColor: Color {
-		guard todo.status != .done else {
+		guard !todo.isDone else {
 			return .secondary
 		}
 		return .yellow

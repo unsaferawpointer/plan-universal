@@ -22,7 +22,14 @@ extension TodoOrder: Order {
 		case .creationDate(let order):
 			SortDescriptor(\.creationDate, order: order)
 		case .status(let order):
-			SortDescriptor(\.rawStatus, order: order)
+			SortDescriptor(\.isDone, order: order)
 		}
+	}
+}
+
+extension Bool: Comparable {
+
+	public static func < (lhs: Bool, rhs: Bool) -> Bool {
+		return lhs == false
 	}
 }

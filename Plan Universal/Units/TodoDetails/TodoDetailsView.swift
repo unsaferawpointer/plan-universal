@@ -36,23 +36,14 @@ struct TodoDetailsView: View {
 				TextField("New Todo", text: $model.configuration.text)
 					.focused($isFocused)
 					.submitLabel(.return)
-				Picker("Status", selection: $model.configuration.status) {
-					ForEach(TodoStatus.allCases) { status in
-						Text(status.title)
-							.tag(status)
-					}
-				}
 				#if os(iOS)
 				.pickerStyle(.inline)
 				#else
 				.pickerStyle(.menu)
 				#endif
-				Picker("Priority", selection: $model.configuration.priority) {
-					ForEach(TodoPriority.allCases) { priority in
-						Text(priority.title)
-							.tag(priority)
-					}
-				}
+				Toggle(isOn: $model.configuration.isUrgent, label: {
+					Text("Is Urgent")
+				})
 				#if os(iOS)
 				.pickerStyle(.inline)
 				#else

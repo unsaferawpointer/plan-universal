@@ -22,9 +22,11 @@ struct ListSectionView: View {
 
 	@Binding var editedList: ListItem?
 
+	@Binding var editedTodo: TodoItem?
+
 	// MARK: - Initialization
 
-	init(list: ListItem, editedList: Binding<ListItem?>) {
+	init(list: ListItem, editedList: Binding<ListItem?>, editedTodo: Binding<TodoItem?>) {
 		self.list = list
 
 		let uuid = list.uuid
@@ -33,6 +35,7 @@ struct ListSectionView: View {
 		}
 
 		self._editedList = editedList
+		self._editedTodo = editedTodo
 		self._todos = Query(filter: predicate, sort: \.order, animation: .default)
 	}
 
@@ -46,6 +49,21 @@ struct ListSectionView: View {
 			}
 			ForEach(todos) { todo in
 				TodoView(todo: todo)
+					.contextMenu {
+						Button("Focus On") {
+							todo.inFocus = true
+						}
+						Divider()
+						Button("Edit Todo...") {
+							editedTodo = todo
+						}
+						Divider()
+						Button("Delete") {
+							withAnimation {
+								modelContext.delete(todo)
+							}
+						}
+					}
 			}
 			.listRowSeparator(.hidden)
 		} header: {
@@ -59,8 +77,8 @@ struct ListSectionView: View {
 						withAnimation {
 							let configuration = TodoConfiguration(
 								text: "New Todo",
-								status: .backlog,
-								priority: .low,
+								isDone: false,
+								isUrgent: false,
 								list: list
 							)
 							DataManager().insert(configuration, toList: list, in: modelContext)

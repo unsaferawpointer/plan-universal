@@ -28,9 +28,8 @@ extension TodoFilter: Filter {
 		if let text = constainsText {
 			switch base {
 			case .status(let value):
-				let rawValue = value.rawValue
 				return #Predicate {
-					$0.rawStatus == rawValue && $0.text.contains(text)
+					$0.isDone == value && $0.text.contains(text)
 				}
 			case .list(let id):
 				return #Predicate {
@@ -40,8 +39,7 @@ extension TodoFilter: Filter {
 		} else {
 			switch base {
 			case .status(let value):
-				let rawValue = value.rawValue
-				return #Predicate { $0.rawStatus == rawValue }
+				return #Predicate { $0.isDone == value }
 			case .list(let id):
 				return #Predicate { $0.list?.uuid == id }
 			}
@@ -52,7 +50,7 @@ extension TodoFilter: Filter {
 extension TodoFilter {
 
 	enum Base {
-		case status(_ value: TodoStatus)
+		case status(_ value: Bool)
 		case list(_ id: UUID?)
 	}
 }

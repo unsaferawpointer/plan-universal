@@ -18,6 +18,7 @@
 
     },
     "%lld Todos" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -168,6 +169,9 @@
     "Edit project..." : {
 
     },
+    "Edit Todo..." : {
+
+    },
     "Edit..." : {
       "localizations" : {
         "ru" : {
@@ -177,6 +181,9 @@
           }
         }
       }
+    },
+    "Focus On" : {
+
     },
     "High" : {
       "localizations" : {
@@ -222,6 +229,9 @@
           }
         }
       }
+    },
+    "Is Urgent" : {
+
     },
     "List" : {
       "localizations" : {
@@ -285,6 +295,9 @@
         }
       }
     },
+    "Move to backlog" : {
+
+    },
     "Move to Favorites" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -334,6 +347,7 @@
       }
     },
     "New todos you create will appear here." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -357,6 +371,7 @@
 
     },
     "No Todos" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -387,6 +402,7 @@
       }
     },
     "Priority" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -423,6 +439,7 @@
       }
     },
     "Status" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

@@ -26,6 +26,8 @@ struct ProjectTodosView: View {
 
 	@State private var editedList: ListItem?
 
+	@State private var editedTodo: TodoItem?
+
 	// MARK: - Initialization
 
 	init(_ project: ProjectItem) {
@@ -50,7 +52,7 @@ struct ProjectTodosView: View {
 			)
 			.listRowSeparator(.hidden)
 			ForEach(lists) { list in
-				ListSectionView(list: list, editedList: $editedList)
+				ListSectionView(list: list, editedList: $editedList, editedTodo: $editedTodo)
 			}
 		}
 		.listStyle(.inset)
@@ -70,6 +72,9 @@ struct ProjectTodosView: View {
 		}
 		.sheet(item: $editedList) { list in
 			ListDetailsView(.edit(list))
+		}
+		.sheet(item: $editedTodo) { todo in
+			TodoDetailsView(action: .edit(todo))
 		}
 	}
 

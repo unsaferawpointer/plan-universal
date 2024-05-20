@@ -11,9 +11,9 @@ struct TodoConfiguration {
 
 	var text: String = ""
 
-	var status: TodoStatus = .backlog
+	var isDone: Bool = false
 
-	var priority: TodoPriority = .low
+	var isUrgent: Bool = false
 
 	var list: ListItem?
 

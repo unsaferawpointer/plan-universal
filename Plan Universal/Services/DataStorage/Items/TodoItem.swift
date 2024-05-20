@@ -14,12 +14,15 @@ final class TodoItem {
 
 	var uuid: UUID = UUID()
 	var text: String = ""
-	var isUrgent: Bool = false
 	var options: Int64 = 0
 
-	// MARK: - Private properties
+	// MARK: - Flags
 
-	private (set) var rawStatus: Int64 = 0
+	var isUrgent: Bool = false
+	var inFocus: Bool = false
+	var isDone: Bool = false
+
+	// MARK: - Private properties
 
 	private (set) var creationDate: Date = Date()
 
@@ -37,7 +40,8 @@ final class TodoItem {
 
 	required init(_ configuration: TodoConfiguration) {
 		self.text = configuration.text
-		self.status = configuration.status
+		self.isDone = configuration.isDone
+		self.isUrgent = configuration.isUrgent
 		self.list = configuration.list
 	}
 }
@@ -48,36 +52,6 @@ extension TodoItem: Sortable { }
 // MARK: - Identifiable
 extension TodoItem: Identifiable { }
 
-// MARK: - Computed properties
-extension TodoItem {
-
-	var isDone: Bool {
-		get {
-			guard case .done = status else {
-				return false
-			}
-			return true
-		}
-		set {
-			rawStatus = newValue ? TodoStatus.done.rawValue : TodoStatus.backlog.rawValue
-		}
-	}
-
-	var status: TodoStatus {
-		get {
-			return TodoStatus(rawValue: rawStatus) ?? .backlog
-		}
-
-		set {
-			self.rawStatus = newValue.rawValue
-		}
-	}
-
-	var isImportant: Bool {
-		return false
-	}
-}
-
 // MARK: - ConfigurableItem
 extension TodoItem: ConfigurableItem {
 
@@ -87,13 +61,15 @@ extension TodoItem: ConfigurableItem {
 		get {
 			return .init(
 				text: text,
-				status: status,
+				isDone: isDone,
+				isUrgent: isUrgent,
 				list: list
 			)
 		}
 		set {
 			self.text = newValue.text
-			self.status = newValue.status
+			self.isDone = newValue.isDone
+			self.isUrgent = newValue.isUrgent
 			self.list = newValue.list
 		}
 	}

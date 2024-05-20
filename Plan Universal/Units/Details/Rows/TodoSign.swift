@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum TodoSign {
-	case priority(_ value: TodoPriority)
+	case urgent(_ value: Bool)
 	case inFocus
 }
 
@@ -16,8 +16,8 @@ extension TodoSign {
 
 	var color: Color {
 		switch self {
-		case .priority(let value):
-			return value.color
+		case .urgent(let value):
+			return value ? .yellow : .secondary
 		case .inFocus:
 			return .yellow
 		}
@@ -25,7 +25,7 @@ extension TodoSign {
 
 	var iconName: String {
 		switch self {
-		case .priority:
+		case .urgent:
 			"bolt.fill"
 		case .inFocus:
 			"sparckles"

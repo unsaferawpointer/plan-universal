@@ -72,7 +72,7 @@ struct SidebarView: View {
 				title: Panel.inFocus.title,
 				icon: "star.fill",
 				sign: nil,
-				filter: TodoFilter(base: .status(.inFocus), constainsText: nil)
+				filter: TodoFilter(base: .status(true), constainsText: nil)
 			)
 			.tag(Panel.inFocus)
 			.listItemTint(.yellow)
@@ -83,6 +83,7 @@ struct SidebarView: View {
 				} else {
 					ForEach(projects, id: \.self) { project in
 						Label(project.name, systemImage: "square.stack.3d.up")
+							.listItemTint(.primary)
 							.contextMenu {
 								Button("Edit project...") {
 									self.editedProject = project
@@ -118,6 +119,7 @@ struct SidebarView: View {
 				} else {
 					ForEach(lists, id: \.self) { list in
 						Label(list.title, systemImage: "doc.text")
+							.listItemTint(.primary)
 							.contextMenu {
 								Button("Edit List...") {
 									self.editedList = list
@@ -135,7 +137,7 @@ struct SidebarView: View {
 					}
 					.onMove { indices, newOffset in
 						withAnimation {
-							var sorted = projects
+							var sorted = lists
 							sorted.move(fromOffsets: indices, toOffset: newOffset)
 							try? modelContext.transaction {
 								for (offset, model) in sorted.enumerated() {

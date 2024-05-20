@@ -6,24 +6,48 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct InFocusView: View {
 
-	@State var completed: [Item] =
-	[
-		.init(text: "ARC"),
-		.init(text: "Generic"),
-		.init(text: "Reference type VS Value type")
-	]
+	@Environment(\.modelContext) var modelContext
 
-	@State var todos: [Item] = 
-	[
-		.init(text: "UIResponder"),
-		.init(text: "UIView"),
-		.init(text: "UIViewController", isUrgent: true)
-	]
+	// MARK: - Data
+
+	@Query(animation: .default) private var todos: [TodoItem]
+
+	@Query(animation: .default) private var completed: [TodoItem]
+
+	// MARK: - Locale state
 
 	@State private var selection: Set<UUID> = .init()
+
+	@State private var editedTodo: TodoItem?
+
+	// MARK: - Initialization
+
+	init() {
+
+		let todosPredicate = #Predicate<TodoItem> {
+			$0.inFocus == true && $0.isDone == false
+		}
+
+		self._todos = Query(
+			filter: todosPredicate,
+			sort: \.order,
+			animation: .default
+		)
+
+		let completedPredicate = #Predicate<TodoItem> {
+			$0.isDone == true && $0.inFocus == true
+		}
+
+		self._completed = Query(
+			filter: completedPredicate,
+			sort: \.order,
+			animation: .default
+		)
+	}
 
 	var body: some View {
 		List(selection: $selection) {
@@ -34,40 +58,20 @@ struct InFocusView: View {
 			)
 			.listRowSeparator(.hidden)
 			Spacer()
-			ForEach(todos) { todo in
-				HStack {
-					RoundedRectangle(
-						cornerSize: CGSize(width: 4, height: 4),
-						style: .continuous
-					)
-					.fill(Color(.secondarySystemFill))
-					.frame(width: 13, height: 13)
-					HStack(spacing: 4) {
-						if todo.isUrgent {
-							Image(systemName: "bolt.fill")
-								.foregroundStyle(.yellow)
-						}
-						Text(todo.text)
+				.listRowSeparator(.hidden)
+			ForEach(todos, id: \.uuid) { todo in
+				TodoView(todo: todo)
+					.contextMenu {
+						buildMenu(for: todo)
 					}
-				}
 			}
 			.listRowSeparator(.hidden)
 			Section {
-				ForEach(completed) { item in
-					HStack {
-						Checkmark(isDone: .constant(true))
-							.frame(width: 13, height: 13)
-
-						HStack(spacing: 4) {
-							if item.isDone {
-								Image(systemName: "bolt.fill")
-									.foregroundStyle(.yellow)
-							}
-							Text(item.text)
-								.strikethrough()
-								.foregroundStyle(.secondary)
+				ForEach(completed, id: \.uuid) { todo in
+					TodoView(todo: todo)
+						.contextMenu {
+							buildMenu(for: todo)
 						}
-					}
 				}
 				.listRowSeparator(.hidden)
 			} header: {
@@ -87,35 +91,29 @@ struct InFocusView: View {
 				}
 			}
 		}
+		.sheet(item: $editedTodo) { todo in
+			TodoDetailsView(action: .edit(todo))
+		}
 	}
 }
 
-extension InFocusView {
+// MARK: - Helpers
+private extension InFocusView {
 
-	struct Header: Identifiable {
-		var id: UUID
-		var title: String
-
-		var items: [Item]
-
-		init(id: UUID = UUID(), title: String, items: [Item] = []) {
-			self.id = id
-			self.title = title
-			self.items = items
+	@ViewBuilder
+	func buildMenu(for todo: TodoItem) -> some View {
+		Button("Move to backlog") {
+			todo.inFocus = false
 		}
-	}
-
-	struct Item: Identifiable {
-		var id: UUID
-		var text: String
-		var isDone: Bool
-		var isUrgent: Bool = false
-
-		init(id: UUID = UUID(), text: String, isDone: Bool = false, isUrgent: Bool = false) {
-			self.id = id
-			self.text = text
-			self.isDone = isDone
-			self.isUrgent = isUrgent
+		Divider()
+		Button("Edit Todo...") {
+			editedTodo = todo
+		}
+		Divider()
+		Button("Delete") {
+			withAnimation {
+				modelContext.delete(todo)
+			}
 		}
 	}
 }
