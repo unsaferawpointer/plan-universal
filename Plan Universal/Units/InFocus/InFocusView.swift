@@ -53,7 +53,7 @@ struct InFocusView: View {
 		List(selection: $selection) {
 			BannerView(
 				systemIcon: "star.fill",
-				message: "Проект макроса для генерации моков",
+				message: "Here are the tasks you need to focus on",
 				color: .yellow
 			)
 			.listRowSeparator(.hidden)

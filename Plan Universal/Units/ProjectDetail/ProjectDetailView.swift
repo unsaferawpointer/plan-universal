@@ -32,9 +32,11 @@ struct ProjectDetailView: View {
 			Form {
 				TextField("Project Name", text: $model.configuration.name)
 					.focused($isFocused)
-#if os(iOS)
+					#if os(iOS)
 					.tint(.accent)
-#endif
+					#endif
+				TextField("Details", text: $model.configuration.details, axis: .vertical)
+					.lineLimit(2, reservesSpace: true)
 				Toggle(isOn: $model.configuration.isArchieved, label: {
 					Text("Is Archieved")
 				})

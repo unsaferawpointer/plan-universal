@@ -21,6 +21,7 @@ struct BannerView: View {
 				.imageScale(.large)
 				.foregroundStyle(color)
 			Text(message)
+				.lineLimit(3)
 			Spacer()
 		}
 		.padding()

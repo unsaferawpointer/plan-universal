@@ -51,11 +51,11 @@ extension ProjectItem: ConfigurableItem {
 
 	var configuration: ProjectConfiguration {
 		get {
-			return .init(uuid: uuid, name: name, isArchieved: isArchieved)
+			return .init(uuid: uuid, name: name, details: details, isArchieved: isArchieved)
 		}
 		set {
-			self.uuid = newValue.uuid
 			self.name = newValue.name
+			self.details = newValue.details
 			self.isArchieved = newValue.isArchieved
 		}
 	}
@@ -67,6 +67,7 @@ extension ProjectItem {
 	convenience init(_ configuration: ProjectConfiguration) {
 		self.init()
 		self.name = configuration.name
+		self.details = configuration.details
 		self.isArchieved = configuration.isArchieved
 	}
 }

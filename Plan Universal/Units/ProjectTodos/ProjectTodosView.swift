@@ -45,12 +45,14 @@ struct ProjectTodosView: View {
 
 	var body: some View {
 		List(selection: $selection) {
-			BannerView(
-				systemIcon: "doc.text",
-				message: project.name,
-				color: .secondary
-			)
-			.listRowSeparator(.hidden)
+			if !project.details.isEmpty {
+				BannerView(
+					systemIcon: "square.stack.3d.up",
+					message: project.details,
+					color: .secondary
+				)
+				.listRowSeparator(.hidden)
+			}
 			ForEach(lists) { list in
 				ListSectionView(list: list, editedList: $editedList, editedTodo: $editedTodo)
 			}

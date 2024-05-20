@@ -13,6 +13,8 @@ struct ProjectConfiguration {
 
 	var name: String
 
+	var details: String
+
 	var isArchieved: Bool
 
 	// MARK: - Initialization
@@ -20,10 +22,12 @@ struct ProjectConfiguration {
 	init(
 		uuid: UUID = .init(),
 		name: String = "",
+		details: String = "",
 		isArchieved: Bool = false
 	) {
 		self.uuid = uuid
 		self.name = name
+		self.details = details
 		self.isArchieved = isArchieved
 	}
 
