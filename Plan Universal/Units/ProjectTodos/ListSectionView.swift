@@ -24,6 +24,8 @@ struct ListSectionView: View {
 
 	@Binding var editedTodo: TodoItem?
 
+	@State var isTodoDetailsPresented: Bool = false
+
 	// MARK: - Initialization
 
 	init(list: ListItem, editedList: Binding<ListItem?>, editedTodo: Binding<TodoItem?>) {
@@ -41,13 +43,7 @@ struct ListSectionView: View {
 
 	var body: some View {
 		Section {
-			if !list.details.isEmpty {
-				Text(list.details)
-					.foregroundStyle(.secondary)
-					.font(.body)
-					.selectionDisabled()
-			}
-			ForEach(todos) { todo in
+			ForEach(todos, id: \.uuid) { todo in
 				TodoView(todo: todo)
 					.contextMenu {
 						Button("Focus On") {
@@ -67,41 +63,41 @@ struct ListSectionView: View {
 			}
 			.listRowSeparator(.hidden)
 		} header: {
-			HStack {
-				Text(list.title)
-					.foregroundStyle(.primary)
-					.font(.headline)
-				Spacer()
-				Menu {
-					Button("Add Todo") {
-						withAnimation {
-							let configuration = TodoConfiguration(
-								text: "New Todo",
-								isDone: false,
-								isUrgent: false,
-								list: list
-							)
-							DataManager().insert(configuration, toList: list, in: modelContext)
+			VStack(alignment: .leading) {
+				HStack {
+					Text(list.title)
+						.foregroundStyle(.primary)
+						.font(.headline)
+					Spacer()
+					Menu {
+						Button("Add Todo") {
+							isTodoDetailsPresented = true
 						}
-					}
-					Divider()
-					Button("Edit...") {
-						editedList = list
-					}
-					Divider()
-					Button("Delete") {
-						withAnimation {
-							modelContext.delete(list)
+						Divider()
+						Button("Edit...") {
+							editedList = list
 						}
+						Divider()
+						Button("Delete") {
+							withAnimation {
+								modelContext.delete(list)
+							}
+						}
+					} label: {
+						Image(systemName: "ellipsis")
 					}
-				} label: {
-					Image(systemName: "ellipsis")
+					.menuIndicator(.hidden)
+					.menuStyle(BorderlessButtonMenuStyle())
+					.fixedSize()
 				}
-				.menuIndicator(.hidden)
-				.menuStyle(BorderlessButtonMenuStyle())
-				.fixedSize()
+				if !list.details.isEmpty {
+					Text(list.details)
+						.foregroundStyle(.secondary)
+						.font(.body)
+						.selectionDisabled()
+						.listRowSeparator(.hidden)
+				}
 			}
-			.listRowSeparator(.visible)
 		}
 	}
 }

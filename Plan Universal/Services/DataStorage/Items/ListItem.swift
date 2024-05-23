@@ -38,7 +38,6 @@ final class ListItem {
 		self.uuid = configuration.uuid
 		self.title = configuration.title
 		self.details = configuration.details
-		self.project = configuration.project
 	}
 
 }
@@ -65,15 +64,13 @@ extension ListItem: ConfigurableItem {
 				uuid: uuid,
 				title: title,
 				details: details,
-				isArchived: isArchieved,
-				project: project
+				isArchived: isArchieved
 			)
 		}
 		set {
 			self.title = newValue.title
 			self.details = newValue.details
 			self.isArchieved = newValue.isArchived
-			self.project = newValue.project
 		}
 	}
 

@@ -17,22 +17,18 @@ struct ListConfiguration {
 
 	var isArchived: Bool
 
-	var project: ProjectItem?
-
 	// MARK: - Initialization
 
 	init(
 		uuid: UUID = .init(),
 		title: String = "New List",
 		details: String = "",
-		isArchived: Bool = false,
-		project: ProjectItem? = nil
+		isArchived: Bool = false
 	) {
 		self.uuid = uuid
 		self.title = title
 		self.details = details
 		self.isArchived = isArchived
-		self.project = project
 	}
 
 }

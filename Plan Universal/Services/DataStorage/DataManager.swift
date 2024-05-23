@@ -36,17 +36,15 @@ extension DataManager: DataManagerProtocol {
 
 		let order = SortDescriptor(\ProjectItem.order, order: .forward)
 
-		var descriptor = FetchDescriptor<ProjectItem>(predicate: nil, sortBy: [order])
+		let descriptor = FetchDescriptor<ProjectItem>(predicate: nil, sortBy: [order])
 
 		guard let projects = try? context.fetch(descriptor), let last = projects.last else {
 			let new = ProjectItem(configuration)
 			context.insert(new)
 			return
 		}
-		print("orders = \(projects.map(\.order))")
-		let new = ProjectItem(configuration)
 
-		print("_TEST lastOrder = \(last.order)")
+		let new = ProjectItem(configuration)
 		new.order = last.order + 1
 
 		context.insert(new)
@@ -55,13 +53,14 @@ extension DataManager: DataManagerProtocol {
 	func insert(_ configuration: TodoConfiguration, toList list: ListItem, in context: ModelContext) {
 
 		let uuid = list.uuid
+
 		let predicate = #Predicate<TodoItem> {
 			$0.list?.uuid == uuid
 		}
 
 		let order = SortDescriptor(\TodoItem.order, order: .forward)
 
-		var descriptor = FetchDescriptor<TodoItem>(predicate: predicate, sortBy: [order])
+		let descriptor = FetchDescriptor<TodoItem>(predicate: predicate, sortBy: [order])
 
 		guard let todos = try? context.fetch(descriptor), let last = todos.last else {
 			let new = TodoItem(configuration)
@@ -73,7 +72,7 @@ extension DataManager: DataManagerProtocol {
 		new.order = last.order + 1
 		context.insert(new)
 	}
-	
+
 	func insert(_ configuration: ListConfiguration, toProject project: ProjectItem?, in context: ModelContext) {
 
 		let uuid = project?.uuid
@@ -81,11 +80,11 @@ extension DataManager: DataManagerProtocol {
 			$0.project?.uuid == uuid
 		}
 
-		var new = ListItem(configuration)
+		let new = ListItem(configuration)
 
 		let order = SortDescriptor(\ListItem.order, order: .reverse)
 
-		var descriptor = FetchDescriptor<ListItem>(predicate: predicate, sortBy: [order])
+		let descriptor = FetchDescriptor<ListItem>(predicate: predicate, sortBy: [order])
 
 		guard let lists = try? context.fetch(descriptor), let last = lists.first else {
 			context.insert(new)

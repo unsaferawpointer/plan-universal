@@ -26,8 +26,8 @@ struct TodoDetailsView: View {
 
 	// MARK: - Initialization
 
-	init(action: Action<TodoItem>) {
-		self._model = State(initialValue: TodoDetailsModel(action: action))
+	init(action: Action<TodoItem>, list: ListItem) {
+		self._model = State(initialValue: TodoDetailsModel(action: action, list: list))
 	}
 
 	var body: some View {
@@ -49,15 +49,6 @@ struct TodoDetailsView: View {
 				#else
 				.pickerStyle(.menu)
 				#endif
-				Picker("List", selection: $model.configuration.list) {
-					Text("None")
-						.tag(Optional<ListItem>(nil))
-					Divider()
-					ForEach(lists) { list in
-						Text(list.title)
-							.tag(Optional<ListItem>(list))
-					}
-				}
 			}
 			.onAppear {
 				self.isFocused = true

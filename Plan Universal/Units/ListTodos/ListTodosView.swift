@@ -82,7 +82,7 @@ struct ListTodosView: View {
 //			return TodoDetailsView(action: .new(configuration))
 //		}
 		.sheet(item: $editedTodo) { todo in
-			TodoDetailsView(action: .edit(todo))
+			TodoDetailsView(action: .edit(todo), list: list)
 		}
 	}
 

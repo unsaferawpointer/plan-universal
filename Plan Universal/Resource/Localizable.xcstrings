@@ -150,6 +150,9 @@
         }
       }
     },
+    "Description" : {
+
+    },
     "Details" : {
 
     },
@@ -234,6 +237,7 @@
 
     },
     "List" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -322,6 +326,9 @@
         }
       }
     },
+    "New List..." : {
+
+    },
     "New lists you create will appear here." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -334,6 +341,9 @@
       }
     },
     "New Project" : {
+
+    },
+    "New Project..." : {
 
     },
     "New Todo" : {
@@ -358,6 +368,7 @@
       }
     },
     "No Lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -382,6 +393,7 @@
       }
     },
     "None" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -411,9 +423,6 @@
           }
         }
       }
-    },
-    "Project Name" : {
-
     },
     "Projects" : {
 

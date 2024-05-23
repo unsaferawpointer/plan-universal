@@ -13,7 +13,7 @@ struct RootView: View {
 
 	var body: some View {
 		NavigationSplitView {
-			SidebarView($selection)
+			Sidebar.UnitView($selection)
 		} detail: {
 			if let selection, selection == .inFocus {
 				NavigationStack {

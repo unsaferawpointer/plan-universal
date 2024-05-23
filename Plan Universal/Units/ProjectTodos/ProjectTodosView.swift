@@ -54,7 +54,11 @@ struct ProjectTodosView: View {
 				.listRowSeparator(.hidden)
 			}
 			ForEach(lists) { list in
-				ListSectionView(list: list, editedList: $editedList, editedTodo: $editedTodo)
+				ListSectionView(
+					list: list,
+					editedList: $editedList,
+					editedTodo: $editedTodo
+				)
 			}
 		}
 		.listStyle(.inset)
@@ -68,15 +72,13 @@ struct ProjectTodosView: View {
 			}
 		}
 		.sheet(isPresented: $isListDetailsPresented) {
-			var configuration: ListConfiguration = .default
-			configuration.project = project
-			return ListDetailsView(.new(configuration))
+			ListDetailsView(.new(.init()), project: project)
 		}
 		.sheet(item: $editedList) { list in
-			ListDetailsView(.edit(list))
+			ListDetailsView(.edit(list), project: project)
 		}
 		.sheet(item: $editedTodo) { todo in
-			TodoDetailsView(action: .edit(todo))
+			TodoDetailsView(action: .edit(todo), list: todo.list!)
 		}
 	}
 

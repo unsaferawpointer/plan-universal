@@ -30,12 +30,12 @@ struct ProjectDetailView: View {
 	var body: some View {
 		NavigationStack {
 			Form {
-				TextField("Project Name", text: $model.configuration.name)
+				TextField("Name", text: $model.configuration.name)
 					.focused($isFocused)
 					#if os(iOS)
 					.tint(.accent)
 					#endif
-				TextField("Details", text: $model.configuration.details, axis: .vertical)
+				TextField("Description", text: $model.configuration.details, axis: .vertical)
 					.lineLimit(2, reservesSpace: true)
 				Toggle(isOn: $model.configuration.isArchieved, label: {
 					Text("Is Archieved")

@@ -23,8 +23,8 @@ struct ListDetailsView: View {
 
 	// MARK: - Initialization
 
-	init(_ action: Action<ListItem>) {
-		self._model = State(initialValue: .init(action: action))
+	init(_ action: Action<ListItem>, project: ProjectItem?) {
+		self._model = State(initialValue: .init(action: action, project: project))
 	}
 
 	var body: some View {
@@ -35,7 +35,7 @@ struct ListDetailsView: View {
 				#if os(iOS)
 				.tint(.accent)
 				#endif
-				TextField("Details", text: $model.configuration.details, axis: .vertical)
+				TextField("Description", text: $model.configuration.details, axis: .vertical)
 					.lineLimit(2, reservesSpace: true)
 				Toggle(isOn: $model.configuration.isArchived, label: {
 					Text("Is Archieved")
@@ -96,6 +96,6 @@ struct ListDetailsView: View {
 }
 
 #Preview {
-	ListDetailsView(.new(.init()))
+	ListDetailsView(.new(.init()), project: ProjectItem())
 		.modelContainer(PreviewContainer.preview)
 }
