@@ -27,65 +27,56 @@ struct Checkmark: View {
 					cornerSize: CGSize(width: 4, height: 4),
 					style: .continuous
 				)
-				.fill(Color(isDone ? .textColor : .secondarySystemFill))
-				.stroke(Color(.quaternaryLabelColor), lineWidth: 1.2)
-				Path { path in
-					path.move(to:
-							.init(
-								x: 0.30 * geometry.size.width,
-								y: 0.70 * geometry.size.height
-							)
-					)
-					path.addLine(to:
-							.init(
-								x: 0.70 * geometry.size.width,
-								y: 0.30 * geometry.size.height
-							)
-					)
-				}
-				.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
-				.stroke(
-					Color(.textBackgroundColor),
-					style: .init(
-						lineWidth: 2.0,
-						lineCap: .round,
-						lineJoin: .miter
-					)
+				.subtracting(
+					Path { path in
+						path.move(to:
+								.init(
+									x: 0.25 * geometry.size.width,
+									y: 0.75 * geometry.size.height
+								)
+						)
+						path.addLine(to:
+								.init(
+									x: 0.75 * geometry.size.width,
+									y: 0.25 * geometry.size.height
+								)
+						)
+					}
+						.stroke(lineWidth: 3.0)
+						.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
 				)
-				.opacity(isDone ? 1 : 0)
-
-				Path { path in
-					path.move(to:
-							.init(
-								x: 0.30 * geometry.size.width,
-								y: 0.30 * geometry.size.height
-							)
-					)
-					path.addLine(to:
-							.init(
-								x: 0.70 * geometry.size.width,
-								y: 0.70 * geometry.size.height
-							)
-					)
-				}
-				.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
-				.stroke(
-					Color(.textBackgroundColor),
-					style: .init(
-						lineWidth: 2.0,
-						lineCap: .round,
-						lineJoin: .miter
-					)
+				.subtracting(
+					Path { path in
+						path.move(to:
+								.init(
+									x: 0.25 * geometry.size.width,
+									y: 0.25 * geometry.size.height
+								)
+						)
+						path.addLine(to:
+								.init(
+									x: 0.75 * geometry.size.width,
+									y: 0.75 * geometry.size.height
+								)
+						)
+					}
+						.stroke(lineWidth: 3.0)
+						.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
 				)
-				.opacity(isDone ? 1 : 0)
+				#if os(iOS)
+				.fill(Color(isDone ? .tertiaryLabel : .secondarySystemFill))
+				.stroke(Color(.quaternaryLabel), lineWidth: 0.8)
+				#elseif os(macOS)
+				.fill(Color(isDone ? .tertiaryLabelColor : .secondarySystemFill))
+				.stroke(Color(.quaternaryLabelColor), lineWidth: 0.8)
+				#endif
 			}
 		}
+		.contentShape(Rectangle())
 	}
 }
 #endif
 
-#if os(iOS)
 #Preview {
-	Checkmark(animate: .constant(false))
+	Checkmark(isDone: .constant(false))
 }
-#endif

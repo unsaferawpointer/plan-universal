@@ -30,17 +30,16 @@ struct TodoView: View {
 					}
 				}
 			HStack(spacing: 4) {
-				if todo.isUrgent {
-					Image(systemName: "bolt.fill")
-						.foregroundStyle(.yellow)
+				if (todo.isUrgent || todo.inFocus) && !todo.isDone {
+					Image(systemName: todo.inFocus ? "sparkles" : "bolt.fill")
+						.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
 				}
 				Text(todo.text)
-//					.strikethrough(todo.isDone)
 					.foregroundStyle(todo.isDone ? .secondary : .primary)
 			}
 		}
 		.onChange(of: todo.isDone) { oldValue, newValue in
-			withAnimation {
+			withAnimation(.easeInOut(duration: 0.3)) {
 				animate = newValue
 			}
 		}

@@ -35,6 +35,10 @@ extension TodoFilter: Filter {
 				return #Predicate {
 					$0.list?.uuid == id && $0.text.contains(text)
 				}
+			case .inFocus(let value):
+				return #Predicate {
+					$0.inFocus == value
+				}
 			}
 		} else {
 			switch base {
@@ -42,6 +46,10 @@ extension TodoFilter: Filter {
 				return #Predicate { $0.isDone == value }
 			case .list(let id):
 				return #Predicate { $0.list?.uuid == id }
+			case .inFocus(let value):
+				return #Predicate {
+					$0.inFocus == value && $0.isDone == false
+				}
 			}
 		}
 	}
@@ -51,6 +59,7 @@ extension TodoFilter {
 
 	enum Base {
 		case status(_ value: Bool)
+		case inFocus(_ value: Bool)
 		case list(_ id: UUID?)
 	}
 }

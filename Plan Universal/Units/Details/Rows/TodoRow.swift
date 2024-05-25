@@ -50,7 +50,7 @@ extension TodoRow: View {
 	var body: some View {
 		HStack(alignment: .center) {
 			#if os(iOS)
-			Checkmark(animate: $animate)
+			Checkmark(isDone: $animate)
 			#else
 			Toggle("", isOn: $model.isDone)
 				.toggleStyle(.checkbox)

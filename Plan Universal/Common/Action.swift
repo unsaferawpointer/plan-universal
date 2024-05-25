@@ -32,6 +32,13 @@ extension Action {
 			return item.configuration
 		}
 	}
+
+	var isNew: Bool {
+		guard case .new = self else {
+			return false
+		}
+		return true
+	}
 }
 
 extension Action: Identifiable where Item: Identifiable, Item.Configuration: Hashable {

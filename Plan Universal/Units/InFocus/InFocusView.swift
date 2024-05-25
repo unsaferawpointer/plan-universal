@@ -83,7 +83,9 @@ struct InFocusView: View {
 			}
 		}
 		.navigationTitle("In Focus")
+		#if os(macOS)
 		.navigationSubtitle("10 Items")
+		#endif			
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button("Archieve", systemImage: "archivebox") {

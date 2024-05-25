@@ -35,7 +35,7 @@ extension Sidebar.UnitView: View {
 				title: Panel.inFocus.title,
 				icon: "star.fill",
 				sign: nil,
-				filter: TodoFilter(base: .status(true), constainsText: nil)
+				filter: TodoFilter(base: .inFocus(true), constainsText: nil)
 			)
 			.tag(Panel.inFocus)
 			.listItemTint(.yellow)
@@ -56,26 +56,6 @@ extension Sidebar.UnitView: View {
 			ListDetailsView(.edit(item), project: item.project!)
 		}
 		.navigationTitle("Plan")
-		#if os(iOS)
-		.toolbar {
-			if isCompact {
-				ToolbarItem(placement: .bottomBar) {
-					Spacer()
-				}
-				ToolbarItem(placement: .primaryAction) {
-					Menu("Add", systemImage: "plus") {
-						Button {
-							self.listDetailsIsPresented = true
-						} label: {
-							Text("New List")
-						}
-					} primaryAction: {
-						self.todoDetailsIsPresented = true
-					}
-				}
-			}
-		}
-		#endif
 	}
 }
 
