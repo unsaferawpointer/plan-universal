@@ -40,6 +40,13 @@ extension ProjectDetailsModel {
 		let trimmed = configuration.name.trimmingCharacters(in: .whitespaces)
 		return !trimmed.isEmpty
 	}
+
+	var isNew: Bool {
+		guard case .new = action else {
+			return false
+		}
+		return true
+	}
 }
 
 // MARK: - Public interface

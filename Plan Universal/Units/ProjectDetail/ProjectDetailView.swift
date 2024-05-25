@@ -50,9 +50,11 @@ struct ProjectDetailView: View {
 					model.save(in: modelContext)
 				}
 			}
+			.padding()
 			.onAppear {
 				self.isFocused = true
 			}
+			.navigationTitle(model.isNew ? "New Project": "Edit Project")
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
 					Button(role: .cancel) {
