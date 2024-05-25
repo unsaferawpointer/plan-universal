@@ -15,15 +15,12 @@ final class TodoDetailsModel {
 
 	var configuration: TodoConfiguration
 
-	var list: ListItem
-
 	private var dataManager: DataManager = DataManager()
 
 	// MARK: Initialization
 
-	init(action: Action<TodoItem>, list: ListItem) {
+	init(action: Action<TodoItem>) {
 		self.action = action
-		self.list = list
 		self.configuration = action.configuration
 	}
 }
@@ -47,6 +44,9 @@ extension TodoDetailsModel {
 		switch action {
 		case .new:
 			configuration.text = text
+			guard let list = configuration.list else {
+				return
+			}
 			dataManager.insert(configuration, toList: list, in: context)
 		case .edit(let todo):
 			try? context.transaction {

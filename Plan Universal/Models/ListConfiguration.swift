@@ -9,26 +9,26 @@ import Foundation
 
 struct ListConfiguration {
 
-	let uuid: UUID
-
 	var title: String
 
 	var details: String
 
 	var isArchived: Bool
 
+	var project: ProjectItem?
+
 	// MARK: - Initialization
 
 	init(
-		uuid: UUID = .init(),
 		title: String = "New List",
 		details: String = "",
-		isArchived: Bool = false
+		isArchived: Bool = false,
+		project: ProjectItem?
 	) {
-		self.uuid = uuid
 		self.title = title
 		self.details = details
 		self.isArchived = isArchived
+		self.project = project
 	}
 
 }
@@ -39,14 +39,6 @@ extension ListConfiguration: ItemConfiguration {
 	typealias Item = ListItem
 }
 
-// MARK: - Identifiable
-extension ListConfiguration: Identifiable {
-
-	var id: UUID {
-		return uuid
-	}
-}
-
 // MARK: - Hashable
 extension ListConfiguration: Hashable { }
 
@@ -54,6 +46,6 @@ extension ListConfiguration: Hashable { }
 extension ListConfiguration {
 
 	static var `default`: Self {
-		return .init()
+		return .init(project: nil)
 	}
 }

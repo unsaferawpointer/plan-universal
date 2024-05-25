@@ -237,7 +237,6 @@
 
     },
     "List" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

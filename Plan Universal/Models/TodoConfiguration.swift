@@ -14,6 +14,8 @@ struct TodoConfiguration {
 	var isDone: Bool = false
 
 	var isUrgent: Bool = false
+
+	var list: ListItem?
 }
 
 // MARK: - Hashable

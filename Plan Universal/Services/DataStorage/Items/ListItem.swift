@@ -35,9 +35,10 @@ final class ListItem {
 	public init() { }
 
 	required init(_ configuration: ListConfiguration) {
-		self.uuid = configuration.uuid
 		self.title = configuration.title
 		self.details = configuration.details
+		self.project = configuration.project
+		self.isArchieved = configuration.isArchived
 	}
 
 }
@@ -61,16 +62,17 @@ extension ListItem: ConfigurableItem {
 	var configuration: Configuration {
 		get {
 			return .init(
-				uuid: uuid,
 				title: title,
 				details: details,
-				isArchived: isArchieved
+				isArchived: isArchieved,
+				project: project
 			)
 		}
 		set {
 			self.title = newValue.title
 			self.details = newValue.details
 			self.isArchieved = newValue.isArchived
+			self.project = project
 		}
 	}
 

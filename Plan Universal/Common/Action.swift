@@ -33,3 +33,17 @@ extension Action {
 		}
 	}
 }
+
+extension Action: Identifiable where Item: Identifiable, Item.Configuration: Hashable {
+
+	var id: AnyHashable {
+		switch self {
+		case .new(let configuration):
+			return configuration
+		case .edit(let item):
+			return item.id
+		}
+	}
+}
+
+extension Action: Equatable where Item: Equatable, Item.Configuration: Equatable { }

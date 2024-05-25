@@ -96,6 +96,6 @@ struct ListDetailsView: View {
 }
 
 #Preview {
-	ListDetailsView(.new(.init()), project: ProjectItem())
+	ListDetailsView(.new(.init(project: nil)), project: ProjectItem())
 		.modelContainer(PreviewContainer.preview)
 }

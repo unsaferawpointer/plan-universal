@@ -36,6 +36,9 @@ final class ProjectItem {
 // MARK: - Sortable
 extension ProjectItem: Sortable { }
 
+// MARK: - Hashable
+extension ProjectItem: Hashable { }
+
 // MARK: - Identifiable
 extension ProjectItem: Identifiable {
 

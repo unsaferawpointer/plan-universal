@@ -42,6 +42,7 @@ final class TodoItem {
 		self.text = configuration.text
 		self.isDone = configuration.isDone
 		self.isUrgent = configuration.isUrgent
+		self.list = configuration.list
 	}
 }
 
@@ -61,13 +62,15 @@ extension TodoItem: ConfigurableItem {
 			return .init(
 				text: text,
 				isDone: isDone,
-				isUrgent: isUrgent
+				isUrgent: isUrgent, 
+				list: list
 			)
 		}
 		set {
 			self.text = newValue.text
 			self.isDone = newValue.isDone
 			self.isUrgent = newValue.isUrgent
+			self.list = newValue.list
 		}
 	}
 

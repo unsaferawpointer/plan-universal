@@ -8,38 +8,41 @@
 import SwiftUI
 import SwiftData
 
-struct ListSectionView: View {
+extension ProjectTodos {
 
-	@Environment(\.modelContext) var modelContext
+	struct ListSection {
 
-	// MARK: - Data
+		@Environment(\.modelContext) var modelContext
 
-	@State var list: ListItem
+		// MARK: - Data
 
-	@Query var todos: [TodoItem]
+		@State var list: ListItem
 
-	// MARK: - Locale state
+		@Query var todos: [TodoItem]
 
-	@Binding var editedList: ListItem?
+		// MARK: - Locale state
 
-	@Binding var editedTodo: TodoItem?
+		@Binding var presentation: Presentation
 
-	@State var isTodoDetailsPresented: Bool = false
+		// MARK: - Initialization
 
-	// MARK: - Initialization
+		init(list: ListItem, presentation: Binding<Presentation>) {
+			self.list = list
 
-	init(list: ListItem, editedList: Binding<ListItem?>, editedTodo: Binding<TodoItem?>) {
-		self.list = list
+			let uuid = list.uuid
+			let predicate = #Predicate<TodoItem> {
+				$0.list?.uuid == uuid
+			}
 
-		let uuid = list.uuid
-		let predicate = #Predicate<TodoItem> {
-			$0.list?.uuid == uuid
+			self._presentation = presentation
+			self._todos = Query(filter: predicate, sort: \.order, animation: .default)
 		}
-
-		self._editedList = editedList
-		self._editedTodo = editedTodo
-		self._todos = Query(filter: predicate, sort: \.order, animation: .default)
 	}
+}
+
+// MARK: - View
+extension ProjectTodos.ListSection: View {
+
 
 	var body: some View {
 		Section {
@@ -51,7 +54,7 @@ struct ListSectionView: View {
 						}
 						Divider()
 						Button("Edit Todo...") {
-							editedTodo = todo
+							presentation.todoAction = .edit(todo)
 						}
 						Divider()
 						Button("Delete") {
@@ -71,11 +74,11 @@ struct ListSectionView: View {
 					Spacer()
 					Menu {
 						Button("Add Todo") {
-							isTodoDetailsPresented = true
+							presentation.todoAction = .new(.init(list: list))
 						}
 						Divider()
 						Button("Edit...") {
-							editedList = list
+							presentation.listAction = .edit(list)
 						}
 						Divider()
 						Button("Delete") {
@@ -101,16 +104,3 @@ struct ListSectionView: View {
 		}
 	}
 }
-
-// MARK: - Helpers
-private extension ListSectionView {
-
-	@ViewBuilder
-	func makeMenu() -> some View {
-
-	}
-}
-
-//#Preview {
-//	ListSectionView()
-//}

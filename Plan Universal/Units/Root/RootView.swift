@@ -21,7 +21,7 @@ struct RootView: View {
 				}
 			} else if case let .project(value) = selection {
 				NavigationStack {
-					ProjectTodosView(value)
+					ProjectTodos.UnitView(value)
 				}
 			} else if case let .list(value) = selection {
 				NavigationStack {
