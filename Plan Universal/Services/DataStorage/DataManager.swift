@@ -15,7 +15,7 @@ protocol DataManagerProtocol {
 	func insert(_ configuration: ProjectConfiguration, in context: ModelContext)
 
 	func delete(_ todo: TodoItem, in context: ModelContext)
-	func delete(_ todos: [TodoItem], in context: ModelContext)
+	func delete<S: Sequence>(_ todos: S, in context: ModelContext) where S.Element == TodoItem
 	func delete(_ list: ListItem, in context: ModelContext)
 
 	func move(_ project: ProjectItem, after: ProjectItem, in context: ModelContext)
@@ -100,7 +100,7 @@ extension DataManager: DataManagerProtocol {
 		context.delete(todo)
 	}
 
-	func delete(_ todos: [TodoItem], in context: ModelContext) {
+	func delete<S>(_ todos: S, in context: ModelContext) where S : Sequence, S.Element == TodoItem {
 		try? context.transaction {
 			for todo in todos {
 				context.delete(todo)

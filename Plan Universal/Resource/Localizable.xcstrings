@@ -358,6 +358,9 @@
         }
       }
     },
+    "New Todo..." : {
+
+    },
     "New todos you create will appear here." : {
       "extractionState" : "stale",
       "localizations" : {
