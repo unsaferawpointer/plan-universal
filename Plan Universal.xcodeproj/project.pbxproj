@@ -14,9 +14,11 @@
 		4C00AC382C031A4700FA5F53 /* ListTodos+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC372C031A4700FA5F53 /* ListTodos+UnitView.swift */; };
 		4C00AC3A2C036C6200FA5F53 /* ListTodos+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC392C036C6200FA5F53 /* ListTodos+Presentation.swift */; };
 		4C00AC3C2C036DDD00FA5F53 /* ListTodos+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC3B2C036DDD00FA5F53 /* ListTodos+Model.swift */; };
+		4C00AC3E2C0495E700FA5F53 /* ListDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC3D2C0495E700FA5F53 /* ListDetails.swift */; };
+		4C00AC402C04961200FA5F53 /* ListDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC3F2C04961200FA5F53 /* ListDetails+UnitView.swift */; };
+		4C00AC422C04995800FA5F53 /* ListDetails+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C00AC412C04995800FA5F53 /* ListDetails+Model.swift */; };
 		4C059C562BCC0BC00048F5FA /* NavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C552BCC0BC00048F5FA /* NavigationModel.swift */; };
 		4C059C5D2BD05B180048F5FA /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C5C2BD05B180048F5FA /* Action.swift */; };
-		4C059C612BD1AD480048F5FA /* ListDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C602BD1AD480048F5FA /* ListDetailsModel.swift */; };
 		4C059C672BD2F8DB0048F5FA /* TodoDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C662BD2F8DB0048F5FA /* TodoDetailsModel.swift */; };
 		4C059C6C2BD3B38D0048F5FA /* NavigationRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C6B2BD3B38D0048F5FA /* NavigationRowModel.swift */; };
 		4C059C702BD576890048F5FA /* TodoRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C6F2BD576890048F5FA /* TodoRowModel.swift */; };
@@ -57,7 +59,6 @@
 		4CDB881A2BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */; };
 		4CDB882B2BC06D2E0019AC71 /* Sidebar+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB882A2BC06D2E0019AC71 /* Sidebar+UnitView.swift */; };
 		4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88322BC06F7D0019AC71 /* Panel.swift */; };
-		4CDB883B2BC07E4E0019AC71 /* ListDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883A2BC07E4E0019AC71 /* ListDetailsView.swift */; };
 		4CDB883D2BC08E7F0019AC71 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883C2BC08E7F0019AC71 /* TodoRow.swift */; };
 		4CDB883F2BC090930019AC71 /* TodoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB883E2BC090930019AC71 /* TodoPriority.swift */; };
 		4CDB88412BC090F60019AC71 /* TodoStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB88402BC090F60019AC71 /* TodoStatus.swift */; };
@@ -94,10 +95,12 @@
 		4C00AC372C031A4700FA5F53 /* ListTodos+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListTodos+UnitView.swift"; sourceTree = "<group>"; };
 		4C00AC392C036C6200FA5F53 /* ListTodos+Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListTodos+Presentation.swift"; sourceTree = "<group>"; };
 		4C00AC3B2C036DDD00FA5F53 /* ListTodos+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListTodos+Model.swift"; sourceTree = "<group>"; };
+		4C00AC3D2C0495E700FA5F53 /* ListDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetails.swift; sourceTree = "<group>"; };
+		4C00AC3F2C04961200FA5F53 /* ListDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDetails+UnitView.swift"; sourceTree = "<group>"; };
+		4C00AC412C04995800FA5F53 /* ListDetails+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDetails+Model.swift"; sourceTree = "<group>"; };
 		4C059C2E2BC9E62C0048F5FA /* Plan-Universal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Plan-Universal-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4C059C552BCC0BC00048F5FA /* NavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModel.swift; sourceTree = "<group>"; };
 		4C059C5C2BD05B180048F5FA /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		4C059C602BD1AD480048F5FA /* ListDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsModel.swift; sourceTree = "<group>"; };
 		4C059C662BD2F8DB0048F5FA /* TodoDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsModel.swift; sourceTree = "<group>"; };
 		4C059C6B2BD3B38D0048F5FA /* NavigationRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRowModel.swift; sourceTree = "<group>"; };
 		4C059C6F2BD576890048F5FA /* TodoRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowModel.swift; sourceTree = "<group>"; };
@@ -142,7 +145,6 @@
 		4CDB88192BC06BFB0019AC71 /* Plan_UniversalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_UniversalUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4CDB882A2BC06D2E0019AC71 /* Sidebar+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sidebar+UnitView.swift"; sourceTree = "<group>"; };
 		4CDB88322BC06F7D0019AC71 /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
-		4CDB883A2BC07E4E0019AC71 /* ListDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsView.swift; sourceTree = "<group>"; };
 		4CDB883C2BC08E7F0019AC71 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
 		4CDB883E2BC090930019AC71 /* TodoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPriority.swift; sourceTree = "<group>"; };
 		4CDB88402BC090F60019AC71 /* TodoStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStatus.swift; sourceTree = "<group>"; };
@@ -431,8 +433,9 @@
 		4CDB88392BC07E3A0019AC71 /* ListDetails */ = {
 			isa = PBXGroup;
 			children = (
-				4CDB883A2BC07E4E0019AC71 /* ListDetailsView.swift */,
-				4C059C602BD1AD480048F5FA /* ListDetailsModel.swift */,
+				4C00AC3D2C0495E700FA5F53 /* ListDetails.swift */,
+				4C00AC3F2C04961200FA5F53 /* ListDetails+UnitView.swift */,
+				4C00AC412C04995800FA5F53 /* ListDetails+Model.swift */,
 			);
 			path = ListDetails;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				4C4ED5362BE2C2010059474A /* ImpactFeedbackFacade.swift in Sources */,
 				4C059C9D2BDEC1260048F5FA /* PreviewContainer.swift in Sources */,
 				4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */,
+				4C00AC3E2C0495E700FA5F53 /* ListDetails.swift in Sources */,
 				4C059C702BD576890048F5FA /* TodoRowModel.swift in Sources */,
 				4C059C842BD9A09E0048F5FA /* ListConfiguration.swift in Sources */,
 				4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */,
@@ -609,10 +613,10 @@
 				4C059C7F2BD991F90048F5FA /* ListItem.swift in Sources */,
 				4C059C802BD991F90048F5FA /* TodoItem.swift in Sources */,
 				4C059C862BDC32870048F5FA /* RequestManager.swift in Sources */,
-				4C059C612BD1AD480048F5FA /* ListDetailsModel.swift in Sources */,
 				4C059C9B2BDE6D8E0048F5FA /* Order.swift in Sources */,
 				4CEEC0302BFA492800C10EF6 /* ProjectTodos+ListSection.swift in Sources */,
 				4CEEC0382BFD2A3000C10EF6 /* Sidebar.swift in Sources */,
+				4C00AC422C04995800FA5F53 /* ListDetails+Model.swift in Sources */,
 				4CB3F27A2BF544C400DDACD3 /* ProjectItem.swift in Sources */,
 				4C059C6C2BD3B38D0048F5FA /* NavigationRowModel.swift in Sources */,
 				4CB3F27C2BF5503200DDACD3 /* ProjectFilter.swift in Sources */,
@@ -626,6 +630,7 @@
 				4CEEC03E2BFD2DAC00C10EF6 /* Sidebar+ProjectsSection.swift in Sources */,
 				4C00AC342C00FF5900FA5F53 /* ProjectTodos+Presentation.swift in Sources */,
 				4CDB88412BC090F60019AC71 /* TodoStatus.swift in Sources */,
+				4C00AC402C04961200FA5F53 /* ListDetails+UnitView.swift in Sources */,
 				4C00AC302C00FC5200FA5F53 /* ProjectTodos.swift in Sources */,
 				4C059C992BDE6D7F0048F5FA /* TodoOrder.swift in Sources */,
 				4CB3F2832BF553F400DDACD3 /* ProjectConfiguration.swift in Sources */,
@@ -642,7 +647,6 @@
 				4CDB883F2BC090930019AC71 /* TodoPriority.swift in Sources */,
 				4C059C562BCC0BC00048F5FA /* NavigationModel.swift in Sources */,
 				4CDB882B2BC06D2E0019AC71 /* Sidebar+UnitView.swift in Sources */,
-				4CDB883B2BC07E4E0019AC71 /* ListDetailsView.swift in Sources */,
 				4CDB87FA2BC06BFA0019AC71 /* PlanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

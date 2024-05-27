@@ -1,34 +1,36 @@
 //
-//  ListDetailsModel.swift
+//  ListDetails+Model.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 18.04.2024.
+//  Created by Anton Cherkasov on 27.05.2024.
 //
 
-import Foundation
 import SwiftData
 
-@Observable
-final class ListDetailsModel {
+extension ListDetails {
 
-	private var action: Action<ListItem>
+	@Observable
+	final class Model {
+		
+		private var action: Action<ListItem>
 
-	private var project: ProjectItem?
+		private var project: ProjectItem?
 
-	var configuration: ListConfiguration
+		var configuration: ListConfiguration
 
-	// MARK: - Initialization
+		// MARK: - Initialization
 
-	init(action: Action<ListItem>, project: ProjectItem?) {
-		self.action = action
-		self.project = project
-		self.configuration = action.configuration
+		init(action: Action<ListItem>, project: ProjectItem?) {
+			self.action = action
+			self.project = project
+			self.configuration = action.configuration
+		}
 	}
 }
 
 // MARK: - Public interface
-extension ListDetailsModel {
-	
+extension ListDetails.Model {
+
 	var canDelete: Bool {
 		guard case .edit = action else {
 			return false
@@ -40,10 +42,14 @@ extension ListDetailsModel {
 		let trimmed = configuration.title.trimmingCharacters(in: .whitespaces)
 		return !trimmed.isEmpty
 	}
+
+	var isNew: Bool {
+		return action.isNew
+	}
 }
 
 // MARK: - Public interface
-extension ListDetailsModel {
+extension ListDetails.Model {
 
 	func delete(in context: ModelContext) {
 		guard case let .edit(item) = action else {

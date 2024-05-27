@@ -47,13 +47,13 @@ extension Sidebar.UnitView: View {
 			ProjectDetailView(.new(.init()))
 		}
 		.sheet(isPresented: $presentation.listDetailIs) {
-			ListDetailsView(.new(.default), project: nil)
+			ListDetails.UnitView(.new(.default), project: nil)
 		}
 		.sheet(item: $presentation.editedProject) { item in
 			ProjectDetailView(.edit(item))
 		}
 		.sheet(item: $presentation.editedList) { item in
-			ListDetailsView(.edit(item), project: item.project!)
+			ListDetails.UnitView(.edit(item), project: item.project!)
 		}
 		.navigationTitle("Plan")
 	}

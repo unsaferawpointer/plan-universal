@@ -1,40 +1,48 @@
 //
-//  ListDetailsView.swift
+//  ListDetails+UnitView.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 05.04.2024.
+//  Created by Anton Cherkasov on 27.05.2024.
 //
 
 import SwiftUI
 
-struct ListDetailsView: View {
+extension ListDetails {
 
-	@Environment(\.dismiss) var dismiss
+	struct UnitView {
 
-	@Environment(\.modelContext) var modelContext
+		@Environment(\.dismiss) var dismiss
 
-	// MARK: - Data
+		@Environment(\.modelContext) var modelContext
 
-	@State var model: ListDetailsModel
+		// MARK: - Data
 
-	// MARK: - Local state
+		@State var model: ListDetails.Model
 
-	@FocusState private var isFocused: Bool
+		// MARK: - Local state
 
-	// MARK: - Initialization
+		@FocusState private var isFocused: Bool
 
-	init(_ action: Action<ListItem>, project: ProjectItem?) {
-		self._model = State(initialValue: .init(action: action, project: project))
+		// MARK: - Initialization
+
+		init(_ action: Action<ListItem>, project: ProjectItem?) {
+			self._model = State(initialValue: .init(action: action, project: project))
+		}
 	}
+}
+
+// MARK: - View
+extension ListDetails.UnitView: View {
+
 
 	var body: some View {
 		NavigationStack {
 			Form {
 				TextField("Name", text: $model.configuration.title)
 					.focused($isFocused)
-				#if os(iOS)
-				.tint(.accent)
-				#endif
+					#if os(iOS)
+					.tint(.accent)
+					#endif
 				TextField("Description", text: $model.configuration.details, axis: .vertical)
 					.lineLimit(2, reservesSpace: true)
 				Toggle(isOn: $model.configuration.isArchived, label: {
@@ -53,6 +61,7 @@ struct ListDetailsView: View {
 			.onAppear {
 				self.isFocused = true
 			}
+			.navigationTitle(model.isNew ? "New List" : "Edit List")
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
 					Button(role: .cancel) {
@@ -86,16 +95,10 @@ struct ListDetailsView: View {
 					}
 				}
 			}
+			#if os(macOS)
+			.padding(10)
+			.frame(minWidth: 320)
+			#endif
 		}
-		#if os(macOS)
-		.padding(10)
-		.frame(minWidth: 320)
-		#endif
 	}
-
-}
-
-#Preview {
-	ListDetailsView(.new(.init(project: nil)), project: ProjectItem())
-		.modelContainer(PreviewContainer.preview)
 }

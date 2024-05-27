@@ -70,7 +70,7 @@ extension ProjectTodos.UnitView: View {
 			}
 		}
 		.sheet(item: $presentation.listAction) { action in
-			ListDetailsView(action, project: project)
+			ListDetails.UnitView(action, project: project)
 		}
 		.sheet(item: $presentation.todoAction) { action in
 			TodoDetailsView(action: action)

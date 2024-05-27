@@ -89,10 +89,10 @@ struct ProjectDetailView: View {
 				}
 			}
 		}
-#if os(macOS)
+		#if os(macOS)
 		.padding(10)
 		.frame(minWidth: 320)
-#endif
+		#endif
 	}
 }
 
