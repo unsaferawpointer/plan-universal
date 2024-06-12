@@ -51,35 +51,32 @@ struct InFocusView: View {
 
 	var body: some View {
 		List(selection: $selection) {
-			BannerView(
-				systemIcon: "star.fill",
-				message: "Here are the tasks you need to focus on",
-				color: .yellow
-			)
-			.listRowSeparator(.hidden)
-			Spacer()
-				.listRowSeparator(.hidden)
-			ForEach(todos, id: \.uuid) { todo in
-				TodoView(todo: todo)
-					.contextMenu {
-						buildMenu(for: todo)
-					}
-			}
-			.listRowSeparator(.hidden)
 			Section {
-				ForEach(completed, id: \.uuid) { todo in
+				ForEach(todos, id: \.uuid) { todo in
 					TodoView(todo: todo)
 						.contextMenu {
 							buildMenu(for: todo)
 						}
 				}
 				.listRowSeparator(.hidden)
-			} header: {
-				HStack {
-					Text("Completed")
-						.font(.headline)
-					Spacer()
+			}
+			if !completed.isEmpty {
+				Section {
+					ForEach(completed, id: \.uuid) { todo in
+						TodoView(todo: todo)
+							.contextMenu {
+								buildMenu(for: todo)
+							}
+					}
+					.listRowSeparator(.hidden)
+				} header: {
+					HStack {
+						Text("Completed")
+							.font(.headline)
+						Spacer()
+					}
 				}
+				.listSectionSeparator(.hidden)
 			}
 		}
 		.navigationTitle("In Focus")
