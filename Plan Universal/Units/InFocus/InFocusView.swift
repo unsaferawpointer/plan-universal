@@ -86,7 +86,11 @@ struct InFocusView: View {
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button("Archieve", systemImage: "archivebox") {
-
+					try? modelContext.transaction {
+						for todo in completed {
+							todo.inFocus = false
+						}
+					}
 				}
 			}
 		}
