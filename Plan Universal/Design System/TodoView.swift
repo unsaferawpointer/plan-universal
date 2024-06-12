@@ -18,6 +18,7 @@ struct TodoView: View {
 		self._animate = State(initialValue: todo.isDone)
 	}
 
+	#if os(macOS)
 	var body: some View {
 		HStack {
 			Checkmark(isDone: $animate)
@@ -44,6 +45,36 @@ struct TodoView: View {
 			}
 		}
 	}
+	#else
+	var body: some View {
+		HStack {
+			Checkmark(isDone: $animate)
+				.frame(width: 13, height: 13)
+			HStack(spacing: 4) {
+				if (todo.isUrgent || todo.inFocus) && !todo.isDone {
+					Image(systemName: todo.inFocus ? "sparkles" : "bolt.fill")
+						.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
+				}
+				Text(todo.text)
+					.foregroundStyle(todo.isDone ? .secondary : .primary)
+			}
+			Spacer()
+		}
+		.contentShape(Rectangle())
+		.onTapGesture {
+			withAnimation {
+				animate.toggle()
+			} completion: {
+				todo.isDone.toggle()
+			}
+		}
+		.onChange(of: todo.isDone) { oldValue, newValue in
+			withAnimation(.easeInOut(duration: 0.3)) {
+				animate = newValue
+			}
+		}
+	}
+	#endif
 }
 
 //#Preview {
