@@ -65,6 +65,20 @@ extension ProjectTodos.UnitView: View {
 				if newSelection.isEmpty {
 					EmptyView()
 				} else if newSelection.count == 1, let first = newSelection.first {
+					Button("Edit todo...") {
+						presentation.todoAction = .edit(first)
+					}
+					Divider()
+					Toggle(
+						sources: Binding(get: {
+							return newSelection.map { $0 }
+						}, set: { _ in
+
+						}),
+						isOn: \.inFocus
+					) {
+						Text("Focus On")
+					}
 					Toggle("Completed", isOn: .init(get: {
 						return first.isDone
 					}, set: { newValue in
@@ -80,6 +94,16 @@ extension ProjectTodos.UnitView: View {
 						modelContext.delete(first)
 					}
 				} else {
+					Toggle(
+						sources: Binding(get: {
+							return newSelection.map { $0 }
+						}, set: { _ in
+
+						}),
+						isOn: \.inFocus
+					) {
+						Text("Focus On")
+					}
 					Toggle(
 						sources: Binding(get: {
 							return newSelection.map { $0 }
