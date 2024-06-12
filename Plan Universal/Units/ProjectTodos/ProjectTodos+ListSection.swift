@@ -63,6 +63,7 @@ extension ProjectTodos.ListSection: View {
 							}
 						}
 					}
+					.tag(todo)
 			}
 			.listRowSeparator(.hidden)
 		} header: {

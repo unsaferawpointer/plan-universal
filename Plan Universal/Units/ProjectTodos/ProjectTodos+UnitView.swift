@@ -12,6 +12,8 @@ extension ProjectTodos {
 
 	struct UnitView {
 
+		@Environment(\.modelContext) var modelContext
+
 		// MARK: - Data
 
 		var project: ProjectItem
@@ -20,7 +22,7 @@ extension ProjectTodos {
 
 		// MARK: - Locale state
 
-		@State private var selection: Set<UUID> = .init()
+		@State private var selection: Set<TodoItem> = .init()
 
 		@State private var presentation: Presentation = .init()
 
@@ -56,6 +58,45 @@ extension ProjectTodos.UnitView: View {
 			}
 			ForEach(lists) { list in
 				ProjectTodos.ListSection(list: list, presentation: $presentation)
+			}
+		}
+		.contextMenu(forSelectionType: TodoItem.self) { newSelection in
+			if newSelection.isEmpty {
+				EmptyView()
+			} else if newSelection.count == 1, let first = newSelection.first {
+				Toggle("Completed", isOn: .init(get: {
+					return first.isDone
+				}, set: { newValue in
+					first.isDone = newValue
+				}))
+				Toggle("Urgent", isOn: .init(get: {
+					return first.isUrgent
+				}, set: { newValue in
+					first.isUrgent = newValue
+				}))
+				Divider()
+				Button("Delete", systemImage: "trash") {
+					modelContext.delete(first)
+				}
+			} else {
+				Toggle(
+					sources: Binding(get: {
+						return newSelection.map { $0 }
+					}, set: { _ in
+
+					}),
+					isOn: \.isUrgent
+				) {
+					Text("Urgent")
+				}
+				Divider()
+				Button("Delete", systemImage: "trash") {
+					try? modelContext.transaction {
+						for todo in newSelection {
+							modelContext.delete(todo)
+						}
+					}
+				}
 			}
 		}
 		.listStyle(.inset)
