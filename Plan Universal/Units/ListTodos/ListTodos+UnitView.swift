@@ -113,7 +113,7 @@ extension ListTodos.UnitView: View {
 			}
 		}
 		.sheet(item: $presentation.todoAction) { action in
-			TodoDetailsView(action: action)
+			TodoDetails.UnitView(action: action)
 		}
 	}
 }

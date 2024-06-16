@@ -1,34 +1,41 @@
 //
-//  TodoDetailsView.swift
+//  TodoDetails+UnitView.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 06.04.2024.
+//  Created by Anton Cherkasov on 16.06.2024.
 //
 
 import SwiftUI
 import SwiftData
 
-struct TodoDetailsView: View {
+extension TodoDetails {
 
-	@Environment(\.modelContext) var modelContext
+	struct UnitView {
 
-	@Environment(\.dismiss) var dismiss
+		@Environment(\.modelContext) var modelContext
 
-	// MARK: - Data
+		@Environment(\.dismiss) var dismiss
 
-	@Query private var lists: [ListItem]
+		// MARK: - Data
 
-	@State var model: TodoDetailsModel
+		@Query private var lists: [ListItem]
 
-	// MARK: - Local state
+		@State var model: TodoDetailsModel
 
-	@FocusState var isFocused: Bool
+		// MARK: - Local state
 
-	// MARK: - Initialization
+		@FocusState var isFocused: Bool
 
-	init(action: Action<TodoItem>) {
-		self._model = State(initialValue: TodoDetailsModel(action: action))
+		// MARK: - Initialization
+
+		init(action: Action<TodoItem>) {
+			self._model = State(initialValue: TodoDetailsModel(action: action))
+		}
 	}
+}
+
+// MARK: - View
+extension TodoDetails.UnitView: View {
 
 	var body: some View {
 		NavigationStack {
@@ -36,11 +43,11 @@ struct TodoDetailsView: View {
 				TextField("New Todo", text: $model.configuration.text)
 					.focused($isFocused)
 					.submitLabel(.return)
-				#if os(iOS)
-				.pickerStyle(.inline)
-				#else
-				.pickerStyle(.menu)
-				#endif
+					#if os(iOS)
+					.pickerStyle(.inline)
+					#else
+					.pickerStyle(.menu)
+					#endif
 				Toggle(isOn: $model.configuration.isUrgent, label: {
 					Text("Is Urgent")
 				})
@@ -87,14 +94,15 @@ struct TodoDetailsView: View {
 			}
 		}
 		#if os(macOS)
-		.padding(/*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+		.padding(10)
 		.frame(minWidth: 320)
 		#endif
 	}
 }
 
+
 // MARK: - Helpers
-private extension TodoDetailsView {
+private extension TodoDetails.UnitView {
 
 	func delete() {
 		defer {
@@ -114,7 +122,3 @@ private extension TodoDetailsView {
 		}
 	}
 }
-
-//#Preview {
-//	TodoDetailsView(action: .new, with: .inFocus)
-//}

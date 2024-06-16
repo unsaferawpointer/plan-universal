@@ -95,7 +95,7 @@ struct InFocusView: View {
 			}
 		}
 		.sheet(item: $editedTodo) { todo in
-			TodoDetailsView(action: .edit(todo))
+			TodoDetails.UnitView(action: .edit(todo))
 		}
 	}
 }

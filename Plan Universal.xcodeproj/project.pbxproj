@@ -37,7 +37,8 @@
 		4C059C9D2BDEC1260048F5FA /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */; };
 		4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA02BDFAFCF0048F5FA /* Icon.swift */; };
 		4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA22BE026A30048F5FA /* TodoSign.swift */; };
-		4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */; };
+		4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DEED2C1F086100974507 /* TodoDetails.swift */; };
+		4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */; };
 		4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5332BE2B5DE0059474A /* ListFilter.swift */; };
 		4C4ED5362BE2C2010059474A /* ImpactFeedbackFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
@@ -119,7 +120,8 @@
 		4C059C9C2BDEC1260048F5FA /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		4C059CA02BDFAFCF0048F5FA /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		4C059CA22BE026A30048F5FA /* TodoSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSign.swift; sourceTree = "<group>"; };
-		4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsView.swift; sourceTree = "<group>"; };
+		4C43DEED2C1F086100974507 /* TodoDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetails.swift; sourceTree = "<group>"; };
+		4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+UnitView.swift"; sourceTree = "<group>"; };
 		4C4ED5332BE2B5DE0059474A /* ListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFilter.swift; sourceTree = "<group>"; };
 		4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedbackFacade.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -231,7 +233,8 @@
 		4C3EFC9A2BC1B56D006CE43F /* TodoDetails */ = {
 			isa = PBXGroup;
 			children = (
-				4C3EFC9B2BC1B593006CE43F /* TodoDetailsView.swift */,
+				4C43DEED2C1F086100974507 /* TodoDetails.swift */,
+				4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */,
 				4C059C662BD2F8DB0048F5FA /* TodoDetailsModel.swift */,
 			);
 			path = TodoDetails;
@@ -606,13 +609,13 @@
 				4C059C672BD2F8DB0048F5FA /* TodoDetailsModel.swift in Sources */,
 				4CB3F27F2BF5534D00DDACD3 /* ProjectDetailView.swift in Sources */,
 				4C059C8B2BDC32BB0048F5FA /* Filter.swift in Sources */,
-				4C3EFC9C2BC1B593006CE43F /* TodoDetailsView.swift in Sources */,
 				4CB3F2882BF689E800DDACD3 /* BannerView.swift in Sources */,
 				4CEEC0322BFA515E00C10EF6 /* TodoView.swift in Sources */,
 				4C059C8D2BDE2AEB0048F5FA /* ConfigurableItem.swift in Sources */,
 				4C059C7F2BD991F90048F5FA /* ListItem.swift in Sources */,
 				4C059C802BD991F90048F5FA /* TodoItem.swift in Sources */,
 				4C059C862BDC32870048F5FA /* RequestManager.swift in Sources */,
+				4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */,
 				4C059C9B2BDE6D8E0048F5FA /* Order.swift in Sources */,
 				4CEEC0302BFA492800C10EF6 /* ProjectTodos+ListSection.swift in Sources */,
 				4CEEC0382BFD2A3000C10EF6 /* Sidebar.swift in Sources */,
@@ -641,6 +644,7 @@
 				4C00AC3A2C036C6200FA5F53 /* ListTodos+Presentation.swift in Sources */,
 				4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */,
 				4C00AC362C031A1400FA5F53 /* ListTodos.swift in Sources */,
+				4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */,
 				4C059C732BD57C7B0048F5FA /* Checkmark.swift in Sources */,
 				4C059C7C2BD991290048F5FA /* DataManager.swift in Sources */,
 				4C059C892BDC32AD0048F5FA /* TodoFilter.swift in Sources */,

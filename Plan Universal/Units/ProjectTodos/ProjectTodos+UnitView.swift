@@ -143,7 +143,7 @@ extension ProjectTodos.UnitView: View {
 			ListDetails.UnitView(action, project: project)
 		}
 		.sheet(item: $presentation.todoAction) { action in
-			TodoDetailsView(action: action)
+			TodoDetails.UnitView(action: action)
 		}
 	}
 }
