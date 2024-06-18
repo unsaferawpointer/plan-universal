@@ -1,33 +1,36 @@
 //
-//  ProjectDetailModel.swift
+//  ProjectDetails+Model.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 15.05.2024.
+//  Created by Anton Cherkasov on 18.06.2024.
 //
 
-import Foundation
 import SwiftData
 
-@Observable
-final class ProjectDetailsModel {
+extension ProjectDetails {
 
-	private var action: Action<ProjectItem>
+	@Observable
+	final class Model {
 
-	var configuration: ProjectConfiguration
+		private var action: Action<ProjectItem>
 
-	@ObservationIgnored
-	var dataManager = DataManager()
+		var configuration: ProjectConfiguration
 
-	// MARK: - Initialization
+		@ObservationIgnored
+		var dataManager = DataManager()
 
-	init(action: Action<ProjectItem>) {
-		self.action = action
-		self.configuration = action.configuration
+		// MARK: - Initialization
+
+		init(action: Action<ProjectItem>) {
+			self.action = action
+			self.configuration = action.configuration
+		}
 	}
 }
 
+
 // MARK: - Public interface
-extension ProjectDetailsModel {
+extension ProjectDetails.Model {
 
 	var canDelete: Bool {
 		guard case .edit = action else {
@@ -50,7 +53,7 @@ extension ProjectDetailsModel {
 }
 
 // MARK: - Public interface
-extension ProjectDetailsModel {
+extension ProjectDetails.Model {
 
 	func delete(in context: ModelContext) {
 		guard case let .edit(item) = action else {

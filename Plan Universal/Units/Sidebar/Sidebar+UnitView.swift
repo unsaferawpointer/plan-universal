@@ -44,13 +44,13 @@ extension Sidebar.UnitView: View {
 			Sidebar.ListsSection(presentation: $presentation)
 		}
 		.sheet(isPresented: $presentation.projectDetailIs) {
-			ProjectDetailView(.new(.init()))
+			ProjectDetails.UnitView(.new(.init()))
 		}
 		.sheet(isPresented: $presentation.listDetailIs) {
 			ListDetails.UnitView(.new(.default), project: nil)
 		}
 		.sheet(item: $presentation.editedProject) { item in
-			ProjectDetailView(.edit(item))
+			ProjectDetails.UnitView(.edit(item))
 		}
 		.sheet(item: $presentation.editedList) { item in
 			ListDetails.UnitView(.edit(item), project: nil)

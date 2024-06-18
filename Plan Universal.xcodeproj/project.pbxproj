@@ -39,14 +39,15 @@
 		4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA22BE026A30048F5FA /* TodoSign.swift */; };
 		4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DEED2C1F086100974507 /* TodoDetails.swift */; };
 		4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */; };
+		4C43DF592C22191200974507 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF582C22191200974507 /* ProjectDetails.swift */; };
+		4C43DF5B2C22197500974507 /* ProjectDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF5A2C22197500974507 /* ProjectDetails+UnitView.swift */; };
+		4C43DF5D2C221A4100974507 /* ProjectDetails+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF5C2C221A4100974507 /* ProjectDetails+Model.swift */; };
 		4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5332BE2B5DE0059474A /* ListFilter.swift */; };
 		4C4ED5362BE2C2010059474A /* ImpactFeedbackFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */; };
 		4C8893432BC286E0005A5DD0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */; };
 		4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8893472BC71109005A5DD0 /* NavigationRow.swift */; };
 		4CB3F27A2BF544C400DDACD3 /* ProjectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F2792BF544C400DDACD3 /* ProjectItem.swift */; };
 		4CB3F27C2BF5503200DDACD3 /* ProjectFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F27B2BF5503200DDACD3 /* ProjectFilter.swift */; };
-		4CB3F27F2BF5534D00DDACD3 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F27E2BF5534D00DDACD3 /* ProjectDetailView.swift */; };
-		4CB3F2812BF5538600DDACD3 /* ProjectDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F2802BF5538600DDACD3 /* ProjectDetailModel.swift */; };
 		4CB3F2832BF553F400DDACD3 /* ProjectConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F2822BF553F400DDACD3 /* ProjectConfiguration.swift */; };
 		4CB3F2882BF689E800DDACD3 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F2872BF689E800DDACD3 /* BannerView.swift */; };
 		4CB3F28B2BF6A11A00DDACD3 /* InFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3F28A2BF6A11A00DDACD3 /* InFocusView.swift */; };
@@ -122,14 +123,15 @@
 		4C059CA22BE026A30048F5FA /* TodoSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSign.swift; sourceTree = "<group>"; };
 		4C43DEED2C1F086100974507 /* TodoDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetails.swift; sourceTree = "<group>"; };
 		4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+UnitView.swift"; sourceTree = "<group>"; };
+		4C43DF582C22191200974507 /* ProjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
+		4C43DF5A2C22197500974507 /* ProjectDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectDetails+UnitView.swift"; sourceTree = "<group>"; };
+		4C43DF5C2C221A4100974507 /* ProjectDetails+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectDetails+Model.swift"; sourceTree = "<group>"; };
 		4C4ED5332BE2B5DE0059474A /* ListFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFilter.swift; sourceTree = "<group>"; };
 		4C4ED5352BE2C2010059474A /* ImpactFeedbackFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedbackFacade.swift; sourceTree = "<group>"; };
 		4C8893422BC286E0005A5DD0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4C8893472BC71109005A5DD0 /* NavigationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRow.swift; sourceTree = "<group>"; };
 		4CB3F2792BF544C400DDACD3 /* ProjectItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectItem.swift; sourceTree = "<group>"; };
 		4CB3F27B2BF5503200DDACD3 /* ProjectFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFilter.swift; sourceTree = "<group>"; };
-		4CB3F27E2BF5534D00DDACD3 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
-		4CB3F2802BF5538600DDACD3 /* ProjectDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailModel.swift; sourceTree = "<group>"; };
 		4CB3F2822BF553F400DDACD3 /* ProjectConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectConfiguration.swift; sourceTree = "<group>"; };
 		4CB3F2872BF689E800DDACD3 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		4CB3F28A2BF6A11A00DDACD3 /* InFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFocusView.swift; sourceTree = "<group>"; };
@@ -257,13 +259,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		4CB3F27D2BF5532300DDACD3 /* ProjectDetail */ = {
+		4CB3F27D2BF5532300DDACD3 /* ProjectDetails */ = {
 			isa = PBXGroup;
 			children = (
-				4CB3F27E2BF5534D00DDACD3 /* ProjectDetailView.swift */,
-				4CB3F2802BF5538600DDACD3 /* ProjectDetailModel.swift */,
+				4C43DF582C22191200974507 /* ProjectDetails.swift */,
+				4C43DF5A2C22197500974507 /* ProjectDetails+UnitView.swift */,
+				4C43DF5C2C221A4100974507 /* ProjectDetails+Model.swift */,
 			);
-			path = ProjectDetail;
+			path = ProjectDetails;
 			sourceTree = "<group>";
 		};
 		4CB3F2842BF5581100DDACD3 /* ProjectTodos */ = {
@@ -358,7 +361,7 @@
 				4CDB88282BC06C3A0019AC71 /* Details */,
 				4C3EFC9A2BC1B56D006CE43F /* TodoDetails */,
 				4CDB88392BC07E3A0019AC71 /* ListDetails */,
-				4CB3F27D2BF5532300DDACD3 /* ProjectDetail */,
+				4CB3F27D2BF5532300DDACD3 /* ProjectDetails */,
 			);
 			path = Units;
 			sourceTree = "<group>";
@@ -603,17 +606,19 @@
 				4CDB87FC2BC06BFA0019AC71 /* RootView.swift in Sources */,
 				4C00AC3E2C0495E700FA5F53 /* ListDetails.swift in Sources */,
 				4C059C702BD576890048F5FA /* TodoRowModel.swift in Sources */,
+				4C43DF592C22191200974507 /* ProjectDetails.swift in Sources */,
 				4C059C842BD9A09E0048F5FA /* ListConfiguration.swift in Sources */,
 				4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */,
 				4C00AC3C2C036DDD00FA5F53 /* ListTodos+Model.swift in Sources */,
 				4C059C672BD2F8DB0048F5FA /* TodoDetailsModel.swift in Sources */,
-				4CB3F27F2BF5534D00DDACD3 /* ProjectDetailView.swift in Sources */,
 				4C059C8B2BDC32BB0048F5FA /* Filter.swift in Sources */,
 				4CB3F2882BF689E800DDACD3 /* BannerView.swift in Sources */,
 				4CEEC0322BFA515E00C10EF6 /* TodoView.swift in Sources */,
 				4C059C8D2BDE2AEB0048F5FA /* ConfigurableItem.swift in Sources */,
+				4C43DF5D2C221A4100974507 /* ProjectDetails+Model.swift in Sources */,
 				4C059C7F2BD991F90048F5FA /* ListItem.swift in Sources */,
 				4C059C802BD991F90048F5FA /* TodoItem.swift in Sources */,
+				4C43DF5B2C22197500974507 /* ProjectDetails+UnitView.swift in Sources */,
 				4C059C862BDC32870048F5FA /* RequestManager.swift in Sources */,
 				4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */,
 				4C059C9B2BDE6D8E0048F5FA /* Order.swift in Sources */,
@@ -626,7 +631,6 @@
 				4CB3F28F2BF7F39A00DDACD3 /* Sortable.swift in Sources */,
 				4C059C822BD9A08F0048F5FA /* TodoConfiguration.swift in Sources */,
 				4CEEC03A2BFD2A6300C10EF6 /* Sidebar+ListsSection.swift in Sources */,
-				4CB3F2812BF5538600DDACD3 /* ProjectDetailModel.swift in Sources */,
 				4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */,
 				4CB3F28B2BF6A11A00DDACD3 /* InFocusView.swift in Sources */,
 				4CDB88332BC06F7D0019AC71 /* Panel.swift in Sources */,

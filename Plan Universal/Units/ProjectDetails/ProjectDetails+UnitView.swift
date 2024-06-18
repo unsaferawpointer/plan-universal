@@ -1,31 +1,38 @@
 //
-//  ProjectDetailView.swift
+//  ProjectDetails+UnitView.swift
 //  Plan Universal
 //
-//  Created by Anton Cherkasov on 15.05.2024.
+//  Created by Anton Cherkasov on 18.06.2024.
 //
 
 import SwiftUI
 
-struct ProjectDetailView: View {
+extension ProjectDetails {
 
-	@Environment(\.dismiss) var dismiss
+	struct UnitView {
 
-	@Environment(\.modelContext) var modelContext
+		@Environment(\.dismiss) var dismiss
 
-	// MARK: - Data
+		@Environment(\.modelContext) var modelContext
 
-	@State var model: ProjectDetailsModel
+		// MARK: - Data
 
-	// MARK: - Local state
+		@State var model: Model
 
-	@FocusState private var isFocused: Bool
+		// MARK: - Local state
 
-	// MARK: - Initialization
+		@FocusState private var isFocused: Bool
 
-	init(_ action: Action<ProjectItem>) {
-		self._model = State(initialValue: .init(action: action))
+		// MARK: - Initialization
+
+		init(_ action: Action<ProjectItem>) {
+			self._model = State(initialValue: .init(action: action))
+		}
 	}
+}
+
+// MARK: - View
+extension ProjectDetails.UnitView: View {
 
 	var body: some View {
 		NavigationStack {
@@ -94,8 +101,4 @@ struct ProjectDetailView: View {
 		.frame(minWidth: 320)
 		#endif
 	}
-}
-
-#Preview {
-	ProjectDetailView(.new(.default))
 }
