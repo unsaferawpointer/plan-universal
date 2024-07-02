@@ -25,8 +25,8 @@ extension ListDetails {
 
 		// MARK: - Initialization
 
-		init(_ action: Action<ListItem>, project: ProjectItem?) {
-			self._model = State(initialValue: .init(action: action, project: project))
+		init(_ action: Action<ListItem>) {
+			self._model = State(initialValue: .init(action: action))
 		}
 	}
 }

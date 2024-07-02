@@ -9,14 +9,6 @@ extension Sidebar {
 
 	struct Presentation {
 
-		// MARK: - Project
-
-		var projectDetailIs: Bool = false
-
-		var editedProject: ProjectItem?
-
-		// MARK: - List
-
 		var editedList: ListItem?
 
 		var listDetailIs: Bool = false

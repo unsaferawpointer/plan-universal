@@ -14,7 +14,6 @@ enum Panel: Hashable {
 	case inFocus
 	case backlog
 	case completed
-	case project(_ value: ProjectItem)
 	case list(_ value: ListItem)
 }
 
@@ -28,8 +27,6 @@ extension Panel {
 			return String(localized: "Backlog")
 		case .completed:
 			return String(localized: "Completed")
-		case .project(let value):
-			return value.name
 		case .list(let value):
 			return value.title
 		}

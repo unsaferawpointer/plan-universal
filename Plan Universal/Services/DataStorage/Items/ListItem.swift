@@ -22,8 +22,6 @@ final class ListItem {
 
 	// MARK: - Relationships
 
-	@Relationship(deleteRule: .nullify) var project: ProjectItem?
-
 	@Relationship(deleteRule: .cascade, inverse: \TodoItem.list) var todos: [TodoItem]?
 
 	// MARK: - Order
@@ -37,7 +35,6 @@ final class ListItem {
 	required init(_ configuration: ListConfiguration) {
 		self.title = configuration.title
 		self.details = configuration.details
-		self.project = configuration.project
 		self.isArchieved = configuration.isArchived
 	}
 
@@ -64,15 +61,13 @@ extension ListItem: ConfigurableItem {
 			return .init(
 				title: title,
 				details: details,
-				isArchived: isArchieved,
-				project: project
+				isArchived: isArchieved
 			)
 		}
 		set {
 			self.title = newValue.title
 			self.details = newValue.details
 			self.isArchieved = newValue.isArchived
-			self.project = project
 		}
 	}
 

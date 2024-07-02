@@ -19,10 +19,6 @@ struct RootView: View {
 				NavigationStack {
 					InFocusView()
 				}
-			} else if case let .project(value) = selection {
-				NavigationStack {
-					ProjectTodos.UnitView(value)
-				}
 			} else if case let .list(value) = selection {
 				NavigationStack {
 					ListTodos.UnitView(value)

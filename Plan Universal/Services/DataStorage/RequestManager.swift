@@ -10,7 +10,6 @@ import Foundation
 protocol RequestManagerProtocol {
 	func sorting(for panel: Panel) -> [TodoOrder]
 	func listPredicate(isFavorite: Bool) -> ListFilter
-	func projectPredicate() -> ProjectFilter
 }
 
 final class RequestManager { }
@@ -24,9 +23,5 @@ extension RequestManager: RequestManagerProtocol {
 
 	func listPredicate(isFavorite: Bool) -> ListFilter {
 		return ListFilter(isFavorite: isFavorite)
-	}
-
-	func projectPredicate() -> ProjectFilter {
-		return ProjectFilter()
 	}
 }

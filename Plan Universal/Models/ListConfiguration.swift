@@ -15,20 +15,16 @@ struct ListConfiguration {
 
 	var isArchived: Bool
 
-	var project: ProjectItem?
-
 	// MARK: - Initialization
 
 	init(
 		title: String = "New List",
 		details: String = "",
-		isArchived: Bool = false,
-		project: ProjectItem?
+		isArchived: Bool = false
 	) {
 		self.title = title
 		self.details = details
 		self.isArchived = isArchived
-		self.project = project
 	}
 
 }
@@ -46,6 +42,6 @@ extension ListConfiguration: Hashable { }
 extension ListConfiguration {
 
 	static var `default`: Self {
-		return .init(project: nil)
+		return .init()
 	}
 }

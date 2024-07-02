@@ -24,7 +24,10 @@ struct Checkmark: View {
 		GeometryReader { geometry in
 			ZStack {
 				RoundedRectangle(
-					cornerSize: CGSize(width: 4, height: 4),
+					cornerSize: CGSize(
+						width: geometry.size.width * 0.3,
+						height: geometry.size.height * 0.3
+					),
 					style: .continuous
 				)
 				.subtracting(
@@ -42,7 +45,7 @@ struct Checkmark: View {
 								)
 						)
 					}
-						.stroke(lineWidth: 3.0)
+						.stroke(lineWidth: 3.0 * geometry.size.height / 12.0)
 						.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
 				)
 				.subtracting(
@@ -60,7 +63,7 @@ struct Checkmark: View {
 								)
 						)
 					}
-						.stroke(lineWidth: 3.0)
+						.stroke(lineWidth: 3.0 * geometry.size.height / 12.0)
 						.trim(from: isDone ? 0 : 0.5, to: isDone ? 1 : 0.5)
 				)
 				#if os(iOS)

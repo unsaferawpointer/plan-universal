@@ -40,20 +40,13 @@ extension Sidebar.UnitView: View {
 			.tag(Panel.inFocus)
 			.listItemTint(.yellow)
 
-			Sidebar.ProjectsSection(presentation: $presentation)
 			Sidebar.ListsSection(presentation: $presentation)
 		}
-		.sheet(isPresented: $presentation.projectDetailIs) {
-			ProjectDetails.UnitView(.new(.init()))
-		}
 		.sheet(isPresented: $presentation.listDetailIs) {
-			ListDetails.UnitView(.new(.default), project: nil)
-		}
-		.sheet(item: $presentation.editedProject) { item in
-			ProjectDetails.UnitView(.edit(item))
+			ListDetails.UnitView(.new(.default))
 		}
 		.sheet(item: $presentation.editedList) { item in
-			ListDetails.UnitView(.edit(item), project: nil)
+			ListDetails.UnitView(.edit(item))
 		}
 		.navigationTitle("Plan")
 	}

@@ -83,9 +83,6 @@
         }
       }
     },
-    "Add Todo" : {
-
-    },
     "Archieve" : {
       "localizations" : {
         "ru" : {
@@ -172,15 +169,6 @@
         }
       }
     },
-    "Edit Project" : {
-
-    },
-    "Edit project..." : {
-
-    },
-    "Edit todo..." : {
-
-    },
     "Edit Todo..." : {
 
     },
@@ -193,9 +181,6 @@
           }
         }
       }
-    },
-    "Focus On" : {
-
     },
     "High" : {
       "localizations" : {
@@ -348,12 +333,6 @@
         }
       }
     },
-    "New Project" : {
-
-    },
-    "New Project..." : {
-
-    },
     "New Todo" : {
       "localizations" : {
         "ru" : {
@@ -388,12 +367,6 @@
           }
         }
       }
-    },
-    "No Lists..." : {
-
-    },
-    "No Projects" : {
-
     },
     "No Todos" : {
       "extractionState" : "stale",
@@ -438,9 +411,6 @@
         }
       }
     },
-    "Projects" : {
-
-    },
     "Save" : {
       "localizations" : {
         "ru" : {
@@ -471,9 +441,6 @@
           }
         }
       }
-    },
-    "Urgent" : {
-
     }
   },
   "version" : "1.0"

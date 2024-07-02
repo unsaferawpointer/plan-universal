@@ -14,15 +14,12 @@ extension ListDetails {
 		
 		private var action: Action<ListItem>
 
-		private var project: ProjectItem?
-
 		var configuration: ListConfiguration
 
 		// MARK: - Initialization
 
-		init(action: Action<ListItem>, project: ProjectItem?) {
+		init(action: Action<ListItem>) {
 			self.action = action
-			self.project = project
 			self.configuration = action.configuration
 		}
 	}
@@ -66,7 +63,6 @@ extension ListDetails.Model {
 		switch action {
 		case .new:
 			let new = ListItem(configuration)
-			new.project = project
 			context.insert(new)
 		case .edit(let list):
 			try? context.transaction {

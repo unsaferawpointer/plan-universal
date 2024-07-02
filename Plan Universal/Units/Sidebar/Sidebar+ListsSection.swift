@@ -26,12 +26,9 @@ extension Sidebar {
 
 		init(presentation: Binding<Presentation>) {
 			self._presentation = presentation
-			let listsPredicate = #Predicate<ListItem> {
-				$0.project == nil
-			}
 
 			self._lists = Query(
-				filter: listsPredicate,
+				filter: nil,
 				sort: [SortDescriptor(\ListItem.order, order: .forward)],
 				animation: .default
 			)

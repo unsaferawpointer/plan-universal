@@ -12,7 +12,7 @@ import SwiftData
 struct PlanApp: App {
 
 	let container: ModelContainer = {
-		let schema = Schema([TodoItem.self, ListItem.self, ProjectItem.self])
+		let schema = Schema([TodoItem.self, ListItem.self])
 		let container = try! ModelContainer(for: schema, configurations: [])
 		return container
 	}()

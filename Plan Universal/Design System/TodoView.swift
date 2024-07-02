@@ -49,7 +49,7 @@ struct TodoView: View {
 	var body: some View {
 		HStack {
 			Checkmark(isDone: $animate)
-				.frame(width: 13, height: 13)
+				.frame(width: 24, height: 24)
 			HStack(spacing: 4) {
 				if (todo.isUrgent || todo.inFocus) && !todo.isDone {
 					Image(systemName: todo.inFocus ? "sparkles" : "bolt.fill")
