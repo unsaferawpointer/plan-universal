@@ -33,12 +33,12 @@ extension Sidebar.UnitView: View {
 		List(selection: $selection) {
 			NavigationRow(
 				title: Panel.inFocus.title,
-				icon: "star.fill",
+				icon: "square.stack.3d.up.fill",
 				sign: nil,
 				filter: TodoFilter(base: .inFocus(true), constainsText: nil)
 			)
 			.tag(Panel.inFocus)
-			.listItemTint(.yellow)
+			.listItemTint(.accentColor)
 
 			Sidebar.ListsSection(presentation: $presentation)
 		}

@@ -431,6 +431,9 @@
         }
       }
     },
+    "Stack" : {
+
+    },
     "Status" : {
       "extractionState" : "stale",
       "localizations" : {

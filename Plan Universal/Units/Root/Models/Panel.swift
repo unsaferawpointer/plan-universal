@@ -22,7 +22,7 @@ extension Panel {
 	var title: String {
 		switch self {
 		case .inFocus:
-			return String(localized: "In Focus")
+			return String(localized: "Stack")
 		case .backlog:
 			return String(localized: "Backlog")
 		case .completed:

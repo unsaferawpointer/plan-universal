@@ -50,12 +50,6 @@ extension ListTodos.UnitView: View {
 
 	var body: some View {
 		List(selection: $selection) {
-			if !list.details.isEmpty {
-				Text(list.details)
-					.foregroundStyle(.secondary)
-					.font(.body)
-					.selectionDisabled()
-			}
 			ForEach(todos, id: \.uuid) { todo in
 				TodoView(todo: todo)
 					.contextMenu {
@@ -104,6 +98,9 @@ extension ListTodos.UnitView: View {
 		}
 		.listStyle(.inset)
 		.scrollIndicators(.never)
+		#if os(macOS)
+		.alternatingRowBackgrounds()
+		#endif
 		.navigationTitle(list.title)
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {

@@ -79,6 +79,9 @@ struct InFocusView: View {
 				.listSectionSeparator(.hidden)
 			}
 		}
+		#if os(macOS)
+		.alternatingRowBackgrounds()
+		#endif
 		.navigationTitle("In Focus")
 		#if os(macOS)
 		.navigationSubtitle("10 Items")
