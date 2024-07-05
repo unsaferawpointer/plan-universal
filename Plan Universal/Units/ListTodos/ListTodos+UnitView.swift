@@ -87,10 +87,22 @@ extension ListTodos.UnitView: View {
 					presentation.todoAction = .edit(first)
 				}
 				Divider()
+				Button("Move To Stack") {
+					for todo in newSelection {
+						todo.inFocus = true
+					}
+				}
+				Divider()
 				Button("Delete") {
 					model.delete(first, in: modelContext)
 				}
 			} else {
+				Button("Move To Stack") {
+					for todo in newSelection {
+						todo.inFocus = true
+					}
+				}
+				Divider()
 				Button("Delete") {
 					model.delete(newSelection, in: modelContext)
 				}
