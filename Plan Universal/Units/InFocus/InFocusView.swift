@@ -16,8 +16,6 @@ struct InFocusView: View {
 
 	@Query(animation: .default) private var todos: [TodoItem]
 
-	@Query(animation: .default) private var completed: [TodoItem]
-
 	// MARK: - Locale state
 
 	@State private var selection: Set<UUID> = .init()
@@ -29,22 +27,12 @@ struct InFocusView: View {
 	init() {
 
 		let todosPredicate = #Predicate<TodoItem> {
-			$0.inFocus == true && $0.isDone == false
+			$0.inFocus == true
 		}
 
 		self._todos = Query(
 			filter: todosPredicate,
-			sort: \.order,
-			animation: .default
-		)
-
-		let completedPredicate = #Predicate<TodoItem> {
-			$0.isDone == true && $0.inFocus == true
-		}
-
-		self._completed = Query(
-			filter: completedPredicate,
-			sort: \.order,
+			sort: \.isDone,
 			animation: .default
 		)
 	}
@@ -60,24 +48,6 @@ struct InFocusView: View {
 				}
 				.listRowSeparator(.hidden)
 			}
-			if !completed.isEmpty {
-				Section {
-					ForEach(completed, id: \.uuid) { todo in
-						TodoView(todo: todo)
-							.contextMenu {
-								buildMenu(for: todo)
-							}
-					}
-					.listRowSeparator(.hidden)
-				} header: {
-					HStack {
-						Text("Completed")
-							.font(.headline)
-						Spacer()
-					}
-				}
-				.listSectionSeparator(.hidden)
-			}
 		}
 		#if os(macOS)
 		.alternatingRowBackgrounds()
@@ -90,7 +60,7 @@ struct InFocusView: View {
 			ToolbarItem(placement: .primaryAction) {
 				Button("Archieve", systemImage: "archivebox") {
 					try? modelContext.transaction {
-						for todo in completed {
+						for todo in todos where todo.isDone == true {
 							todo.inFocus = false
 						}
 					}
