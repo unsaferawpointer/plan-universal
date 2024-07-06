@@ -30,13 +30,12 @@ struct TodoView: View {
 						todo.isDone.toggle()
 					}
 				}
-			HStack(spacing: 4) {
-				if (todo.isUrgent || todo.inFocus) && !todo.isDone {
-					Image(systemName: todo.inFocus ? "sparkles" : "bolt.fill")
-						.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
-				}
-				Text(todo.text)
-					.foregroundStyle(todo.isDone ? .secondary : .primary)
+			Text(todo.text)
+				.foregroundStyle(todo.isDone ? .secondary : .primary)
+			Spacer()
+			if todo.isUrgent {
+				Image(systemName: "bolt.fill")
+					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
 			}
 		}
 		.onChange(of: todo.isDone) { oldValue, newValue in
