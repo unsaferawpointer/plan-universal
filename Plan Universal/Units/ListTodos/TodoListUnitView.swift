@@ -1,5 +1,5 @@
 //
-//  ListTodos+UnitView.swift
+//  TodoListUnitView.swift
 //  Plan Universal
 //
 //  Created by Anton Cherkasov on 26.05.2024.
@@ -8,50 +8,47 @@
 import SwiftUI
 import SwiftData
 
-extension ListTodos {
+struct TodoListUnitView {
 
-	struct UnitView {
+	@Environment(\.modelContext) var modelContext
 
-		@Environment(\.modelContext) var modelContext
+	// MARK: - Data
 
-		// MARK: - Data
+	var list: ListItem
 
-		var list: ListItem
+	@Query(animation: .default) private var todos: [TodoItem]
 
-		@Query(animation: .default) private var todos: [TodoItem]
+	var model: TodoListModel = .init()
 
-		var model: Model = .init()
+	// MARK: - Locale state
 
-		// MARK: - Locale state
+	@State private var selection: Set<TodoItem> = .init()
 
-		@State private var selection: Set<TodoItem> = .init()
+	@State private var presentation: TodoListPresentation = .init()
 
-		@State private var presentation: Presentation = .init()
+	// MARK: - Initialization
 
-		// MARK: - Initialization
-
-		init(_ list: ListItem) {
-			self.list = list
-			let uuid = list.uuid
-			let predicate = #Predicate<TodoItem> {
-				$0.list?.uuid == uuid
-			}
-			self._todos = Query(
-				filter: predicate,
-				sort: \TodoItem.order,
-				animation: .default
-			)
+	init(_ list: ListItem) {
+		self.list = list
+		let uuid = list.uuid
+		let predicate = #Predicate<TodoItem> {
+			$0.list?.uuid == uuid
 		}
+		self._todos = Query(
+			filter: predicate,
+			sort: \TodoItem.order,
+			animation: .default
+		)
 	}
 }
 
 // MARK: - View
-extension ListTodos.UnitView: View {
+extension TodoListUnitView: View {
 
 	var body: some View {
 		List(selection: $selection) {
 			ForEach(todos, id: \.uuid) { todo in
-				TodoView(todo: todo)
+				TodoView(todo: todo, indicators: [.inFocus, .isUrgent])
 					.contextMenu {
 						Button("Edit...") {
 							presentation.todoAction = .edit(todo)
@@ -87,20 +84,24 @@ extension ListTodos.UnitView: View {
 					presentation.todoAction = .edit(first)
 				}
 				Divider()
-				Button("Move To Stack") {
-					for todo in newSelection {
-						todo.inFocus = true
-					}
+				Toggle(sources: Binding(get: {
+					return newSelection.map { $0 }
+				}, set: { newValue in
+
+				}), isOn: \.inFocus) {
+					Text("In Stack")
 				}
 				Divider()
 				Button("Delete") {
 					model.delete(first, in: modelContext)
 				}
 			} else {
-				Button("Move To Stack") {
-					for todo in newSelection {
-						todo.inFocus = true
-					}
+				Toggle(sources: Binding(get: {
+					return newSelection.map { $0 }
+				}, set: { newValue in
+
+				}), isOn: \.inFocus) {
+					Text("In Stack")
 				}
 				Divider()
 				Button("Delete") {
@@ -120,6 +121,11 @@ extension ListTodos.UnitView: View {
 					self.presentation.todoAction = .new(.init(list: list))
 				}
 			}
+			#if os(iOS)
+			ToolbarItem(placement: .primaryAction) {
+				EditButton()
+			}
+			#endif
 		}
 		.sheet(item: $presentation.todoAction) { action in
 			TodoDetails.UnitView(action: action)

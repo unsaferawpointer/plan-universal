@@ -213,6 +213,9 @@
         }
       }
     },
+    "In Stack" : {
+
+    },
     "Is Archieved" : {
 
     },
@@ -305,9 +308,6 @@
           }
         }
       }
-    },
-    "Move To Stack" : {
-
     },
     "Name" : {
 

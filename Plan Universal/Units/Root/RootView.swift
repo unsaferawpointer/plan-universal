@@ -21,7 +21,7 @@ struct RootView: View {
 				}
 			} else if case let .list(value) = selection {
 				NavigationStack {
-					ListTodos.UnitView(value)
+					TodoListUnitView(value)
 				}
 			} else {
 				Text("Select sidebar item")

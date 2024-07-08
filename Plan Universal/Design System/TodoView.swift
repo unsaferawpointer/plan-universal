@@ -13,27 +13,30 @@ struct TodoView: View {
 
 	@State var animate: Bool = false
 
-	init(todo: TodoItem) {
+	@State var indicators: Indicators = []
+
+	init(todo: TodoItem, indicators: Indicators) {
 		self.todo = todo
+		self._indicators = State(initialValue: indicators)
 		self._animate = State(initialValue: todo.isDone)
 	}
 
 	#if os(macOS)
 	var body: some View {
 		HStack {
-			Checkmark(isDone: $animate)
-				.frame(width: 13, height: 13)
-				.onTapGesture {
-					withAnimation {
-						animate.toggle()
-					} completion: {
-						todo.isDone.toggle()
-					}
-				}
+			Circle()
+				.foregroundStyle(
+					todo.inFocus && indicators.contains(.inFocus) 
+						? Color.accentColor
+						: .clear
+				)
+				.frame(width: 6, height: 6)
+			Toggle("", isOn: $todo.isDone)
+				.labelsHidden()
 			Text(todo.text)
 				.foregroundStyle(todo.isDone ? .secondary : .primary)
 			Spacer()
-			if todo.isUrgent {
+			if todo.isUrgent && indicators.contains(.isUrgent) {
 				Image(systemName: "bolt.fill")
 					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
 			}
@@ -47,17 +50,15 @@ struct TodoView: View {
 	#else
 	var body: some View {
 		HStack {
-			Checkmark(isDone: $animate)
-				.frame(width: 24, height: 24)
-			HStack(spacing: 4) {
-				if (todo.isUrgent || todo.inFocus) && !todo.isDone {
-					Image(systemName: todo.inFocus ? "sparkles" : "bolt.fill")
-						.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
-				}
-				Text(todo.text)
-					.foregroundStyle(todo.isDone ? .secondary : .primary)
+			if todo.isUrgent {
+				Image(systemName: "bolt.fill")
+					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
 			}
+			Text(todo.text)
+				.foregroundStyle(todo.isDone ? .secondary : .primary)
 			Spacer()
+			Image(systemName: todo.isDone ? "checkmark" : "")
+				.frame(width: 24, height: 24)
 		}
 		.contentShape(Rectangle())
 		.onTapGesture {
@@ -76,6 +77,22 @@ struct TodoView: View {
 	#endif
 }
 
-//#Preview {
-//	TodoView()
-//}
+extension TodoView {
+
+	struct Indicators: OptionSet {
+
+		static var inFocus = Indicators(rawValue: 1 << 0)
+
+		static var isUrgent = Indicators(rawValue: 1 << 1)
+
+		var rawValue: Int
+
+		init(rawValue: Int) {
+			self.rawValue = rawValue
+		}
+	}
+}
+
+#Preview {
+	TodoView(todo: .init(), indicators: [.inFocus, .isUrgent])
+}

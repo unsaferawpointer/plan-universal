@@ -41,7 +41,7 @@ struct InFocusView: View {
 		List(selection: $selection) {
 			Section {
 				ForEach(todos, id: \.uuid) { todo in
-					TodoView(todo: todo)
+					TodoView(todo: todo, indicators: [.isUrgent])
 						.contextMenu {
 							buildMenu(for: todo)
 						}
