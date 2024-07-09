@@ -13,12 +13,15 @@ struct TodoView: View {
 
 	@State var animate: Bool = false
 
+	@State var text: String
+
 	@State var indicators: Indicators = []
 
 	init(todo: TodoItem, indicators: Indicators) {
 		self.todo = todo
 		self._indicators = State(initialValue: indicators)
 		self._animate = State(initialValue: todo.isDone)
+		self._text = State(initialValue: todo.text)
 	}
 
 	#if os(macOS)
@@ -33,8 +36,11 @@ struct TodoView: View {
 				.frame(width: 6, height: 6)
 			Toggle("", isOn: $todo.isDone)
 				.labelsHidden()
-			Text(todo.text)
+			TextField("Description", text: $text)
 				.foregroundStyle(todo.isDone ? .secondary : .primary)
+				.onSubmit {
+					todo.text = text
+				}
 			Spacer()
 			if todo.isUrgent && indicators.contains(.isUrgent) {
 				Image(systemName: "bolt.fill")
