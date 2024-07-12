@@ -50,7 +50,11 @@ extension SidebarUnitView: View {
 
 			Section("Lists") {
 				ForEach(lists, id: \.self) { list in
-					Label(list.title, systemImage: "doc.text")
+					SidebarLabel(systemName: "doc.text", text: .init(get: {
+						return list.title
+					}, set: { newValue in
+						list.title = newValue
+					}))
 						.listItemTint(.primary)
 						.contextMenu {
 							Button("Edit List...") {
