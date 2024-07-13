@@ -169,9 +169,6 @@
         }
       }
     },
-    "Edit Todo..." : {
-
-    },
     "Edit..." : {
       "localizations" : {
         "ru" : {
@@ -294,6 +291,9 @@
           }
         }
       }
+    },
+    "Move To" : {
+
     },
     "Move to backlog" : {
 

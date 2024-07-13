@@ -18,7 +18,7 @@ struct InFocusView: View {
 
 	// MARK: - Locale state
 
-	@State private var selection: Set<UUID> = .init()
+	@State private var selection: Set<TodoItem> = .init()
 
 	@State private var editedTodo: TodoItem?
 
@@ -42,11 +42,22 @@ struct InFocusView: View {
 			Section {
 				ForEach(todos, id: \.uuid) { todo in
 					TodoView(todo: todo, indicators: [.isUrgent])
-						.contextMenu {
-							buildMenu(for: todo)
-						}
+						.tag(todo)
 				}
 				.listRowSeparator(.hidden)
+			}
+		}
+		.contextMenu(forSelectionType: TodoItem.self) { newSelection in
+			if newSelection.isEmpty {
+				EmptyView()
+			} else if newSelection.count == 1, let first = newSelection.first {
+				Button("Edit...") {
+					editedTodo = first
+				}
+				Divider()
+				buildMenu(for: newSelection)
+			} else {
+				buildMenu(for: newSelection)
 			}
 		}
 		#if os(macOS)
@@ -77,18 +88,32 @@ struct InFocusView: View {
 private extension InFocusView {
 
 	@ViewBuilder
-	func buildMenu(for todo: TodoItem) -> some View {
+	func buildMenu(for selection: Set<TodoItem>) -> some View {
 		Button("Move to backlog") {
-			todo.inFocus = false
+			withAnimation {
+				try? modelContext.transaction {
+					for todo in selection {
+						todo.inFocus = false
+					}
+				}
+			}
 		}
 		Divider()
-		Button("Edit Todo...") {
-			editedTodo = todo
+		Menu("Move To") {
+			ListPicker { list in
+				for todo in self.todos {
+					todo.list = list
+				}
+			}
 		}
 		Divider()
 		Button("Delete") {
 			withAnimation {
-				modelContext.delete(todo)
+				try? modelContext.transaction {
+					for todo in selection {
+						modelContext.delete(todo)
+					}
+				}
 			}
 		}
 	}

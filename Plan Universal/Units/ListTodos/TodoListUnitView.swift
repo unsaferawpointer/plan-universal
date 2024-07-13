@@ -49,15 +49,6 @@ extension TodoListUnitView: View {
 		List(selection: $selection) {
 			ForEach(todos, id: \.uuid) { todo in
 				TodoView(todo: todo, indicators: [.inFocus, .isUrgent])
-					.contextMenu {
-						Button("Edit...") {
-							presentation.todoAction = .edit(todo)
-						}
-						Divider()
-						Button("Delete") {
-							model.delete(todo, in: modelContext)
-						}
-					}
 					.tag(todo)
 			}
 			.onMove { indices, newOffset in
@@ -84,29 +75,9 @@ extension TodoListUnitView: View {
 					presentation.todoAction = .edit(first)
 				}
 				Divider()
-				Toggle(sources: Binding(get: {
-					return newSelection.map { $0 }
-				}, set: { newValue in
-
-				}), isOn: \.inFocus) {
-					Text("In Stack")
-				}
-				Divider()
-				Button("Delete") {
-					model.delete(first, in: modelContext)
-				}
+				buildMenu(for: newSelection)
 			} else {
-				Toggle(sources: Binding(get: {
-					return newSelection.map { $0 }
-				}, set: { newValue in
-
-				}), isOn: \.inFocus) {
-					Text("In Stack")
-				}
-				Divider()
-				Button("Delete") {
-					model.delete(newSelection, in: modelContext)
-				}
+				buildMenu(for: newSelection)
 			}
 		}
 		.listStyle(.inset)
@@ -129,6 +100,33 @@ extension TodoListUnitView: View {
 		}
 		.sheet(item: $presentation.todoAction) { action in
 			TodoDetails.UnitView(action: action)
+		}
+	}
+}
+
+// MARK: - Helpers
+private extension TodoListUnitView {
+
+	@ViewBuilder
+	func buildMenu(for selection: Set<TodoItem>) -> some View {
+		Toggle(sources: Binding(get: {
+			return selection.map { $0 }
+		}, set: { newValue in
+
+		}), isOn: \.inFocus) {
+			Text("In Stack")
+		}
+		Divider()
+		Menu("Move To") {
+			ListPicker { list in
+				for todo in self.todos {
+					todo.list = list
+				}
+			}
+		}
+		Divider()
+		Button("Delete") {
+			model.delete(selection, in: modelContext)
 		}
 	}
 }
