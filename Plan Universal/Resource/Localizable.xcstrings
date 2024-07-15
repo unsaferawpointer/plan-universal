@@ -14,7 +14,23 @@
         }
       }
     },
+    "%d" : {
+
+    },
     "%lld" : {
+
+    },
+    "%lld Items - %lld story points" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld Items - %2$lld story points"
+          }
+        }
+      }
+    },
+    "%lld pt" : {
 
     },
     "%lld Todos" : {
@@ -69,9 +85,6 @@
           }
         }
       }
-    },
-    "10 Items" : {
-
     },
     "Add" : {
       "localizations" : {
@@ -178,6 +191,9 @@
           }
         }
       }
+    },
+    "Estimation" : {
+
     },
     "High" : {
       "localizations" : {

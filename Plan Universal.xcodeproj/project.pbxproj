@@ -34,6 +34,8 @@
 		4C059CA32BE026A30048F5FA /* TodoSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C059CA22BE026A30048F5FA /* TodoSign.swift */; };
 		4C3FB23B2C40630B0018A92A /* SidebarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB23A2C40630B0018A92A /* SidebarLabel.swift */; };
 		4C3FB23D2C42A7020018A92A /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB23C2C42A7020018A92A /* ListPicker.swift */; };
+		4C3FB23F2C4420DD0018A92A /* TodoEstimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB23E2C4420DD0018A92A /* TodoEstimation.swift */; };
+		4C3FB2412C4441570018A92A /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2402C4441570018A92A /* Sequence+Extension.swift */; };
 		4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DEED2C1F086100974507 /* TodoDetails.swift */; };
 		4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */; };
 		4C43DF5F2C29E76E00974507 /* TodoDetails+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF5E2C29E76E00974507 /* TodoDetails+Model.swift */; };
@@ -106,6 +108,8 @@
 		4C059CA22BE026A30048F5FA /* TodoSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSign.swift; sourceTree = "<group>"; };
 		4C3FB23A2C40630B0018A92A /* SidebarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarLabel.swift; sourceTree = "<group>"; };
 		4C3FB23C2C42A7020018A92A /* ListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPicker.swift; sourceTree = "<group>"; };
+		4C3FB23E2C4420DD0018A92A /* TodoEstimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEstimation.swift; sourceTree = "<group>"; };
+		4C3FB2402C4441570018A92A /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		4C43DEED2C1F086100974507 /* TodoDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetails.swift; sourceTree = "<group>"; };
 		4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+UnitView.swift"; sourceTree = "<group>"; };
 		4C43DF5E2C29E76E00974507 /* TodoDetails+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+Model.swift"; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				4C059C5C2BD05B180048F5FA /* Action.swift */,
+				4C3FB2402C4441570018A92A /* Sequence+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				4CDB88402BC090F60019AC71 /* TodoStatus.swift */,
 				4C059C812BD9A08F0048F5FA /* TodoConfiguration.swift */,
 				4C059C832BD9A09E0048F5FA /* ListConfiguration.swift */,
+				4C3FB23E2C4420DD0018A92A /* TodoEstimation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				4C00AC422C04995800FA5F53 /* ListDetails+Model.swift in Sources */,
 				4C059C6C2BD3B38D0048F5FA /* NavigationRowModel.swift in Sources */,
 				4CB3F28F2BF7F39A00DDACD3 /* Sortable.swift in Sources */,
+				4C3FB2412C4441570018A92A /* Sequence+Extension.swift in Sources */,
 				4C059C822BD9A08F0048F5FA /* TodoConfiguration.swift in Sources */,
 				4C059CA12BDFAFCF0048F5FA /* Icon.swift in Sources */,
 				4CB3F28B2BF6A11A00DDACD3 /* InFocusView.swift in Sources */,
@@ -585,6 +592,7 @@
 				4C00AC3A2C036C6200FA5F53 /* TodoListPresentation.swift in Sources */,
 				4C8893482BC71109005A5DD0 /* NavigationRow.swift in Sources */,
 				4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */,
+				4C3FB23F2C4420DD0018A92A /* TodoEstimation.swift in Sources */,
 				4C059C732BD57C7B0048F5FA /* Checkmark.swift in Sources */,
 				4C059C7C2BD991290048F5FA /* DataManager.swift in Sources */,
 				4C059C892BDC32AD0048F5FA /* TodoFilter.swift in Sources */,

@@ -125,6 +125,16 @@ private extension TodoListUnitView {
 			}
 		}
 		Divider()
+		Menu("Estimation") {
+			ForEach(TodoEstimation.allCases) { estimation in
+				Button("\(estimation.storyPoints) pt") {
+					for todo in self.todos {
+						todo.rawEstimation = estimation.rawValue
+					}
+				}
+			}
+		}
+		Divider()
 		Button("Delete") {
 			model.delete(selection, in: modelContext)
 		}

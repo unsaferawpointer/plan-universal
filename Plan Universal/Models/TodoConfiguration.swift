@@ -15,6 +15,8 @@ struct TodoConfiguration {
 
 	var isUrgent: Bool = false
 
+	var estimation: TodoEstimation? = nil
+
 	var list: ListItem?
 }
 

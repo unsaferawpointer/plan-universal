@@ -63,10 +63,9 @@ struct InFocusView: View {
 		#if os(macOS)
 		.alternatingRowBackgrounds()
 		#endif
-		.navigationTitle("In Focus")
 		#if os(macOS)
-		.navigationSubtitle("10 Items")
-		#endif			
+		.navigationSubtitle("\(todos.count) Items - \(todos.map(\.storyPoints).sum) story points")
+		#endif
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
 				Button("Archieve", systemImage: "archivebox") {
@@ -103,6 +102,16 @@ private extension InFocusView {
 			ListPicker { list in
 				for todo in self.todos {
 					todo.list = list
+				}
+			}
+		}
+		Divider()
+		Menu("Estimation") {
+			ForEach(TodoEstimation.allCases) { estimation in
+				Button("\(estimation.storyPoints) pt") {
+					for todo in self.todos {
+						todo.rawEstimation = estimation.rawValue
+					}
 				}
 			}
 		}

@@ -15,6 +15,7 @@ final class TodoItem {
 	var uuid: UUID = UUID()
 	var text: String = ""
 	var options: Int64 = 0
+	var rawEstimation: Int8?
 
 	// MARK: - Flags
 
@@ -43,6 +44,7 @@ final class TodoItem {
 		self.isDone = configuration.isDone
 		self.isUrgent = configuration.isUrgent
 		self.list = configuration.list
+		self.rawEstimation = configuration.estimation?.rawValue
 	}
 }
 
@@ -62,7 +64,8 @@ extension TodoItem: ConfigurableItem {
 			return .init(
 				text: text,
 				isDone: isDone,
-				isUrgent: isUrgent, 
+				isUrgent: isUrgent,
+				estimation: TodoEstimation(rawValue: rawEstimation),
 				list: list
 			)
 		}
@@ -70,8 +73,29 @@ extension TodoItem: ConfigurableItem {
 			self.text = newValue.text
 			self.isDone = newValue.isDone
 			self.isUrgent = newValue.isUrgent
+			self.rawEstimation = newValue.estimation?.rawValue
 			self.list = newValue.list
 		}
 	}
 
+}
+
+// MARK: - Calculated properties
+extension TodoItem {
+
+	var storyPoints: Int {
+		return estimation?.storyPoints ?? 0
+	}
+
+	var estimation: TodoEstimation? {
+		get {
+			guard let rawEstimation else {
+				return nil
+			}
+			return TodoEstimation(rawValue: rawEstimation)
+		}
+		set {
+			self.rawEstimation = newValue?.rawValue
+		}
+	}
 }

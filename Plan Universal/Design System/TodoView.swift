@@ -42,9 +42,14 @@ struct TodoView: View {
 					todo.text = text
 				}
 			Spacer()
-			if todo.isUrgent && indicators.contains(.isUrgent) {
+			if let storyPoints = todo.estimation?.storyPoints {
+				Text("\(storyPoints)")
+					.foregroundStyle(.secondary)
+			}
+			if indicators.contains(.isUrgent) {
 				Image(systemName: "bolt.fill")
 					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
+					.opacity(todo.isUrgent ? 1 : 0)
 			}
 		}
 		.onChange(of: todo.isDone) { oldValue, newValue in
