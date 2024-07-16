@@ -61,12 +61,17 @@ struct TodoView: View {
 	#else
 	var body: some View {
 		HStack {
-			if todo.isUrgent {
+			if indicators.contains(.isUrgent) && todo.isUrgent {
 				Image(systemName: "bolt.fill")
 					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
 			}
 			Text(todo.text)
 				.foregroundStyle(todo.isDone ? .secondary : .primary)
+			if let storyPoints = todo.estimation?.storyPoints {
+				Text("\(storyPoints)")
+					.foregroundStyle(.secondary)
+					.font(.callout)
+			}
 			Spacer()
 			Image(systemName: todo.isDone ? "checkmark" : "")
 				.frame(width: 24, height: 24)
