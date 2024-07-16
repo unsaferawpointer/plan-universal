@@ -11,14 +11,14 @@ struct SidebarLabel: View {
 
 	var systemName: String
 
-	@Binding var text: String
+	@State var list: ListItem
 
 	@State var localText: String
 
-	init(systemName: String, text: Binding<String>) {
+	init(systemName: String, list: ListItem) {
 		self.systemName = systemName
-		self._text = text
-		self._localText = State(initialValue: text.wrappedValue)
+		self.list = list
+		self._localText = State(initialValue: list.title)
 	}
 }
 
@@ -30,7 +30,13 @@ extension SidebarLabel {
 			Image(systemName: systemName)
 			TextField("Description", text: $localText)
 				.onSubmit {
-					self.text = localText
+					self.list.title = localText
+				}
+				.onChange(of: list.title) { oldValue, newValue in
+					guard oldValue != newValue else {
+						return
+					}
+					localText = newValue
 				}
 		}
 	}
@@ -41,12 +47,12 @@ extension SidebarLabel {
 	var body: some View {
 		HStack {
 			Image(systemName: systemName)
-			Text(localText)
+			Text(list.title)
 		}
 	}
 }
 #endif
 
-#Preview {
-	SidebarLabel(systemName: "doc.text", text: .constant("Label"))
-}
+//#Preview {
+//	SidebarLabel(systemName: "doc.text", text: .constant("Label"))
+//}
