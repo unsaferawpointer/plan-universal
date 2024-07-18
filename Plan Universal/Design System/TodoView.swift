@@ -17,6 +17,27 @@ struct TodoView: View {
 
 	@State var indicators: Indicators = []
 
+	#if os(macOS)
+	var badgeText: Text? {
+		switch (todo.isUrgent, todo.estimation?.storyPoints) {
+		case (true, .none):
+			return Text(systemImage: "bolt.fill")
+		case (false, .some(let storyPoints)):
+			return Text("\(storyPoints)")
+		case (true, .some(let storyPoints)):
+			return Text(systemImage: "bolt.fill") + Text(" ") + Text("\(storyPoints)")
+		default:
+			return nil
+		}
+	}
+	#endif
+
+	#if os(iOS)
+	var showBadge: Bool {
+		return todo.isUrgent || todo.storyPoints > 0
+	}
+	#endif
+
 	init(todo: TodoItem, indicators: Indicators) {
 		self.todo = todo
 		self._indicators = State(initialValue: indicators)
@@ -30,7 +51,7 @@ struct TodoView: View {
 			Circle()
 				.foregroundStyle(
 					todo.inFocus && indicators.contains(.inFocus) 
-						? Color.accentColor
+						? Color.yellow
 						: .clear
 				)
 				.frame(width: 6, height: 6)
@@ -42,16 +63,8 @@ struct TodoView: View {
 					todo.text = text
 				}
 			Spacer()
-			if let storyPoints = todo.estimation?.storyPoints {
-				Text("\(storyPoints)")
-					.foregroundStyle(.secondary)
-			}
-			if indicators.contains(.isUrgent) {
-				Image(systemName: "bolt.fill")
-					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
-					.opacity(todo.isUrgent ? 1 : 0)
-			}
 		}
+		.badge(badgeText)
 		.onChange(of: todo.isDone) { oldValue, newValue in
 			withAnimation(.easeInOut(duration: 0.3)) {
 				animate = newValue
@@ -61,17 +74,20 @@ struct TodoView: View {
 	#else
 	var body: some View {
 		HStack {
-			if indicators.contains(.isUrgent) && todo.isUrgent {
-				Image(systemName: "bolt.fill")
-					.foregroundStyle(todo.isDone ? Color.secondary : Color.yellow)
+			if showBadge {
+				HStack {
+					if todo.isUrgent && indicators.contains(.isUrgent) {
+						Text("\(Image(systemName: "bolt.fill").symbolRenderingMode(todo.isDone ? .monochrome : .multicolor))")
+					}
+					if let storyPoints = todo.estimation?.storyPoints {
+						Text("\(storyPoints)")
+					}
+				}
+				.padding(.init(top: 2, leading: 8, bottom: 2, trailing: 8))
+				.background(Capsule().fill(Color(.quaternarySystemFill)))
 			}
 			Text(todo.text)
 				.foregroundStyle(todo.isDone ? .secondary : .primary)
-			if let storyPoints = todo.estimation?.storyPoints {
-				Text("\(storyPoints)")
-					.foregroundStyle(.secondary)
-					.font(.callout)
-			}
 			Spacer()
 			Image(systemName: todo.isDone ? "checkmark" : "")
 				.frame(width: 24, height: 24)

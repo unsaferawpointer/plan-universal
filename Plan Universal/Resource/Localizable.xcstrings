@@ -4,6 +4,12 @@
     "" : {
 
     },
+    " " : {
+
+    },
+    "%@" : {
+
+    },
     "%@ %lld" : {
       "localizations" : {
         "en" : {
@@ -399,7 +405,6 @@
       }
     },
     "None" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

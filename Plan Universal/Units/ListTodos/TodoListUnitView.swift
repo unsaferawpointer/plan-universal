@@ -126,9 +126,15 @@ private extension TodoListUnitView {
 		}
 		Divider()
 		Menu("Estimation") {
+			Button("None") {
+				for todo in selection {
+					todo.rawEstimation = nil
+				}
+			}
+			Divider()
 			ForEach(TodoEstimation.allCases) { estimation in
 				Button("\(estimation.storyPoints) pt") {
-					for todo in self.todos {
+					for todo in selection {
 						todo.rawEstimation = estimation.rawValue
 					}
 				}
