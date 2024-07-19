@@ -116,6 +116,13 @@ private extension TodoListUnitView {
 		}), isOn: \.inFocus) {
 			Text("In Stack")
 		}
+		Toggle(sources: Binding(get: {
+			return selection.map { $0 }
+		}, set: { newValue in
+
+		}), isOn: \.isUrgent) {
+			Text("Urgent")
+		}
 		Divider()
 		Menu("Move To") {
 			ListPicker { list in
