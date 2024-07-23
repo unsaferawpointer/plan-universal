@@ -37,6 +37,12 @@
 		4C3FB23F2C4420DD0018A92A /* TodoEstimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB23E2C4420DD0018A92A /* TodoEstimation.swift */; };
 		4C3FB2412C4441570018A92A /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2402C4441570018A92A /* Sequence+Extension.swift */; };
 		4C3FB2442C498AE40018A92A /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2432C498AE40018A92A /* Text+Extension.swift */; };
+		4C3FB2462C4BB6510018A92A /* InFocusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2452C4BB6510018A92A /* InFocusModel.swift */; };
+		4C3FB2482C4BB7D30018A92A /* InFocusLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2472C4BB7D30018A92A /* InFocusLocalization.swift */; };
+		4C3FB24E2C4D76D60018A92A /* InFocusModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB24D2C4D76D60018A92A /* InFocusModelTests.swift */; };
+		4C3FB2512C4D7CBB0018A92A /* TodoItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2502C4D7CBB0018A92A /* TodoItem+Extension.swift */; };
+		4C3FB2532C4D7DD50018A92A /* InFocusLocalizationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2522C4D7DD50018A92A /* InFocusLocalizationMock.swift */; };
+		4C3FB2552C4D7F340018A92A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3FB2542C4D7F340018A92A /* String+Extension.swift */; };
 		4C43DEEE2C1F086100974507 /* TodoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DEED2C1F086100974507 /* TodoDetails.swift */; };
 		4C43DF562C1F798F00974507 /* TodoDetails+UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */; };
 		4C43DF5F2C29E76E00974507 /* TodoDetails+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C43DF5E2C29E76E00974507 /* TodoDetails+Model.swift */; };
@@ -112,6 +118,12 @@
 		4C3FB23E2C4420DD0018A92A /* TodoEstimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEstimation.swift; sourceTree = "<group>"; };
 		4C3FB2402C4441570018A92A /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		4C3FB2432C498AE40018A92A /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		4C3FB2452C4BB6510018A92A /* InFocusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFocusModel.swift; sourceTree = "<group>"; };
+		4C3FB2472C4BB7D30018A92A /* InFocusLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFocusLocalization.swift; sourceTree = "<group>"; };
+		4C3FB24D2C4D76D60018A92A /* InFocusModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFocusModelTests.swift; sourceTree = "<group>"; };
+		4C3FB2502C4D7CBB0018A92A /* TodoItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoItem+Extension.swift"; sourceTree = "<group>"; };
+		4C3FB2522C4D7DD50018A92A /* InFocusLocalizationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFocusLocalizationMock.swift; sourceTree = "<group>"; };
+		4C3FB2542C4D7F340018A92A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4C43DEED2C1F086100974507 /* TodoDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetails.swift; sourceTree = "<group>"; };
 		4C43DF552C1F798F00974507 /* TodoDetails+UnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+UnitView.swift"; sourceTree = "<group>"; };
 		4C43DF5E2C29E76E00974507 /* TodoDetails+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoDetails+Model.swift"; sourceTree = "<group>"; };
@@ -234,6 +246,49 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4C3FB2492C4D76A80018A92A /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				4C3FB24F2C4D7CA50018A92A /* Helpers */,
+				4C3FB24A2C4D76AE0018A92A /* InFocus */,
+			);
+			path = Units;
+			sourceTree = "<group>";
+		};
+		4C3FB24A2C4D76AE0018A92A /* InFocus */ = {
+			isa = PBXGroup;
+			children = (
+				4C3FB24C2C4D76BD0018A92A /* Mocks */,
+				4C3FB24B2C4D76B70018A92A /* Tests */,
+			);
+			path = InFocus;
+			sourceTree = "<group>";
+		};
+		4C3FB24B2C4D76B70018A92A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4C3FB24D2C4D76D60018A92A /* InFocusModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4C3FB24C2C4D76BD0018A92A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				4C3FB2522C4D7DD50018A92A /* InFocusLocalizationMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		4C3FB24F2C4D7CA50018A92A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4C3FB2502C4D7CBB0018A92A /* TodoItem+Extension.swift */,
+				4C3FB2542C4D7F340018A92A /* String+Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4C8893442BC706CA005A5DD0 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +311,8 @@
 			isa = PBXGroup;
 			children = (
 				4CB3F28A2BF6A11A00DDACD3 /* InFocusView.swift */,
+				4C3FB2452C4BB6510018A92A /* InFocusModel.swift */,
+				4C3FB2472C4BB7D30018A92A /* InFocusLocalization.swift */,
 			);
 			path = InFocus;
 			sourceTree = "<group>";
@@ -308,6 +365,7 @@
 		4CDB880C2BC06BFB0019AC71 /* Plan UniversalTests */ = {
 			isa = PBXGroup;
 			children = (
+				4C3FB2492C4D76A80018A92A /* Units */,
 				4CDB880D2BC06BFB0019AC71 /* Plan_UniversalTests.swift */,
 			);
 			path = "Plan UniversalTests";
@@ -571,10 +629,12 @@
 				4C00AC3E2C0495E700FA5F53 /* ListDetails.swift in Sources */,
 				4C059C702BD576890048F5FA /* TodoRowModel.swift in Sources */,
 				4C059C842BD9A09E0048F5FA /* ListConfiguration.swift in Sources */,
+				4C3FB2462C4BB6510018A92A /* InFocusModel.swift in Sources */,
 				4C4ED5342BE2B5DE0059474A /* ListFilter.swift in Sources */,
 				4C00AC3C2C036DDD00FA5F53 /* TodoListModel.swift in Sources */,
 				4C059C672BD2F8DB0048F5FA /* TodoDetailsModel.swift in Sources */,
 				4C059C8B2BDC32BB0048F5FA /* Filter.swift in Sources */,
+				4C3FB2482C4BB7D30018A92A /* InFocusLocalization.swift in Sources */,
 				4CB3F2882BF689E800DDACD3 /* BannerView.swift in Sources */,
 				4C3FB23B2C40630B0018A92A /* SidebarLabel.swift in Sources */,
 				4CEEC0322BFA515E00C10EF6 /* TodoView.swift in Sources */,
@@ -619,7 +679,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3FB2512C4D7CBB0018A92A /* TodoItem+Extension.swift in Sources */,
 				4CDB880E2BC06BFB0019AC71 /* Plan_UniversalTests.swift in Sources */,
+				4C3FB2532C4D7DD50018A92A /* InFocusLocalizationMock.swift in Sources */,
+				4C3FB2552C4D7F340018A92A /* String+Extension.swift in Sources */,
+				4C3FB24E2C4D76D60018A92A /* InFocusModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

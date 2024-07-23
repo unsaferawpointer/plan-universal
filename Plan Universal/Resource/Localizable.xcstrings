@@ -26,18 +26,94 @@
     "%lld" : {
 
     },
-    "%lld Items - %lld story points" : {
+    "%lld incomplete" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld Items - %2$lld story points"
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld невыполненных"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld невыполненных"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld невыполненное"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld невыполненных"
+                }
+              }
+            }
           }
         }
       }
     },
     "%lld pt" : {
 
+    },
+    "%lld todos" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld todo"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld todos"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld задания"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld заданий"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld задание"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld заданий"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "%lld Todos" : {
       "extractionState" : "stale",
@@ -98,6 +174,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавить"
+          }
+        }
+      }
+    },
+    "All tasks completed" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все задания выполнены"
           }
         }
       }
@@ -167,7 +253,14 @@
       }
     },
     "Description" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
+        }
+      }
     },
     "Details" : {
 
@@ -199,7 +292,14 @@
       }
     },
     "Estimation" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценка"
+          }
+        }
+      }
     },
     "High" : {
       "localizations" : {
@@ -233,7 +333,14 @@
       }
     },
     "In Stack" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стек"
+          }
+        }
+      }
     },
     "Is Archieved" : {
 
@@ -315,10 +422,24 @@
       }
     },
     "Move To" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переместить в"
+          }
+        }
+      }
     },
     "Move to backlog" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переместить в бэклог"
+          }
+        }
+      }
     },
     "Move to Favorites" : {
       "extractionState" : "stale",
@@ -332,7 +453,14 @@
       }
     },
     "Name" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        }
+      }
     },
     "New List" : {
       "localizations" : {
@@ -345,7 +473,14 @@
       }
     },
     "New List..." : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый список"
+          }
+        }
+      }
     },
     "New lists you create will appear here." : {
       "extractionState" : "stale",
@@ -369,7 +504,14 @@
       }
     },
     "New Todo..." : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новое задание..."
+          }
+        }
+      }
     },
     "New todos you create will appear here." : {
       "extractionState" : "stale",
@@ -389,6 +531,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Списков нет"
+          }
+        }
+      }
+    },
+    "No scheduled todos" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет запланированных заданий"
           }
         }
       }
@@ -470,7 +622,14 @@
       }
     },
     "Urgent" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Важное"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

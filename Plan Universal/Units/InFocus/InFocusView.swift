@@ -22,6 +22,8 @@ struct InFocusView: View {
 
 	@State private var editedTodo: TodoItem?
 
+	var model: InFocusModel = .init()
+
 	// MARK: - Initialization
 
 	init() {
@@ -64,7 +66,7 @@ struct InFocusView: View {
 		.alternatingRowBackgrounds()
 		#endif
 		#if os(macOS)
-		.navigationSubtitle("\(todos.count) Items - \(todos.map(\.storyPoints).sum) story points")
+		.navigationSubtitle(model.subtitle(for: todos))
 		#endif
 		.toolbar {
 			ToolbarItem(placement: .primaryAction) {
