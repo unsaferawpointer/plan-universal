@@ -431,16 +431,6 @@
         }
       }
     },
-    "Move to backlog" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Переместить в бэклог"
-          }
-        }
-      }
-    },
     "Move to Favorites" : {
       "extractionState" : "stale",
       "localizations" : {

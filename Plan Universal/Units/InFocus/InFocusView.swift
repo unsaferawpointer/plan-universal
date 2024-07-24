@@ -90,16 +90,13 @@ private extension InFocusView {
 
 	@ViewBuilder
 	func buildMenu(for selection: Set<TodoItem>) -> some View {
-		Button("Move to backlog") {
-			withAnimation {
-				try? modelContext.transaction {
-					for todo in selection {
-						todo.inFocus = false
-					}
-				}
-			}
+		Toggle(sources: Binding(get: {
+			return selection.map { $0 }
+		}, set: { newValue in
+
+		}), isOn: \.inFocus) {
+			Text("In Stack")
 		}
-		Divider()
 		Toggle(sources: Binding(get: {
 			return selection.map { $0 }
 		}, set: { newValue in
