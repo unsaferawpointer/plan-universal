@@ -84,6 +84,7 @@ extension TodoListUnitView: View {
 		.scrollIndicators(.never)
 		#if os(macOS)
 		.alternatingRowBackgrounds()
+		.navigationSubtitle(model.subtitle(for: todos))
 		#endif
 		.navigationTitle(list.title)
 		.toolbar {

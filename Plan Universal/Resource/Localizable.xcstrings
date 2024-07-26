@@ -535,6 +535,16 @@
         }
       }
     },
+    "No todos" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заданий нет"
+          }
+        }
+      }
+    },
     "No Todos" : {
       "extractionState" : "stale",
       "localizations" : {
