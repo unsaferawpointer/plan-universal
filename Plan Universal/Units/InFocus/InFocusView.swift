@@ -63,12 +63,25 @@ struct InFocusView: View {
 			}
 		}
 		#if os(macOS)
+		.safeAreaInset(edge: .bottom) {
+			if let status = model.estimationMessage(for: todos) {
+				VStack(alignment: .center) {
+					Divider()
+					Text(status)
+						.foregroundStyle(.secondary)
+						.font(.callout)
+						.padding(.init(top: 2, leading: 0, bottom: 8, trailing: 0))
+				}
+				.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+				.background(.thinMaterial)
+			}
+		}
 		.alternatingRowBackgrounds()
-		#endif
-		#if os(macOS)
 		.navigationSubtitle(model.subtitle(for: todos))
 		#endif
+		.navigationTitle("Stack")
 		.toolbar {
+			#if os(macOS)
 			ToolbarItem(placement: .primaryAction) {
 				Button("Archieve", systemImage: "archivebox") {
 					try? modelContext.transaction {
@@ -78,6 +91,38 @@ struct InFocusView: View {
 					}
 				}
 			}
+			#else
+			ToolbarItem(placement: .bottomBar) {
+				Button("Done", systemImage: "checkmark") {
+					try? modelContext.transaction {
+						for todo in todos where todo.isDone == true {
+							todo.inFocus = false
+						}
+					}
+				}
+			}
+			ToolbarItem(placement: .bottomBar) {
+				Button("Archieve", systemImage: "archivebox") {
+					try? modelContext.transaction {
+						for todo in todos where todo.isDone == true {
+							todo.inFocus = false
+						}
+					}
+				}
+			}
+			ToolbarItem(placement: .status) {
+				VStack {
+					Text(model.subtitle(for: todos))
+						.foregroundStyle(.primary)
+						.font(.caption)
+					if let subtitle = model.estimationMessage(for: todos) {
+						Text(subtitle)
+							.foregroundStyle(.secondary)
+							.font(.caption)
+					}
+				}
+			}
+			#endif
 		}
 		.sheet(item: $editedTodo) { todo in
 			TodoDetails.UnitView(action: .edit(todo))

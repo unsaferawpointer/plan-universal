@@ -83,6 +83,19 @@ extension TodoListUnitView: View {
 		.listStyle(.inset)
 		.scrollIndicators(.never)
 		#if os(macOS)
+		.safeAreaInset(edge: .bottom) {
+			if let status = model.estimationMessage(for: todos) {
+				VStack(alignment: .center) {
+					Divider()
+					Text(status)
+						.foregroundStyle(.secondary)
+						.font(.callout)
+						.padding(.init(top: 0, leading: 0, bottom: 8, trailing: 0))
+				}
+				.frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+				.background(.thinMaterial)
+			}
+		}
 		.alternatingRowBackgrounds()
 		.navigationSubtitle(model.subtitle(for: todos))
 		#endif
@@ -96,6 +109,18 @@ extension TodoListUnitView: View {
 			#if os(iOS)
 			ToolbarItem(placement: .primaryAction) {
 				EditButton()
+			}
+			ToolbarItem(placement: .status) {
+				VStack {
+					Text(model.subtitle(for: todos))
+						.foregroundStyle(.primary)
+						.font(.caption)
+					if let subtitle = model.estimationMessage(for: todos) {
+						Text(subtitle)
+							.foregroundStyle(.secondary)
+							.font(.caption)
+					}
+				}
 			}
 			#endif
 		}

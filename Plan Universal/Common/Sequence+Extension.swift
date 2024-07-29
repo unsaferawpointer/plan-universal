@@ -33,8 +33,11 @@ extension Sequence where Element: AdditiveArithmetic {
 			return partialResult + element
 		}
 	}
+}
 
-	func sum<T: AdditiveArithmetic>(where block: (Element) -> Bool, keyPath: KeyPath<Element, T>) -> T {
+extension Sequence {
+
+	func sum<T: AdditiveArithmetic>(keyPath: KeyPath<Element, T>) -> T {
 		reduce(.zero) { partialResult, element in
 			return partialResult + element[keyPath: keyPath]
 		}

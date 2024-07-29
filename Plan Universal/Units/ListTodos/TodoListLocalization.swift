@@ -12,6 +12,7 @@ protocol TodoListLocalizationProtocol {
 	func statusMessage(for totalCount: Int) -> String
 	var noScheduledTodos: String { get }
 	var allTodosCompleted: String { get }
+	func estimationMessage(for estimation: Int) -> String
 }
 
 final class TodoListLocalization { }
@@ -35,5 +36,9 @@ extension TodoListLocalization: TodoListLocalizationProtocol {
 
 	var allTodosCompleted: String {
 		String(localized: "All tasks completed")
+	}
+
+	func estimationMessage(for estimation: Int) -> String {
+		return String(localized: "Estimation - \(estimation) sp")
 	}
 }

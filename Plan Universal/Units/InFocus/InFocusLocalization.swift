@@ -10,6 +10,7 @@ import Foundation
 protocol InFocusLocalizationProtocol {
 	func statusMessage(for totalCount: Int, incompleteCount: Int) -> String
 	func statusMessage(for totalCount: Int) -> String
+	func estimationMessage(for estimation: Int) -> String
 	var noScheduledTodos: String { get }
 	var allTodosCompleted: String { get }
 }
@@ -27,6 +28,10 @@ extension InFocusLocalization: InFocusLocalizationProtocol {
 
 	func statusMessage(for totalCount: Int) -> String {
 		return String(localized: "\(totalCount) todos")
+	}
+
+	func estimationMessage(for estimation: Int) -> String {
+		return String(localized: "Estimation - \(estimation) sp")
 	}
 
 	var noScheduledTodos: String {

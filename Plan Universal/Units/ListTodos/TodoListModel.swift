@@ -49,4 +49,11 @@ extension TodoListModel {
 			)
 		}
 	}
+
+	func estimationMessage(for items: [TodoItem]) -> String? {
+		let total = items.filter(where: \.isDone, equalsTo: false)
+			.compactMap(\.estimation?.storyPoints)
+			.sum
+		return total > 0 ? localization.estimationMessage(for: total) : nil
+	}
 }

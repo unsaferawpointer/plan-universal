@@ -301,6 +301,16 @@
         }
       }
     },
+    "Estimation - %lld sp" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценка - %lld sp"
+          }
+        }
+      }
+    },
     "High" : {
       "localizations" : {
         "ru" : {
@@ -608,7 +618,14 @@
       }
     },
     "Stack" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Стэк"
+          }
+        }
+      }
     },
     "Status" : {
       "extractionState" : "stale",
